@@ -1289,6 +1289,19 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
   .nt-pdf .nt-sec{ box-shadow:none !important; border:none !important; padding:0 !important; margin:0 0 8mm !important; background:#fff !important; }
   .pdf-toast{ position:fixed; left:50%; bottom:calc(90px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:2000; max-width:90vw; padding:10px 16px; border-radius:12px; background:#1B1D21; color:#fff; font:600 13.5px var(--sans); box-shadow:0 6px 20px rgba(0,0,0,.25); text-align:center; }
   .pdf-toast[hidden]{ display:none; }
+  .nb-bar{ display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); }
+  .nt-sec.nb-on .nb-bar{ position:sticky; bottom:calc(64px + env(safe-area-inset-bottom,0px)); z-index:5; background:var(--card); padding:10px 0; }
+  .nb-go{ width:100%; min-height:44px; border:0; border-radius:12px; background:var(--blue-soft); color:var(--blue); font:700 14px var(--sans); cursor:pointer; }
+  .nb-cnt{ flex:1 1 100%; font:700 13px var(--sans); color:var(--ink-soft); }
+  .nb-b{ flex:1; min-height:40px; border-radius:10px; border:1px solid var(--border); background:var(--card); color:var(--ink); font:700 13px var(--sans); cursor:pointer; }
+  .nb-b.pri{ background:var(--blue); border-color:var(--blue); color:#fff; }
+  .nb-in{ display:inline-block; min-width:3em; max-width:100%; height:1.6em; padding:0 4px; margin:0 1px; border:0; border-bottom:2px solid var(--blue); border-radius:3px 3px 0 0; background:var(--blue-soft); color:var(--ink); font:inherit; font-weight:700; vertical-align:baseline; }
+  .nb-in:focus{ outline:2px solid var(--blue); outline-offset:1px; }
+  .nb-in.ok{ border-bottom-color:#1A9B5B; background:rgba(26,155,91,.14); }
+  .nb-in.bad{ border-bottom-color:var(--red); background:var(--red-soft); }
+  .nb-ans{ margin-left:3px; padding:0 4px; border-radius:4px; background:var(--red-soft); color:var(--red); font-weight:700; font-size:.92em; }
+  @media print{ .nb-bar{ display:none !important; } }
+  .nt-pdf .nb-bar{ display:none !important; }
   .sh-popt span{ font:500 12.5px var(--sans); color:var(--ink-soft); }
   .sh-popt:focus-visible{ outline:2px solid #3B6FE0; outline-offset:2px; }
   @media (hover:hover){ .sh-popt:hover{ border-color:var(--ink); } }
@@ -2706,11 +2719,63 @@ function openNotes(subjId, secIdx){
   const ntLogo = (typeof skLogo === "function") ? skLogo("개념노트") : "SEOIK.COM";
   const ntHead = '<header class="nt-head"><div class="nt-head-top">'+ntLogo+'<span>고1 · '+escapeHtml(n.title.replace(" 개념노트",""))+'</span></div><h1>'+escapeHtml(n.title)+'</h1>'+(n.sub ? '<p>'+escapeHtml(n.sub)+'</p>' : '')+'</header>';
   body.innerHTML = ntHead + '<p class="nt-legend">'+(n.legend || '<span class="star">★</span> 교과서에 형광펜으로 표시된 부분 · 정의 문장은 그대로 외우기')+'</p>' +
-    n.sections.map((s,i)=>'<section class="nt-sec" id="nt-sec-'+i+'"><h2><span class="nt-tag">'+s.tag+'</span>'+escapeHtml(s.title)+'</h2>'+s.html+'</section>').join("");
+    n.sections.map((s,i)=>'<section class="nt-sec" id="nt-sec-'+i+'"><h2><span class="nt-tag">'+s.tag+'</span>'+escapeHtml(s.title)+'</h2><div class="nt-sec-body">'+s.html+'</div>'+
+      '<div class="nb-bar"><button type="button" class="nb-go" data-nb="'+i+'">다 봤으면 빈칸 채우기 →</button></div></section>').join("");
   window.scrollTo(0,0);
   if(typeof secIdx==="number"){ const el = document.getElementById("nt-sec-"+secIdx); if(el) el.scrollIntoView({block:"start"}); }
 }
 document.getElementById("notesBack").addEventListener("click", ()=>{ goTab("study"); window.scrollTo(0,0); });
+/* ---------- 개념노트 빈칸 채우기: 형광펜·동그라미·굵은 글씨를 빈칸으로 ---------- */
+function nbNorm(t){ return String(t).replace(/\([^)]*\)/g,"").replace(/[\s·,.\-–—~'"‘’“”!?:;\/]/g,"").toLowerCase(); }
+function nbStart(sec){
+  const body = sec.querySelector(".nt-sec-body");
+  if(!sec._orig) sec._orig = body.innerHTML; else body.innerHTML = sec._orig;
+  const cand = [...body.querySelectorAll("mark.mk-hl, .mk-circle, b")].filter(el=>{
+    if(el.closest(".nt-pen")) return false;
+    if(el.querySelector("mark, .mk-circle, b, input")) return false;
+    const t = el.textContent.trim(); return t.length>=2 && t.length<=24;
+  });
+  /* 절반쯤 골라서 빈칸으로 (최소 5개) */
+  const pick = cand.filter(()=>Math.random()<0.55);
+  while(pick.length<Math.min(5,cand.length)){ const c = cand[Math.floor(Math.random()*cand.length)]; if(!pick.includes(c)) pick.push(c); }
+  pick.forEach(el=>{
+    const a = el.textContent.trim();
+    const inp = document.createElement("input");
+    inp.type = "text"; inp.className = "nb-in"; inp.dataset.a = a; inp.autocomplete = "off"; inp.spellcheck = false;
+    inp.style.width = Math.min(16, Math.max(3, a.length*1.15+1)) + "em";
+    inp.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); const all=[...body.querySelectorAll(".nb-in")]; const nx=all[all.indexOf(inp)+1]; if(nx) nx.focus(); else nbGrade(sec); } });
+    el.textContent = ""; el.appendChild(inp);
+  });
+  sec.querySelector(".nb-bar").innerHTML = '<span class="nb-cnt">빈칸 '+pick.length+'개</span>'+
+    '<button type="button" class="nb-b pri" data-nbact="grade">채점</button><button type="button" class="nb-b" data-nbact="show">정답 보기</button>'+
+    '<button type="button" class="nb-b" data-nbact="again">다시 뚫기</button><button type="button" class="nb-b" data-nbact="off">끄기</button>';
+  sec.classList.add("nb-on");
+  const first = body.querySelector(".nb-in"); if(first) first.focus({preventScroll:true});
+}
+function nbGrade(sec, show){
+  const ins = [...sec.querySelectorAll(".nb-in")]; let ok = 0;
+  ins.forEach(inp=>{
+    const a = inp.dataset.a, v = inp.value.trim();
+    const good = v && (nbNorm(v)===nbNorm(a) || nbNorm(v)===nbNorm(a.replace(/\(.*?\)/g,"")));
+    if(good) ok++;
+    inp.classList.toggle("ok", !!good); inp.classList.toggle("bad", !good && !show);
+    let tip = inp.nextElementSibling && inp.nextElementSibling.classList.contains("nb-ans") ? inp.nextElementSibling : null;
+    if(!good && (show || v)){ if(!tip){ tip = document.createElement("span"); tip.className = "nb-ans"; inp.after(tip); } tip.textContent = a; }
+    else if(tip) tip.remove();
+  });
+  const cnt = sec.querySelector(".nb-cnt");
+  if(cnt) cnt.textContent = show ? "정답 "+ins.length+"개 공개" : ins.length+"개 중 "+ok+"개 맞음" + (ok===ins.length ? " 🎉" : "");
+}
+document.getElementById("notesBody").addEventListener("click", e=>{
+  const go = e.target.closest(".nb-go"); const act = e.target.closest("[data-nbact]");
+  const sec = e.target.closest(".nt-sec"); if(!sec) return;
+  if(go){ nbStart(sec); sec.scrollIntoView({block:"start", behavior:"smooth"}); return; }
+  if(!act) return;
+  const a = act.dataset.nbact;
+  if(a==="grade") nbGrade(sec); else if(a==="show") nbGrade(sec, true); else if(a==="again") nbStart(sec);
+  else if(a==="off"){ sec.querySelector(".nt-sec-body").innerHTML = sec._orig; sec._orig = null; sec.classList.remove("nb-on");
+    sec.querySelector(".nb-bar").innerHTML = '<button type="button" class="nb-go">다 봤으면 빈칸 채우기 →</button>'; }
+});
 document.getElementById("notesPrintBtn").addEventListener("click", ()=>{
   document.body.classList.remove("print-doc", "print-graded");
   document.body.classList.add("print-notes");
