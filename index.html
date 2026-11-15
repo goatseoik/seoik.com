@@ -2726,17 +2726,27 @@ function openNotes(subjId, secIdx){
 }
 document.getElementById("notesBack").addEventListener("click", ()=>{ goTab("study"); window.scrollTo(0,0); });
 /* ---------- 개념노트 빈칸 채우기: 형광펜·동그라미·굵은 글씨를 빈칸으로 ---------- */
+/* 시험에 나올 핵심어 (직접 고른 것) — 과목 › 섹션 태그 */
+const NB_KEYS = {"kh_f":{"6-1": ["냉전", "트루먼 독트린", "코민포름", "마셜 플랜", "코메콘", "북대서양 조약 기구(NATO)", "바르샤바 조약 기구(WTO)", "여운형 + 안재홍", "조선 건국 동맹", "좌우 합작", "조선 인민 공화국", "인민 위원회", "한국 민주당", "남조선 노동당"], "6-2": ["직접", "간접", "미국, 영국, 소련", "민주주의 임시 정부", "미·소 공동 위원회", "신탁", "반탁", "찬탁", "반탁 세력 제외"], "6-3": ["좌우 합작 운동", "여운형", "좌우 합작 7원칙", "좌우익 모두 반발", "유엔 한국 임시 위원단", "김구, 김규식", "남북 연석회의", "단독 정부 수립 반대", "외국 군대 철수"], "6-4": ["경찰과 우익 청년단", "좌익 세력(남로당)", "최초의 보통 선거", "제헌 헌법 공포", "대통령 중심제", "간선제"], "7-1": ["반민족 행위 처벌법(반민법)", "반민족 행위 특별 조사 위원회", "이승만", "반공", "국회 프락치 사건", "반민 특위 사무실 습격 사건", "무상 몰수·무상 분배", "일본인 소유의 토지만", "유상", "지가 증권", "지주들 미리 토지 판매"], "7-2": ["조선 의용군", "애치슨", "남침", "낙동강", "인천 상륙", "1·4", "소련", "군사 분계선", "포로 송환", "반공 포로", "한·미 상호 방위", "국민 보도 연맹 사건"], "7-3": ["발췌", "자유당", "직선제", "부산 정치 파동", "양원제", "사사오입", "진보당", "경향", "삼백", "경제 개발 3개년 계획"], "8-1": ["반공", "국가 재건 최고 회의", "중앙정보부", "정치 활동 정화", "고리채", "한일 국교 정상화", "비밀", "차관", "6·3", "인혁당 사건", "고엽제", "라이따이한", "3선"], "8-2": ["닉슨", "통일 주체 국민 회의", "국회", "긴급 조치", "민청학련", "정의 구현 사제단", "3·1 민주 구국 선언", "YH 무역", "부·마"], "8-3": ["경공업", "경부", "중화학", "고리", "석유 파동", "중동 건설 사업", "외채", "8·3 조치", "정경 유착", "새마을", "근면·자조·협동", "전태일"], "9-1": ["12·12", "신군부", "시민군", "유네스코", "국가 보위 비상대책", "단임", "선거인단", "3S 정책", "박종철", "4·13 호헌", "정의 구현 사제단", "이한열", "호헌 철폐, 독재 타도", "6·29", "노태우", "3저 호황"], "9-2": ["여소야대", "5공", "3당", "부분적 실시", "북방", "전면", "역사 바로", "금융 실명제", "OECD", "IMF 사태", "구조 조정 실시", "금 모으기 운동", "자유 무역 협정"], "10-1": ["북진", "평화", "반공", "닉슨 독트린", "남북 적십자 회담", "7·4 남북 공동 성명", "최초 통일 원칙 합의", "자주·평화·민족 대단결", "남북 조절 위원회", "인구 비례에 의한 총선거", "남북 연방제 통일", "이산가족", "7·7 특별 선언", "UN 동시", "남북 기본 합의서", "비핵화"], "10-2": ["정상 회담", "햇볕", "금강산 해로", "육로", "1차", "6·15 남북 공동 선언", "개성 공단", "제2차 남북 정상 회담", "10·4 남북 공동 선언"]}};
 function nbNorm(t){ return String(t).replace(/\([^)]*\)/g,"").replace(/[\s·,.\-–—~'"‘’“”!?:;\/]/g,"").toLowerCase(); }
 function nbStart(sec){
   const body = sec.querySelector(".nt-sec-body");
+  sec._nbRound = sec._orig ? (sec._nbRound||0)+1 : 0;
   if(!sec._orig) sec._orig = body.innerHTML; else body.innerHTML = sec._orig;
   const cand = [...body.querySelectorAll("mark.mk-hl, .mk-circle, b")].filter(el=>{
     if(el.closest(".nt-pen")) return false;
     if(el.querySelector("mark, .mk-circle, b, input")) return false;
     const t = el.textContent.trim(); return t.length>=2 && t.length<=24;
   });
-  /* 절반쯤 골라서 빈칸으로 (최소 5개) */
-  const pick = cand.filter(()=>Math.random()<0.55);
+  /* 핵심어를 직접 골라 둔 섹션은 그것만, 아니면 절반쯤 랜덤 (최소 5개) */
+  const tag = (sec.querySelector(".nt-tag")||{}).textContent;
+  const keys = (NB_KEYS[notesSubjectId]||{})[tag];
+  let pick;
+  if(keys){
+    const ks = new Set(keys.map(nbNorm)), seen = new Set();
+    pick = cand.filter(el=>{ const k = nbNorm(el.textContent); if(!ks.has(k)) return false; return true; });
+    if(sec._nbRound){ pick = pick.filter(()=>Math.random()<0.7); }
+  } else pick = cand.filter(()=>Math.random()<0.55);
   while(pick.length<Math.min(5,cand.length)){ const c = cand[Math.floor(Math.random()*cand.length)]; if(!pick.includes(c)) pick.push(c); }
   pick.forEach(el=>{
     const a = el.textContent.trim();
