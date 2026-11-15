@@ -1468,7 +1468,7 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
     var a = JSON.parse(localStorage.getItem("seoik_account_v1") || "null");
     if(!a || a.keep !== false || a.dirty) return;   /* 아직 못 올린 기록이 있으면 아래 계정 스크립트가 올린 뒤 처리 */
     if(sessionStorage.getItem("seoik_acc_live")) return;
-    ["seoik_account_v1","jokbo_app_progress_v2","seoik_wrong_v1","seoik_mock_hist_v1","seoik_en_orig_v1","jokbo_app_pending_v2"].forEach(function(k){ localStorage.removeItem(k); });
+    ["seoik_account_v1","jokbo_app_progress_v2","seoik_wrong_v1","seoik_mock_hist_v1","seoik_mock_seen_v1","seoik_en_orig_v1","jokbo_app_pending_v2"].forEach(function(k){ localStorage.removeItem(k); });
   }catch(e){}
 })();
 </script>
@@ -2817,12 +2817,27 @@ function mockPool(sid){
   });
   return pool;
 }
+/* 모의고사에 한 번 나온 문제는 다 돌 때까지 다시 안 나오게 */
+const MOCK_SEEN = "seoik_mock_seen_v1";
+function loadSeen(){ try{ return JSON.parse(localStorage.getItem(MOCK_SEEN) || "{}") || {}; }catch(e){ return {}; } }
+function saveSeen(o){ try{ localStorage.setItem(MOCK_SEEN, JSON.stringify(o)); }catch(e){} }
+const mkKey = it => it.set+"."+it.q;
+function mockFresh(sid){ const seen = new Set(loadSeen()[sid] || []); return mockPool(sid).reduce((n,a)=>n+a.filter(it=>!seen.has(mkKey(it))).length,0); }
 function pickMockItems(sid, n){
-  const pool = mockPool(sid).filter(a=>a.length), out = [];
-  let k = 0;
-  while(out.length<n && pool.some(a=>a.length)){
-    const a = pool[k % pool.length]; if(a.length) out.push(a.pop()); k++;
+  const all = loadSeen(), seen = new Set(all[sid] || []);
+  const pool = mockPool(sid).filter(a=>a.length);
+  const fresh = pool.map(a=>a.filter(it=>!seen.has(mkKey(it)))), old = pool.map(a=>a.filter(it=>seen.has(mkKey(it))));
+  const out = [];
+  const take = arrs => { let k = 0; while(out.length<n && arrs.some(a=>a.length)){ const a = arrs[k % arrs.length]; if(a.length) out.push(a.pop()); k++; } };
+  take(fresh);
+  if(out.length<n){
+    /* 안 푼 문제가 모자라면 이 범위는 한 바퀴 다 돈 것: 기록을 비우고 이미 푼 문제로 채움 */
+    const inPool = new Set(pool.flat().map(mkKey));
+    all[sid] = (all[sid]||[]).filter(k=>!inPool.has(k));
+    take(old);
   }
+  all[sid] = (all[sid]||[]).concat(out.map(mkKey));
+  saveSeen(all);
   return shuffle(out);
 }
 function renderMock(){
@@ -2842,7 +2857,7 @@ function renderMock(){
     '<div class="mk-row-t">단원 <small>(여러 개 골라서 합칠 수 있어요)</small></div><div class="mk-units" id="mockUnits">'+
       '<button data-u="all" class="'+(!mockUnits?"active":"")+'">전체 단원</button>'+
       units.map((u,ui)=>'<button data-u="'+ui+'" class="'+(mockUnits&&mockUnits.has(ui)?"active":"")+'">'+escapeHtml(u.name)+'</button>').join("")+'</div>'+
-    '<div class="mk-row-t">문항 수 <small>(고른 단원 '+total+'문항에서 단원별로 고르게 뽑아요)</small></div><div class="mk-seg mk-seg-wrap" id="mockCnt">'+
+    '<div class="mk-row-t">문항 수 <small>(고른 단원 '+total+'문항 중 아직 안 나온 문제 '+mockFresh(mockSid)+'개 · 이미 나온 문제는 다 돌 때까지 다시 안 나와요)</small></div><div class="mk-seg mk-seg-wrap" id="mockCnt">'+
       CNTS.map(n=>'<button data-n="'+n+'" class="'+(mockCount===n?"active":"")+'">'+(n===total&&n>10?"전부 "+n:n)+'문항</button>').join("")+'</div>'+
     '<div class="mk-row-t">시간</div><div class="mk-seg" id="mockTime">'+
       '<button data-t="1" class="'+(mockTimerOn?"active":"")+'">'+mockMinutes(mockCount)+'분 타이머</button><button data-t="0" class="'+(!mockTimerOn?"active":"")+'">시간 제한 없음</button></div>'+
@@ -4716,7 +4731,7 @@ const LIVE_KEY = "seoik_acc_live";      /* 이번 접속(창) 동안 로그인 �
 const LASTID_KEY = "seoik_last_id";     /* 아이디 저장 */
 const OPT_KEY = "seoik_login_opt_v1";   /* 체크박스 선택 기억 {keep, saveId} */
 /* 계정을 따라다니는 기록: 진도, 오답노트, 모의고사 기록 */
-const SYNC_KEYS = ["jokbo_app_progress_v2", "seoik_wrong_v1", "seoik_mock_hist_v1", "seoik_en_orig_v1"];
+const SYNC_KEYS = ["jokbo_app_progress_v2", "seoik_wrong_v1", "seoik_mock_hist_v1", "seoik_mock_seen_v1", "seoik_en_orig_v1"];
 const CLEAR_ALSO = ["jokbo_app_pending_v2"];
 const PROGRESS_KEY = "jokbo_app_progress_v2";
 const MAIL = "@seoik.example.com";   /* 실제 메일이 가지 않는 예약 도메인 */
