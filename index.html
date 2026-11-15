@@ -1488,7 +1488,7 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
     var a = JSON.parse(localStorage.getItem("seoik_account_v1") || "null");
     if(!a || a.keep !== false || a.dirty) return;   /* 아직 못 올린 기록이 있으면 아래 계정 스크립트가 올린 뒤 처리 */
     if(sessionStorage.getItem("seoik_acc_live")) return;
-    ["seoik_account_v1","jokbo_app_progress_v2","seoik_wrong_v1","seoik_mock_hist_v1","seoik_mock_seen_v1","seoik_en_orig_v1","jokbo_app_pending_v2"].forEach(function(k){ localStorage.removeItem(k); });
+    ["seoik_account_v1","jokbo_app_progress_v2","seoik_wrong_v1","seoik_mock_hist_v1","seoik_mock_seen_v1","seoik_en_orig_v1","jokbo_app_pending_v2","seoik_sheet_save_v1"].forEach(function(k){ localStorage.removeItem(k); });
   }catch(e){}
 })();
 </script>
@@ -3529,7 +3529,7 @@ function renderQuizTrack(){
   }
 }
 function renderQuizQuestion(){
-  if(quizQ===0 && !(sheetState) && sheetUsable()){ renderSheet(); return; }
+  if(quizQ===0 && !(sheetState) && sheetUsable()){ renderSheet(); restoreSheetPicks(); return; }
   if(sheetState) return;
   exitSheet();
   quizAnswered = false;
@@ -4039,6 +4039,9 @@ function renderSheet(){
       return { q, order, picked:null, done:false, flag:false };
     })
   };
+  /* 풀다가 나갔던 같은 시험지면 선지 순서를 그대로 되살림 */
+  const sv = quizMode!=="mock" && loadSheetSave();
+  if(sv) sheetState.items.forEach((st,i)=>{ const o = sv.items[i] && sv.items[i].o; if(o && o.length===st.order.length) st.order = o.slice(); });
   sheetState.t0 = Date.now();
   const info = sheetInfo(), pages = sheetPages(), n = quizItems.length;
   const isMathPaper = quizItems.every(it=>{const subject=subjById(it.sid); return subject && subject.math;});
@@ -4219,6 +4222,7 @@ function answerKeyHTML(){
     '<div class="sh-foot"><span>- 정답 및 해설 -</span></div></article>';
 }
 function afterSheetGraded(){
+  clearSheetSave();
   sheetState.elapsed = Date.now() - sheetState.t0;
   if(sheetState.clock){ clearInterval(sheetState.clock); sheetState.clock = null; }
   sheetState.graded = true;
@@ -4261,6 +4265,26 @@ function onSheetAnswer(i, k){
   quizCells[i] = st.picked === null ? "" : "answered";
   paintPick(i, st.picked);
   renderAnsState();
+  saveSheetNow();
+}
+/* ---------- 시험지 풀던 답 자동 저장 (다른 탭 갔다 와도 이어서) ---------- */
+const SHEET_SAVE = "seoik_sheet_save_v1";
+function sheetKey(){ return quizMode+"|"+quizItems.map(it=>it.sid+"."+it.set+"."+it.q).join(","); }
+function loadSheetSave(){
+  try{ const o = JSON.parse(localStorage.getItem(SHEET_SAVE)||"null"); return o && o.key===sheetKey() ? o : null; }catch(e){ return null; }
+}
+function saveSheetNow(){
+  if(!sheetState || sheetState.graded || quizMode==="mock") return;
+  try{ localStorage.setItem(SHEET_SAVE, JSON.stringify({ key:sheetKey(), ts:Date.now(),
+    items: sheetState.items.map(st=>({o:st.order, p:st.picked, f:!!st.flag})) })); }catch(e){}
+}
+function clearSheetSave(){ try{ localStorage.removeItem(SHEET_SAVE); }catch(e){} }
+function restoreSheetPicks(){
+  const sv = quizMode!=="mock" && loadSheetSave(); if(!sv || !sheetState) return;
+  let n = 0;
+  sv.items.forEach((x,i)=>{ const st = sheetState.items[i]; if(!st || x.p===null || x.p===undefined) return;
+    st.picked = x.p; quizCells[i] = "answered"; paintPick(i, x.p); n++; });
+  if(n){ renderAnsState(); if(typeof pdfToast==="function") pdfToast("풀던 답 "+n+"개를 불러왔어요"); }
 }
 function paintMockSheet(){
   if(!sheetState || sheetState.graded) return;
