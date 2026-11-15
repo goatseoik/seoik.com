@@ -638,6 +638,10 @@
   .mk-row-t small{ font-weight:500; color:var(--ink-faint); font-size:11.5px; }
   .mk-chips{ padding:0 !important; flex-wrap:wrap; }
   .mk-seg{ display:flex; gap:6px; }
+  .mk-seg-wrap{ flex-wrap:wrap; } .mk-seg-wrap button{ flex:1 1 28%; }
+  .mk-units{ display:flex; flex-wrap:wrap; gap:6px; }
+  .mk-units button{ padding:8px 12px; border-radius:99px; border:1px solid var(--border); background:var(--card); color:var(--ink-soft); font-size:12.5px; font-weight:600; text-align:left; cursor:pointer; max-width:100%; }
+  .mk-units button.active{ background:var(--blue); border-color:var(--blue); color:#fff; }
   .mk-seg button{ flex:1; padding:10px 6px; border-radius:10px; border:1px solid var(--border); background:var(--card); color:var(--ink-soft); font-weight:700; font-size:13px; cursor:pointer; }
   .mk-seg button.active{ background:var(--navy); color:#fff; border-color:var(--navy); }
   .mk-note{ font-size:12.5px; color:var(--ink-soft); line-height:1.65; margin:14px 0; }
@@ -2415,7 +2419,7 @@ function renderDrawer(){
     if(a==="study") openSubjectStudy(s.id, -1);
     else if(a==="notes"){ if(SUBJECT_NOTES[s.id]) openNotes(s.id); else openSubjectStudy(s.id, -1); }
     else if(a==="basic"||a==="adv"){ drillDiff = a==="adv" ? "advanced" : "basic"; drillSubjectId = s.id; drillUnitKey = "ALL"; goTab("drill"); window.scrollTo(0,0); }
-    else if(a==="mock"){ mockSid = s.id; mockCount = s.id==="sci" ? 26 : 20; goTab("mock"); window.scrollTo(0,0); }
+    else if(a==="mock"){ mockSid = s.id; mockUnits = null; mockCount = s.id==="sci" ? 26 : 20; goTab("mock"); window.scrollTo(0,0); }
     else if(a==="wrong"){ wrongFilter = sw ? s.id : "ALL"; goTab("wrong"); window.scrollTo(0,0); }
   });
 }
@@ -2799,13 +2803,14 @@ function showWrongResult(){
 
 /* ================= 실전 모의고사 ================= */
 const MOCK_HIST = "seoik_mock_hist_v1";
-let mockSid = "sci", mockCount = 26, mockTimerOn = true;
+let mockSid = "sci", mockCount = 26, mockTimerOn = true, mockUnits = null; /* null = 전체 단원 */
 function loadMockHist(){ try{ return JSON.parse(localStorage.getItem(MOCK_HIST) || "[]"); }catch(e){ return []; } }
 function mockMinutes(n){ return Math.max(5, Math.round(n*50/26)); }
 function mockPool(sid){
   const s = subjById(sid), pool = [];
   if(s.math) return pool;
   s.units.forEach((u,ui)=>{
+    if(mockUnits && !mockUnits.has(ui)) return;
     const arr = [];
     u.indices.forEach(set=>{ (s.quiz[set]||[]).forEach((q,qi)=>{ if(q.type!=="order") arr.push({sid, set, q:qi, ui}); }); });
     pool.push(shuffle(arr));
@@ -2825,13 +2830,20 @@ function renderMock(){
   const hist = loadMockHist().slice(-6).reverse();
   if(!SUBJECTS.some(s=>s.id===mockSid)) mockSid = SUBJECTS[0].id;
   const total = mockPool(mockSid).reduce((a,b)=>a+b.length,0);
-  if(!total){ body.innerHTML = '<div class="empty-note">'+escapeHtml(curTerm.label)+' 문제가 아직 없어요.<br>문제가 추가되면 여기서 실전 모의고사를 볼 수 있어요.</div>'; return; }
+  if(mockUnits && mockUnits.size===0) mockUnits = null;
+  if(!total && !mockUnits){ body.innerHTML = '<div class="empty-note">'+escapeHtml(curTerm.label)+' 문제가 아직 없어요.<br>문제가 추가되면 여기서 실전 모의고사를 볼 수 있어요.</div>'; return; }
+  const units = subjById(mockSid).units || [];
+  const CNTS = [10,20,30,50,100].filter(n=>n<total); CNTS.push(total);
   if(mockCount>total) mockCount = total;
+  if(!CNTS.includes(mockCount)) mockCount = CNTS.find(n=>n>=mockCount) || total;
   body.innerHTML =
     '<div class="mk-card"><div class="mk-row-t">과목</div><div class="sub-toggle mk-chips" id="mockSubj">'+
       SUBJECTS.filter(s=>!s.math).map(s=>'<button data-sid="'+s.id+'" class="'+(mockSid===s.id?"active":"")+'">'+escapeHtml(s.name)+'</button>').join("")+'</div>'+
-    '<div class="mk-row-t">문항 수 <small>(전체 '+total+'문항에서 단원별로 고르게 뽑아요)</small></div><div class="mk-seg" id="mockCnt">'+
-      [10,20,26].map(n=>'<button data-n="'+n+'" class="'+(mockCount===n?"active":"")+'">'+n+'문항</button>').join("")+'</div>'+
+    '<div class="mk-row-t">단원 <small>(여러 개 골라서 합칠 수 있어요)</small></div><div class="mk-units" id="mockUnits">'+
+      '<button data-u="all" class="'+(!mockUnits?"active":"")+'">전체 단원</button>'+
+      units.map((u,ui)=>'<button data-u="'+ui+'" class="'+(mockUnits&&mockUnits.has(ui)?"active":"")+'">'+escapeHtml(u.name)+'</button>').join("")+'</div>'+
+    '<div class="mk-row-t">문항 수 <small>(고른 단원 '+total+'문항에서 단원별로 고르게 뽑아요)</small></div><div class="mk-seg mk-seg-wrap" id="mockCnt">'+
+      CNTS.map(n=>'<button data-n="'+n+'" class="'+(mockCount===n?"active":"")+'">'+(n===total&&n>10?"전부 "+n:n)+'문항</button>').join("")+'</div>'+
     '<div class="mk-row-t">시간</div><div class="mk-seg" id="mockTime">'+
       '<button data-t="1" class="'+(mockTimerOn?"active":"")+'">'+mockMinutes(mockCount)+'분 타이머</button><button data-t="0" class="'+(!mockTimerOn?"active":"")+'">시간 제한 없음</button></div>'+
     '<p class="mk-note">시험처럼 풀고 마지막에 한꺼번에 채점해요. 답은 제출 전까지 바꿀 수 있고, 위쪽 번호를 눌러 다른 문제로 이동할 수 있어요. 틀린 문제는 오답노트에 저장돼요.</p>'+
@@ -2840,7 +2852,13 @@ function renderMock(){
       const d = new Date(r.ts);
       return '<div class="mk-h"><span>'+(d.getMonth()+1)+'.'+d.getDate()+' '+escapeHtml(r.name)+' '+r.n+'문항</span><b>'+r.pct+'점</b></div>';
     }).join("")+'</div>' : '');
-  body.querySelectorAll("#mockSubj button").forEach(b=> b.onclick = ()=>{ mockSid = b.dataset.sid; mockCount = mockSid==="sci" ? 26 : 20; renderMock(); });
+  body.querySelectorAll("#mockSubj button").forEach(b=> b.onclick = ()=>{ mockSid = b.dataset.sid; mockUnits = null; mockCount = 20; renderMock(); });
+  body.querySelectorAll("#mockUnits button").forEach(b=> b.onclick = ()=>{
+    const u = b.dataset.u;
+    if(u==="all") mockUnits = null;
+    else { if(!mockUnits) mockUnits = new Set(); const k = +u; mockUnits.has(k) ? mockUnits.delete(k) : mockUnits.add(k); if(!mockUnits.size || mockUnits.size===units.length) mockUnits = null; }
+    renderMock();
+  });
   body.querySelectorAll("#mockCnt button").forEach(b=> b.onclick = ()=>{ mockCount = +b.dataset.n; renderMock(); });
   body.querySelectorAll("#mockTime button").forEach(b=> b.onclick = ()=>{ mockTimerOn = b.dataset.t==="1"; renderMock(); });
   document.getElementById("mockStartBtn").onclick = startMock;
@@ -2849,7 +2867,8 @@ function startMock(){
   const items = pickMockItems(mockSid, mockCount);
   if(!items.length) return;
   mockState = { sid:mockSid, answers: items.map(()=>({order:null, picked:null})), endAt: mockTimerOn ? Date.now()+mockMinutes(items.length)*60000 : null, done:false };
-  startCustomQuiz("mock", items.map(({sid,set,q})=>({sid,set,q})), subjById(mockSid).name+" 실전 모의고사", items.length+"문항"+(mockTimerOn? " · "+mockMinutes(items.length)+"분":" · 시간 제한 없음"), "mock");
+  const uName = mockUnits ? " ("+[...mockUnits].sort((a,b)=>a-b).map(i=>(subjById(mockSid).units[i].name.match(/^[^.\s]+/)||[""])[0]).join("·")+")" : "";
+  startCustomQuiz("mock", items.map(({sid,set,q})=>({sid,set,q})), subjById(mockSid).name+uName+" 실전 모의고사", items.length+"문항"+(mockTimerOn? " · "+mockMinutes(items.length)+"분":" · 시간 제한 없음"), "mock");
   stopMockTimer();
   tickMock();
   if(mockState.endAt) mockState.timerId = setInterval(tickMock, 1000);
