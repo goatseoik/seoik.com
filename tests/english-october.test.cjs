@@ -62,6 +62,43 @@ test('sequence answers reconstruct the complete original paragraph order', () =>
   }
 });
 
+test('paired notebook keeps every English sentence directly above its translation', () => {
+  assert.equal(extra.notes.paired,true);
+  assert.equal(extra.notes.sections.length,21);
+  assert.equal(extra.units.filter(u=>u.notebook).length,1);
+  assert.equal(extra.units.find(u=>u.notebook).indices.length,42);
+  const decode=s=>s.replaceAll('&#x27;',"'").replaceAll('&quot;','"').replaceAll('&gt;','>').replaceAll('&lt;','<').replaceAll('&amp;','&');
+  for(const [i,p] of source.passages.entries()) {
+    const section=extra.notes.sections[i];
+    assert.equal(section.passage,p.number);
+    const pairs=[...section.html.matchAll(/<article class="en-note-pair" data-sentence="(\d+)">([\s\S]*?)<\/article>/g)];
+    assert.equal(pairs.length,p.sentences.length);
+    for(const [j,pair] of pairs.entries()) {
+      assert.equal(Number(pair[1]),j+1);
+      const lines=[...pair[2].matchAll(/<p class="[^"]*" lang="(en|ko)">([\s\S]*?)<\/p>/g)];
+      assert.deepEqual(lines.map(l=>l[1]),['en','ko']);
+      for(const [k,lang] of ['english','korean'].entries()) {
+        assert.equal(decode(lines[k][2].replace(/<\/?mark[^>]*>/g,'')),p.sentences[j][lang]);
+        assert.equal([...lines[k][2].matchAll(/<mark class="mk-hl">/g)].length,1);
+      }
+    }
+  }
+});
+
+test('notebook list combines two legacy banks without changing saved set indices', () => {
+  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+  const helper=html.match(/function unitStudyIndices\(subject, unit\)\{[\s\S]*?\n\}/)[0];
+  const ctx={}; vm.runInNewContext(helper,ctx);
+  const subject={quiz:extra.quiz};
+  const indices=ctx.unitStudyIndices(subject,extra.units.find(u=>u.notebook));
+  assert.equal(indices.length,21);
+  assert.deepEqual(Array.from(indices),Array.from({length:21},(_,i)=>i+3));
+  for(const [i,p] of source.passages.entries()) {
+    assert.equal(extra.quiz[3+i][0].passage,p.number);
+    assert.equal(extra.quiz[24+i][0].passage,p.number);
+  }
+});
+
 test('sentence cloze uses typed practice while mock exams retain sheet compatibility', () => {
   const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
   const normalize=html.match(/function normalizeEnglishCloze\(value\)\{[\s\S]*?\n\}/)[0];

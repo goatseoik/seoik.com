@@ -1412,6 +1412,16 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
   body.print-notes .nt-sec li b, body.print-notes .nt-sec p b{ -webkit-print-color-adjust:exact; print-color-adjust:exact; background:linear-gradient(transparent 60%, #FFE58A 60%) !important; }
 }
 
+/* 영어는 문장과 해석을 한 쌍으로 이어 읽으며 두 줄을 함께 채운다. */
+.en-note-pair{ padding:16px 0; border-bottom:1px solid var(--border); break-inside:avoid; }
+.en-note-pair:last-child{ border-bottom:0; }
+.en-note-num{ font-size:11px; color:var(--ink-soft); margin-bottom:8px; font-weight:700; }
+.nt-sec .en-note-line{ margin:6px 0; line-height:2.2; overflow-wrap:anywhere; }
+.nt-sec .en-note-line[lang="en"]{ font-size:16px; }
+.en-note-translation{ color:var(--ink-soft); }
+.en-note-pair .nb-in{ max-width:min(100%, 16em); box-sizing:border-box; }
+.en-note-pair .nb-ans{ overflow-wrap:anywhere; }
+
 /* ---------- 개념노트: 로고 머리글 · 교과서 표시 ---------- */
 .nt-head{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:14px 16px 12px; margin:6px 0 10px; }
 .nt-head-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding-bottom:8px; border-bottom:2px solid var(--ink); font-size:12px; font-weight:600; color:var(--ink-soft); }
@@ -2113,12 +2123,13 @@ const IS_F_SET_TOPICS = {"0": ["시민 참여의 필요성", "정당·이익 집
   EN_F_SET_TITLES.push(...extra.titles);
   EN_F_UNITS.push(...extra.units.map(unit => ({...unit, indices: unit.indices.map(i => i + offset)})));
   Object.entries(extra.topics).forEach(([i, value]) => { EN_F_SET_TOPICS[Number(i) + offset] = value; });
+  SUBJECT_NOTES.en_f = extra.notes;
 }
 const FINAL_SUBJECTS = [
   { id: "kh_f", name: "한국사", desc: "시험 범위 6~10단원 — 정부 수립 · 이승만~장면 · 박정희 · 전두환~노무현 · 남북 관계", quiz: KH_F_QUIZ, titles: KH_F_SET_TITLES, units: KH_F_UNITS, topics: {} },
   { id: "is_f", name: "통합사회", desc: "통합사회2 2학기 2차고사 범위 — 시민 참여·인권 문제 · 정의관·불평등 · 시장 실패·자산 관리·무역 · 남북 관계 · 자원·미래 사회", quiz: IS_F_QUIZ, titles: IS_F_SET_TITLES, units: IS_F_UNITS, topics: IS_F_SET_TOPICS },
   { id: "info_f", name: "정보", desc: "2학기 2차고사 범위 — 문제 준비 중", quiz: [], titles: [], units: [], topics: {} },
-  { id: "en_f", name: "영어", desc: "2026년 10월 모의고사 1학년 18~24·29~45번 — 모의고사 주제·요지·순서 · 문장별 영어 빈칸·해석 빈칸 · 삽입·배열", quiz: EN_F_QUIZ, titles: EN_F_SET_TITLES, units: EN_F_UNITS, topics: EN_F_SET_TOPICS },
+  { id: "en_f", name: "영어", desc: "2026년 10월 모의고사 1학년 18~24·29~45번 — 모의고사 주제·요지·순서 · 문장·해석 빈칸 암기노트 · 삽입·배열", quiz: EN_F_QUIZ, titles: EN_F_SET_TITLES, units: EN_F_UNITS, topics: EN_F_SET_TOPICS },
   { id: "sci_f", name: "통합과학", desc: "통합과학2 2학기 2차고사 범위 — 생물다양성 · 생태계와 평형 · 온실 효과·지구 환경 변화 · 에너지 자원 · 산과 염기 · 중화 반응 · 에너지 출입", quiz: SCI_F_QUIZ, titles: SCI_F_SET_TITLES, units: SCI_F_UNITS, topics: SCI_F_SET_TOPICS },
   { id: "kr_f", name: "공통국어", desc: "2학기 2차고사 범위 — 문제 준비 중", quiz: [], titles: [], units: [], topics: {} },
   { id: "pe_f", name: "체육", desc: "체육2 서논술 암기장 — 밑줄 친 부분 빈칸 21칸", quiz: [], titles: [], units: [], topics: {}, memo: true }
@@ -2731,8 +2742,9 @@ function openNotes(subjId, secIdx){
   const ntLogo = (typeof skLogo === "function") ? skLogo("개념노트") : "SEOIK.COM";
   const ntHead = '<header class="nt-head"><div class="nt-head-top">'+ntLogo+'<span>고1 · '+escapeHtml(n.title.replace(" 개념노트",""))+'</span></div><h1>'+escapeHtml(n.title)+'</h1>'+(n.sub ? '<p>'+escapeHtml(n.sub)+'</p>' : '')+'</header>';
   body.innerHTML = ntHead + '<p class="nt-legend">'+(n.legend || '<span class="star">★</span> 교과서에 형광펜으로 표시된 부분 · 정의 문장은 그대로 외우기')+'</p>' +
-    n.sections.map((s,i)=>'<section class="nt-sec" id="nt-sec-'+i+'"><h2><span class="nt-tag">'+s.tag+'</span>'+escapeHtml(s.title)+'</h2><div class="nt-sec-body">'+s.html+'</div>'+
+    n.sections.map((s,i)=>'<section class="nt-sec" id="nt-sec-'+i+'"'+(s.passage ? ' data-passage="'+escapeHtml(s.passage)+'"' : '')+'><h2><span class="nt-tag">'+s.tag+'</span>'+escapeHtml(s.title)+'</h2><div class="nt-sec-body">'+s.html+'</div>'+
       '<div class="nb-bar"><button type="button" class="nb-go" data-nb="'+i+'">다 봤으면 빈칸 채우기 →</button></div></section>').join("");
+  if(n.paired) body.querySelectorAll('.nt-sec').forEach(sec=>nbStart(sec, false));
   window.scrollTo(0,0);
   if(typeof secIdx==="number"){ const el = document.getElementById("nt-sec-"+secIdx); if(el) el.scrollIntoView({block:"start"}); }
 }
@@ -2741,7 +2753,7 @@ document.getElementById("notesBack").addEventListener("click", ()=>{ goTab("stud
 /* 시험에 나올 핵심어 (직접 고른 것) — 과목 › 섹션 태그 */
 const NB_KEYS = {"sci_f":{},"kh_f":{"6-1": ["냉전", "트루먼 독트린", "코민포름", "마셜 플랜", "코메콘", "북대서양 조약 기구(NATO)", "바르샤바 조약 기구(WTO)", "여운형 + 안재홍", "조선 건국 동맹", "좌우 합작", "조선 인민 공화국", "인민 위원회", "한국 민주당", "남조선 노동당"], "6-2": ["직접", "간접", "미국, 영국, 소련", "민주주의 임시 정부", "미·소 공동 위원회", "신탁", "반탁", "찬탁", "반탁 세력 제외"], "6-3": ["좌우 합작 운동", "여운형", "좌우 합작 7원칙", "좌우익 모두 반발", "유엔 한국 임시 위원단", "김구, 김규식", "남북 연석회의", "단독 정부 수립 반대", "외국 군대 철수"], "6-4": ["경찰과 우익 청년단", "좌익 세력(남로당)", "최초의 보통 선거", "제헌 헌법 공포", "대통령 중심제", "간선제"], "7-1": ["반민족 행위 처벌법(반민법)", "반민족 행위 특별 조사 위원회", "이승만", "반공", "국회 프락치 사건", "반민 특위 사무실 습격 사건", "무상 몰수·무상 분배", "일본인 소유의 토지만", "유상", "지가 증권", "지주들 미리 토지 판매"], "7-2": ["조선 의용군", "애치슨", "남침", "낙동강", "인천 상륙", "1·4", "소련", "군사 분계선", "포로 송환", "반공 포로", "한·미 상호 방위", "국민 보도 연맹 사건"], "7-3": ["발췌", "자유당", "직선제", "부산 정치 파동", "양원제", "사사오입", "진보당", "경향", "삼백", "경제 개발 3개년 계획"], "8-1": ["반공", "국가 재건 최고 회의", "중앙정보부", "정치 활동 정화", "고리채", "한일 국교 정상화", "비밀", "차관", "6·3", "인혁당 사건", "고엽제", "라이따이한", "3선"], "8-2": ["닉슨", "통일 주체 국민 회의", "국회", "긴급 조치", "민청학련", "정의 구현 사제단", "3·1 민주 구국 선언", "YH 무역", "부·마"], "8-3": ["경공업", "경부", "중화학", "고리", "석유 파동", "중동 건설 사업", "외채", "8·3 조치", "정경 유착", "새마을", "근면·자조·협동", "전태일"], "9-1": ["12·12", "신군부", "시민군", "유네스코", "국가 보위 비상대책", "단임", "선거인단", "3S 정책", "박종철", "4·13 호헌", "정의 구현 사제단", "이한열", "호헌 철폐, 독재 타도", "6·29", "노태우", "3저 호황"], "9-2": ["여소야대", "5공", "3당", "부분적 실시", "북방", "전면", "역사 바로", "금융 실명제", "OECD", "IMF 사태", "구조 조정 실시", "금 모으기 운동", "자유 무역 협정"], "10-1": ["북진", "평화", "반공", "닉슨 독트린", "남북 적십자 회담", "7·4 남북 공동 성명", "최초 통일 원칙 합의", "자주·평화·민족 대단결", "남북 조절 위원회", "인구 비례에 의한 총선거", "남북 연방제 통일", "이산가족", "7·7 특별 선언", "UN 동시", "남북 기본 합의서", "비핵화"], "10-2": ["정상 회담", "햇볕", "금강산 해로", "육로", "1차", "6·15 남북 공동 선언", "개성 공단", "제2차 남북 정상 회담", "10·4 남북 공동 선언"]}};
 function nbNorm(t){ return String(t).replace(/\([^)]*\)/g,"").replace(/[\s·,.\-–—~'"‘’“”!?:;\/]/g,"").toLowerCase(); }
-function nbStart(sec){
+function nbStart(sec, focus){
   const body = sec.querySelector(".nt-sec-body");
   sec._nbRound = sec._orig ? (sec._nbRound||0)+1 : 0;
   if(!sec._orig) sec._orig = body.innerHTML; else body.innerHTML = sec._orig;
@@ -2754,7 +2766,9 @@ function nbStart(sec){
   const tag = (sec.querySelector(".nt-tag")||{}).textContent;
   const keys = (NB_KEYS[notesSubjectId]||{})[tag];
   let pick;
-  if(keys){
+  if((SUBJECT_NOTES[notesSubjectId]||{}).paired){
+    pick = cand;
+  } else if(keys){
     const ks = new Set(keys.map(nbNorm)), seen = new Set();
     pick = cand.filter(el=>{ const k = nbNorm(el.textContent); if(!ks.has(k)) return false; return true; });
     if(sec._nbRound){ pick = pick.filter(()=>Math.random()<0.7); }
@@ -2764,15 +2778,18 @@ function nbStart(sec){
     const a = el.textContent.trim();
     const inp = document.createElement("input");
     inp.type = "text"; inp.className = "nb-in"; inp.dataset.a = a; inp.autocomplete = "off"; inp.spellcheck = false;
-    inp.style.width = Math.min(16, Math.max(3, a.length*1.15+1)) + "em";
+    const pair = el.closest('.en-note-pair');
+    const english = pair && el.closest('[lang]').lang==='en';
+    if(pair) inp.setAttribute('aria-label', sec.dataset.passage+'번 '+pair.dataset.sentence+'번째 문장 '+(english ? '영어' : '해석')+' 빈칸');
+    inp.style.width = Math.min(16, Math.max(3, a.length*(english ? 0.65 : 1.15)+1)) + "em";
     inp.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); const all=[...body.querySelectorAll(".nb-in")]; const nx=all[all.indexOf(inp)+1]; if(nx) nx.focus(); else nbGrade(sec); } });
     el.textContent = ""; el.appendChild(inp);
   });
   sec.querySelector(".nb-bar").innerHTML = '<span class="nb-cnt">빈칸 '+pick.length+'개</span>'+
     '<button type="button" class="nb-b pri" data-nbact="grade">채점</button><button type="button" class="nb-b" data-nbact="show">정답 보기</button>'+
-    '<button type="button" class="nb-b" data-nbact="again">다시 뚫기</button><button type="button" class="nb-b" data-nbact="off">끄기</button>';
+    '<button type="button" class="nb-b" data-nbact="again">'+(sec.dataset.passage ? '다시 풀기' : '다시 뚫기')+'</button><button type="button" class="nb-b" data-nbact="off">끄기</button>';
   sec.classList.add("nb-on");
-  const first = body.querySelector(".nb-in"); if(first) first.focus({preventScroll:true});
+  const first = body.querySelector(".nb-in"); if(first && focus!==false) first.focus({preventScroll:true});
 }
 function nbGrade(sec, show){
   const ins = [...sec.querySelectorAll(".nb-in")]; let ok = 0;
@@ -2787,6 +2804,11 @@ function nbGrade(sec, show){
   });
   const cnt = sec.querySelector(".nb-cnt");
   if(cnt) cnt.textContent = show ? "정답 "+ins.length+"개 공개" : ins.length+"개 중 "+ok+"개 맞음" + (ok===ins.length ? " 🎉" : "");
+  if(!show && ins.length && ok===ins.length && sec.dataset.passage){
+    const subject = subjById(notesSubjectId);
+    subject.quiz.forEach((set,i)=>{ if(set[0] && set[0].cloze && set[0].passage===sec.dataset.passage) progress[subject.id][i] = true; });
+    saveProgress(progress);
+  }
 }
 document.getElementById("notesBody").addEventListener("click", e=>{
   const go = e.target.closest(".nb-go"); const act = e.target.closest("[data-nbact]");
@@ -3283,9 +3305,22 @@ function renderHome(){
 }
 
 /* ================= 단원별 학습 (full-width accordion) ================= */
+function unitStudyIndices(subject, unit){
+  if(!unit.notebook) return unit.indices;
+  const seen = new Set();
+  return unit.indices.filter(i=>{
+    const passage = subject.quiz[i][0].passage;
+    if(seen.has(passage)) return false;
+    seen.add(passage); return true;
+  });
+}
 function setRowHTML(subject, globalIdx, showTag){
   const done = progress[subject.id][globalIdx];
   const adv = isAdvanced(subject, globalIdx);
+  const first = subject.quiz[globalIdx][0];
+  if(first && first.cloze && SUBJECT_NOTES[subject.id] && SUBJECT_NOTES[subject.id].paired){
+    return '<i class="sr-bub'+(done?' on':'')+'"></i><span class="sr-main"><span class="sr-no">'+subject.quiz[globalIdx].length+'문장 · 영어+해석</span><span class="sr-title">'+escapeHtml(first.passage)+'번 · 문장·해석 빈칸</span></span>';
+  }
   return '<i class="sr-bub'+(done?' on':'')+'"></i><span class="sr-main"><span class="sr-no">SET '+(globalIdx+1)+(done?' · 완료':'')+'</span><span class="sr-title">'+escapeHtml(subject.titles[globalIdx])+'</span></span>'+
     (showTag ? '<span class="sr-tag '+(adv?'adv':'basic')+'">'+(adv?'심화':'기본')+'</span>' : '');
 }
@@ -3315,10 +3350,11 @@ function renderStudy(){
     list.querySelectorAll("[data-pm]").forEach(b=> b.onclick = ()=> openMemo(b.dataset.pm, "all")); }
   else if(!subject.units.length) list.innerHTML = '<div class="empty-note">'+escapeHtml(curTerm.label)+' 범위 문제를 준비하고 있어요.<br>지난 '+escapeHtml(TERMS.mid.label)+' 문제는 왼쪽 메뉴(☰) 위쪽에서 1차고사를 고르면 풀 수 있어요.</div>';
   subject.units.forEach((unit, ui)=>{
-    const basicIdx = unit.indices.filter(i=>!isAdvanced(subject,i));
-    const advIdx = unit.indices.filter(i=>isAdvanced(subject,i));
-    const cleared = unit.indices.filter(i=>progress[subject.id][i]).length;
-    const pct = Math.round(cleared/unit.indices.length*100);
+    const indices = unitStudyIndices(subject, unit);
+    const basicIdx = indices.filter(i=>!isAdvanced(subject,i));
+    const advIdx = indices.filter(i=>isAdvanced(subject,i));
+    const cleared = indices.filter(i=>progress[subject.id][i]).length;
+    const pct = Math.round(cleared/indices.length*100);
 
     const item = document.createElement("div");
     item.className = "acc-item";
@@ -3327,7 +3363,7 @@ function renderStudy(){
     head.className = "acc-head";
     head.innerHTML =
       '<div style="min-width:0"><div class="acc-num">'+(ui+1)+'단원</div><div class="acc-title">'+escapeHtml(unit.name)+'</div>'+
-      '<div class="acc-meta">'+battHTML(pct,"sm")+'<span>'+cleared+'/'+unit.indices.length+' 세트 · '+unit.indices.reduce((n,i)=>n+(subject.quiz[i]||[]).length,0)+'문항</span></div></div>'+
+      '<div class="acc-meta">'+battHTML(pct,"sm")+'<span>'+cleared+'/'+indices.length+(unit.notebook ? ' 지문 · 영어·해석 함께 쓰기' : ' 세트 · '+indices.reduce((n,i)=>n+(subject.quiz[i]||[]).length,0)+'문항')+'</span></div></div>'+
       '<div class="acc-arrow">›</div>';
     head.addEventListener("click", ()=> item.classList.toggle("open"));
     if(ui===studyOpenUnit) item.classList.add("open");
@@ -3349,7 +3385,7 @@ function renderStudy(){
         body.appendChild(row);
       });
     }
-    buildRows("기본 학습", basicIdx);
+    buildRows(unit.notebook ? "문장·해석 암기노트" : "기본 학습", basicIdx);
     buildRows("심화 공략", advIdx);
     item.appendChild(body);
     list.appendChild(item);
@@ -3407,7 +3443,7 @@ function renderDrillList(){
   subjList.forEach(subj=>{
     subj.units.forEach((unit, ui)=>{
       if(drillUnitKey !== "ALL" && drillUnitKey !== (subj.id+"::"+ui)) return;
-      const matchIdx = unit.indices.filter(i => (isAdvanced(subj,i)?"advanced":"basic")===drillDiff);
+      const matchIdx = unitStudyIndices(subj, unit).filter(i => (isAdvanced(subj,i)?"advanced":"basic")===drillDiff);
       if(!matchIdx.length) return;
       anyUnit = true;
 
@@ -3420,7 +3456,7 @@ function renderDrillList(){
       const pct = Math.round(cleared/matchIdx.length*100);
       head.innerHTML =
         '<div style="min-width:0"><div class="acc-num">'+escapeHtml(subj.name)+'</div><div class="acc-title">'+escapeHtml(unit.name)+'</div>'+
-        '<div class="acc-meta">'+battHTML(pct,"sm")+'<span>'+cleared+'/'+matchIdx.length+' 세트 · '+matchIdx.reduce((n,i)=>n+(subj.quiz[i]||[]).length,0)+'문항</span></div></div>'+
+        '<div class="acc-meta">'+battHTML(pct,"sm")+'<span>'+cleared+'/'+matchIdx.length+(unit.notebook ? ' 지문 · 영어·해석 함께 쓰기' : ' 세트 · '+matchIdx.reduce((n,i)=>n+(subj.quiz[i]||[]).length,0)+'문항')+'</span></div></div>'+
         '<div class="acc-arrow">›</div>';
       head.addEventListener("click", ()=> item.classList.toggle("open"));
       item.appendChild(head);
@@ -3492,6 +3528,12 @@ document.getElementById("resetAllBtn").addEventListener("click", ()=>{
 const MARK_O = '<svg viewBox="0 0 44 44" aria-hidden="true"><path d="M24 5.5C13 4.6 5.2 11.8 5.6 22.4c.4 9.6 8.6 16.4 18.2 15.6 9.8-.8 15.4-8.6 14.4-17.6C37.2 11.6 30 6 20.5 7.4"/></svg>';
 const MARK_X = '<svg viewBox="0 0 44 44" aria-hidden="true"><path d="M9 37 L36 6"/></svg>';
 function enterQuiz(subject, globalIdx, fromTab){
+  const first = subject.quiz[globalIdx][0], notes = SUBJECT_NOTES[subject.id];
+  if(first && first.cloze && notes && notes.paired){
+    exitSheet(); stopMockTimer(); mockState = null;
+    openNotes(subject.id, notes.sections.findIndex(s=>s.passage===first.passage));
+    return;
+  }
   if(subject.math && !subject.quiz[globalIdx].every(q=>Array.isArray(q.choices))){ openMathQuiz(subject,globalIdx,fromTab); return; }
   exitSheet();
   quizSubject = subject; quizSet = globalIdx; quizQ = 0; quizScore = 0;
