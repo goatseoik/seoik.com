@@ -272,6 +272,7 @@
   .mat-table td{ background:var(--card); }
   .mat-wrap > .mat-table{ overflow-x:auto; display:table; }
 
+  .choices[hidden]{ display:none; }
   .choices{ padding:0 12px; display:flex; flex-direction:column; gap:2px; }
   .choice{
     display:flex; align-items:flex-start; gap:10px; width:100%; text-align:left;
@@ -1862,6 +1863,7 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
 
 <script type="application/json" id="boardShared">[]</script>
 
+<script src="./english/october-2026.js"></script>
 <script src="./math/data.js"></script>
 <script src="./math/exam-sets.js"></script>
 <script src="./math/transcribed-2026-06.js"></script>
@@ -2103,11 +2105,20 @@ const IS_F_QUIZ = [[{"q": "다음 글의 ㉠에 대한 옳은 설명만을 〈�
 const IS_F_SET_TITLES = ["시민 참여의 의미와 방법", "시민불복종과 시민 참여 심화", "인권 문제의 양상과 해결", "인권 문제 심화 (자료 분석)", "자유주의적·공동체주의적 정의관 기본", "정의관의 비교와 적용 심화", "불평등 현상과 정의로운 제도", "불평등과 해결 방안 심화", "평화의 의미와 남북 분단", "남북 관계와 세계 평화 심화", "시장 실패의 의미와 유형", "경제 주체의 역할과 책임", "자산 관리와 금융 생활", "국제 분업과 무역의 필요성", "자원의 특성과 에너지 자원", "기후변화 대응과 지속가능한 발전", "미래 사회와 세계시민", "[Ⅰ-2] 시민 참여 추가 ①", "[Ⅰ-2] 시민불복종 추가 ②", "[Ⅰ-3] 인권 문제 추가 ①", "[Ⅰ-3] 인권 문제 추가 ②", "[Ⅱ-02] 정의관 추가 ①", "[Ⅱ-02] 정의관 추가 ②", "[Ⅱ-03] 불평등 추가 ①", "[Ⅱ-03] 불평등 추가 ②", "[Ⅳ-03-1] 남북 관계·평화 추가 ①", "[Ⅳ-03-1] 남북 관계·평화 추가 ②", "[Ⅲ-2] 시장 실패 추가 ①", "[Ⅲ-2] 경제 주체의 역할 추가 ②", "[Ⅲ-3] 자산 관리 추가 ①", "[Ⅲ-3·Ⅲ-4] 금융 생활·무역 추가 ②", "[Ⅴ-2] 에너지 자원 추가 ①", "[Ⅴ-2] 지속가능발전 추가 ②", "[Ⅴ-3] 미래 사회 추가 ①", "[Ⅴ-3] 미래 사회 추가 ②", "[Ⅲ-4] 비교 우위 계산 추가", "[종합] 2차고사 범위 섞어 풀기"];
 const IS_F_UNITS = [{"name": "Ⅰ-2-02. 시민 참여 (시민 참여부터)", "desc": "신보경T · 시민 참여의 의미·필요성, 참여 방법, 정당·이익 집단·시민 단체, 시민불복종", "indices": [0, 1, 17, 18]}, {"name": "Ⅰ-3. 인권 문제의 양상과 해결 방안", "desc": "신보경T · 사회적 소수자, 청소년 노동권, 세계 인권 지수", "indices": [2, 3, 19, 20]}, {"name": "Ⅱ-02. 다양한 정의관의 특징과 적용", "desc": "권유나T · 자유주의(롤스·노직) vs 공동체주의(매킨타이어·왈처·샌델)", "indices": [4, 5, 21, 22]}, {"name": "Ⅱ-03. 다양한 불평등과 해결 방안", "desc": "권유나T · 양극화, 공간 불평등, 사회 복지 제도, 적극적 평등 실현 조치", "indices": [6, 7, 23, 24]}, {"name": "Ⅳ-03-1. 남북 관계와 세계평화", "desc": "권유나T · 소극적·적극적 평화, 남북 분단 과정, 통일 비용·편익", "indices": [8, 9, 25, 26]}, {"name": "Ⅲ-2. 시장 실패와 경제 주체의 역할과 책임 (시장 실패부터)", "desc": "김정은T · 시장 실패(독과점·공공재·외부 효과), 정부·기업·노동자·소비자의 역할", "indices": [10, 11, 27, 28]}, {"name": "Ⅲ-3. 자산 관리와 금융 생활", "desc": "김정은T · 예금·채권·주식, 수익성·안전성·유동성, 금리·환율", "indices": [12, 29, 30]}, {"name": "Ⅲ-4 ①. 국제 분업과 무역의 필요성", "desc": "김정은T · 교과서 78~94p · 절대 우위, 비교 우위", "indices": [13, 35]}, {"name": "Ⅴ-2. 에너지 자원의 이용과 지속가능발전", "desc": "정찬우T · 자원의 특성, 화석 에너지, 기후변화 대응", "indices": [14, 15, 31, 32]}, {"name": "Ⅴ-3. 미래 사회의 변화와 세계시민의 자세", "desc": "정찬우T · 미래 사회 변화 양상, 세계시민", "indices": [16, 33, 34]}, {"name": "종합. 2차고사 범위 섞어 풀기", "desc": "전 범위에서 골고루", "indices": [36]}];
 const IS_F_SET_TOPICS = {"0": ["시민 참여의 필요성", "정당·이익 집단·시민 단체 구별", "합법적 참여 방법"], "1": ["시민불복종의 정당화 조건", "간디·로자 파크스 사례", "정당·이익 집단·시민 단체 구별"], "2": ["사회적 소수자의 특징", "청소년 근로 기준(하루 7시간·주 35시간)", "세계 인권 지수와 발표 기관"], "3": ["사회적 소수자의 특징", "청소년 근로 기준(하루 7시간·주 35시간)", "세계 인권 지수와 발표 기관"], "4": ["사상가별 주장 구별", "각 정의관의 한계(이기주의/집단주의)", "개발 제한 구역 사례 적용"], "5": ["사상가별 주장 구별", "각 정의관의 한계(이기주의/집단주의)", "개발 제한 구역 사례 적용"], "6": ["사회 보험·공공 부조·사회 서비스 비교", "지역 격차 완화 정책 구분", "적극적 평등 실현 조치와 역차별"], "7": ["사회 보험·공공 부조·사회 서비스 비교", "지역 격차 완화 정책 구분", "적극적 평등 실현 조치와 역차별"], "8": ["소극적 평화 vs 적극적 평화", "남북 분단 과정 순서", "분단 비용·통일 비용·통일 편익"], "9": ["소극적 평화 vs 적극적 평화", "남북 분단 과정 순서", "분단 비용·통일 비용·통일 편익"], "10": ["시장 실패 유형", "공공재 비경합성·비배제성", "외부 효과와 해결 방안"], "11": ["정부의 역할(공정 거래 위원회)", "노동 3권", "소비자 주권·윤리적 소비"], "12": ["금융 자산별 수익성·안전성", "자산 관리의 원칙", "금리·환율 변화와 금융 의사 결정"], "13": ["절대 우위 vs 비교 우위", "생산 기회비용 계산", "교환 비율 조건"], "14": ["유한성·편재성·가변성", "석탄·석유·천연가스 비교", "교토 의정서 vs 파리 협정"], "15": ["유한성·편재성·가변성", "석탄·석유·천연가스 비교", "교토 의정서 vs 파리 협정"], "16": ["미래 사회 변화 양상", "세계시민의 의미와 자세", "지속가능발전목표(SDGs)"]};
+/* 첨부 PDF 기반 추가 학습: 기존 세트 번호와 학습 기록을 유지한다. */
+{
+  const extra = window.SEOIK_ENGLISH_OCTOBER;
+  const offset = EN_F_QUIZ.length;
+  EN_F_QUIZ.push(...extra.quiz);
+  EN_F_SET_TITLES.push(...extra.titles);
+  EN_F_UNITS.push(...extra.units.map(unit => ({...unit, indices: unit.indices.map(i => i + offset)})));
+  Object.entries(extra.topics).forEach(([i, value]) => { EN_F_SET_TOPICS[Number(i) + offset] = value; });
+}
 const FINAL_SUBJECTS = [
   { id: "kh_f", name: "한국사", desc: "시험 범위 6~10단원 — 정부 수립 · 이승만~장면 · 박정희 · 전두환~노무현 · 남북 관계", quiz: KH_F_QUIZ, titles: KH_F_SET_TITLES, units: KH_F_UNITS, topics: {} },
   { id: "is_f", name: "통합사회", desc: "통합사회2 2학기 2차고사 범위 — 시민 참여·인권 문제 · 정의관·불평등 · 시장 실패·자산 관리·무역 · 남북 관계 · 자원·미래 사회", quiz: IS_F_QUIZ, titles: IS_F_SET_TITLES, units: IS_F_UNITS, topics: IS_F_SET_TOPICS },
   { id: "info_f", name: "정보", desc: "2학기 2차고사 범위 — 문제 준비 중", quiz: [], titles: [], units: [], topics: {} },
-  { id: "en_f", name: "영어", desc: "2026년 10월 모의고사 1학년 18~45번(25~28 제외) — 글의 순서 · 문장 삽입 · 빈칸 · 내용 불일치 · 문장 배열", quiz: EN_F_QUIZ, titles: EN_F_SET_TITLES, units: EN_F_UNITS, topics: EN_F_SET_TOPICS },
+  { id: "en_f", name: "영어", desc: "2026년 10월 모의고사 1학년 18~24·29~45번 — 모의고사 주제·요지·순서 · 문장별 영어 빈칸·해석 빈칸 · 삽입·배열", quiz: EN_F_QUIZ, titles: EN_F_SET_TITLES, units: EN_F_UNITS, topics: EN_F_SET_TOPICS },
   { id: "sci_f", name: "통합과학", desc: "통합과학2 2학기 2차고사 범위 — 생물다양성 · 생태계와 평형 · 온실 효과·지구 환경 변화 · 에너지 자원 · 산과 염기 · 중화 반응 · 에너지 출입", quiz: SCI_F_QUIZ, titles: SCI_F_SET_TITLES, units: SCI_F_UNITS, topics: SCI_F_SET_TOPICS },
   { id: "kr_f", name: "공통국어", desc: "2학기 2차고사 범위 — 문제 준비 중", quiz: [], titles: [], units: [], topics: {} },
   { id: "pe_f", name: "체육", desc: "체육2 서논술 암기장 — 밑줄 친 부분 빈칸 21칸", quiz: [], titles: [], units: [], topics: {}, memo: true }
@@ -3540,6 +3551,7 @@ function renderQuizQuestion(){
     const u = sj.units.find(u=>u.indices.includes(it.set));
     document.getElementById("quizCrumb").textContent = sj.name + " · SET " + (it.set+1) + (u ? " · " + u.name : "");
   }
+  document.getElementById("choices").hidden = false;
   if(qData.type==="order"){ renderOrderQuestion(qData); return; }
   document.getElementById("qstem").style.display = "";
   let order;
@@ -3565,6 +3577,27 @@ function renderQuizQuestion(){
     btn.addEventListener("click", ()=> onQuizAnswer(idx));
     choicesEl.appendChild(btn);
   });
+
+  if(qData.cloze && quizMode !== "mock"){
+    choicesEl.hidden = true;
+    const form = document.createElement("form");
+    form.id = "englishClozeForm";
+    form.innerHTML = '<label for="englishClozeAnswer">빈칸에 들어갈 '+(qData.cloze.language === "english" ? "영어" : "우리말")+'를 입력하세요.</label>'+
+      '<input id="englishClozeAnswer" type="text" autocomplete="off" spellcheck="false" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin:8px 0;font:inherit" required>'+
+      '<p>원문 표현을 기준으로 채점해요. 띄어쓰기와 영어 대소문자는 구분하지 않아요.</p>'+
+      '<button class="btn" type="submit">정답 확인</button> <button class="btn ghost" type="button" id="englishClozeHint" aria-expanded="false">보기 보기</button>';
+    document.getElementById("qstem").appendChild(form);
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      const input = document.getElementById("englishClozeAnswer");
+      if(input.value.trim()) onQuizAnswer(normalizeEnglishCloze(input.value) === normalizeEnglishCloze(qData.cloze.answer) ? quizCorrectIdx : -1);
+    });
+    document.getElementById("englishClozeHint").addEventListener("click", event => {
+      choicesEl.hidden = !choicesEl.hidden;
+      event.currentTarget.setAttribute("aria-expanded", String(!choicesEl.hidden));
+      event.currentTarget.textContent = choicesEl.hidden ? "보기 보기" : "보기 숨기기";
+    });
+  } else choicesEl.hidden = false;
 
   const fb = document.getElementById("feedback");
   fb.className = "feedback"; fb.style.display = "none";
@@ -3699,6 +3732,10 @@ function gradeOrder(reveal){
   renderQuizTrack();
 }
 
+function normalizeEnglishCloze(value){
+  return value.normalize("NFKC").toLowerCase().replace(/[’‘]/g, "'").replace(/\s+/g, "").trim();
+}
+
 function onQuizAnswer(idx){
   if(quizMode==="mock"){
     const a = mockState.answers[quizQ];
@@ -3726,7 +3763,12 @@ function onQuizAnswer(idx){
   const fb = document.getElementById("feedback");
   fb.classList.add("show", correct ? "is-correct" : "is-wrong");
   fb.style.display = "";
-  document.getElementById("stampText").textContent = correct ? "정답이에요" : "오답이에요 · 정답은 " + CIRCLED[quizCorrectIdx];
+  const clozeForm = document.getElementById("englishClozeForm");
+  if(qData.cloze && clozeForm){
+    clozeForm.querySelectorAll("input,button").forEach(el => { el.disabled = true; });
+    document.getElementById("choices").hidden = false;
+  }
+  document.getElementById("stampText").textContent = correct ? "정답이에요" : "오답이에요 · 정답은 " + (qData.cloze ? qData.cloze.answer : CIRCLED[quizCorrectIdx]);
   document.getElementById("explainText").textContent = qData.explain;
   formatMathNotation(document.getElementById("quizArea"));
 
@@ -3818,7 +3860,7 @@ function skLogo(extra){ return '<span class="sk-logo">'+SK_MARK+'<b>SEOIK.COM</b
 function sheetUsable(){
   return quizItems.length > 0 && quizItems.every(it=>{
     const s = subjById(it.sid), q = s && s.quiz[it.set] && s.quiz[it.set][it.q];
-    return q && q.type !== "order" && Array.isArray(q.choices);
+    return q && q.type !== "order" && (!q.cloze || quizMode === "mock") && Array.isArray(q.choices);
   });
 }
 function sheetEl(){ return document.getElementById("sheet"); }
