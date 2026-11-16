@@ -18,7 +18,7 @@ def add(title, questions):
     index = len(sets)
     sets.append(questions)
     titles.append(title)
-    topics[str(index)] = ['첨부 필기 자료의 본문 기준', '정답과 원문·해석 확인', '18~24번·29~45번 (장문은 공통 지문)']
+    topics[str(index)] = ['첨부 필기 자료의 영어 본문 기준', '해석.pdf 기준 문장별 해석 확인', '18~24번·29~45번 (장문은 공통 지문)']
     return index
 
 
@@ -125,7 +125,7 @@ for p in passages:
 
 notes = dict(title='영어 모의고사 · 문장·해석 빈칸', paired=True,
              sub='2026년 10월 고1 · 18~24번·29~45번 · 영어 한 줄, 해석 한 줄을 함께 채워요.',
-             legend='문장 속 빈칸에 바로 입력하세요. 지문별로 채점하고, 정답을 보거나 다시 풀 수 있어요.',
+             legend='해석은 첨부한 「해석.pdf」 기준입니다. 문장 속 빈칸에 바로 입력하고, 지문별로 채점하거나 정답을 확인하세요.',
              sections=sections)
 units.append(dict(name='모의고사 · 문장·해석 빈칸', notebook=True,
                   desc='개념노트처럼 영어와 해석을 한 화면에서 함께 채우기',

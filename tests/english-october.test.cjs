@@ -9,6 +9,28 @@ const context = {window:{}};
 vm.runInNewContext(fs.readFileSync(path.join(root, 'english/october-2026.js'), 'utf8'), context);
 const extra = JSON.parse(JSON.stringify(context.window.SEOIK_ENGLISH_OCTOBER));
 
+test('all 21 passage translations follow the newly supplied official interpretation PDF', () => {
+  const reference=JSON.parse(fs.readFileSync(path.join(root,'english/october-2026-translation-reference.json'),'utf8'));
+  const norm=text=>text.normalize('NFKC').replace(/\s+/g,'');
+  assert.match(source.translation_source,/해석\.pdf/);
+  assert.equal(reference.source,source.translation_source);
+  assert.deepEqual(Object.keys(reference.passages),source.passages.map(p=>p.number));
+  for(const p of source.passages) {
+    let expected=norm(reference.passages[p.number]);
+    if(p.number==='18') expected=expected.replace(/^Ms\.Palmer귀하/,'').replace(/KarenWhitfield드림$/,'');
+    if(p.number==='30') expected=expected.replace('감소(→증가)','증가');
+    if(p.number==='35') expected=expected.replace(/\(개인들은.*?있다\.\)/,'');
+    if(p.number==='40') expected=expected.split('\uf000')[0];
+    if(p.number==='41-42') expected=expected.replace('영향력이없고(→영향력이크고)','영향력이크고');
+    expected=expected.replace(/\([A-Da-e]\)/g,'');
+    assert.equal(norm(p.sentences.map(s=>s.korean).join(' ')),expected,p.number+'번 해석');
+  }
+  const story=source.passages.find(p=>p.number==='43-45').sentences;
+  assert.match(story[0].korean,/자신의 학교 복도/);
+  assert.match(story[12].korean,/그녀\(Emily\)의 목소리가 떨렸다/);
+  assert.match(story[21].korean,/엉망진창 속에서 아름다움을 찾는 지혜/);
+});
+
 test('October English covers the requested passages and every aligned sentence in both languages', () => {
   assert.deepEqual(source.passages.map(p=>p.number), ['18','19','20','21','22','23','24','29','30','31','32','33','34','35','36','37','38','39','40','41-42','43-45']);
   assert.equal(source.passages.reduce((n,p)=>n+p.sentences.length,0),184);
