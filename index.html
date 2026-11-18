@@ -4555,7 +4555,48 @@ function loadSharedPosts(){
     return Array.isArray(arr) ? arr.map(p=>Object.assign({}, p, {shared:true})) : [];
   }catch(e){ return []; }
 }
-const SHARED_POSTS = loadSharedPosts();
+let SHARED_POSTS = loadSharedPosts();
+/* ---------- 공개 글: Firebase(Firestore) posts 컬렉션 — 서익닷컴을 여는 모든 사람에게 보임 ---------- */
+const FS_BOARD = !document.getElementById("srcBlob");
+const postsUrl = id => "https://firestore.googleapis.com/v1/projects/"+((window.__seoikAcc||{}).projectId||"seoik-9ac41")+"/databases/(default)/documents/posts"+(id?"/"+id:"");
+const fsStr = v => ({stringValue:String(v==null?"":v)});
+function fromDoc(d){ const f = d.fields||{}; const g = k => f[k] ? (f[k].stringValue!==undefined ? f[k].stringValue : +f[k].integerValue) : "";
+  return { id:d.name.split("/").pop(), cat:g("cat"), title:g("title"), content:g("content"), ts:+g("ts")||0, uid:g("uid"), author:g("author"), shared:true }; }
+let boardLoaded = false, boardLoadErr = "";
+async function fetchSharedPosts(){
+  try{
+    const r = await fetch(postsUrl()+"?pageSize=300");
+    const j = await r.json().catch(()=>({}));
+    if(!r.ok){ boardLoadErr = (j.error && j.error.status) || "ERR"; return; }
+    SHARED_POSTS = (j.documents||[]).map(fromDoc).sort((a,b)=>b.ts-a.ts); boardLoadErr = ""; boardLoaded = true;
+  }catch(e){ boardLoadErr = "NETWORK"; }
+}
+async function fsPublish(nextShared){
+  const A = window.__seoikAcc, a = A && A.acc();
+  if(!a){ alert("공개 글은 로그인해야 쓸 수 있어요. 마이 탭에서 로그인해 주세요."); if(A && A.login){ goTab("my"); setTimeout(A.login, 200); } return false; }
+  showBoardBusy("게시판에 올리는 중이에요…");
+  try{
+    const tok = await A.idToken();
+    const prev = new Map(SHARED_POSTS.map(p=>[p.id,p])), next = new Map(nextShared.map(p=>[p.id,p]));
+    for(const [id,p] of next){
+      const o = prev.get(id);
+      if(o && o.cat===p.cat && o.title===p.title && o.content===p.content) continue;
+      const body = { fields:{ cat:fsStr(p.cat), title:fsStr(p.title), content:fsStr(p.content), ts:{integerValue:String(p.ts||Date.now())}, uid:fsStr(a.uid), author:fsStr(a.id) } };
+      const r = await fetch(postsUrl(id), { method:"PATCH", headers:{ "Content-Type":"application/json", Authorization:"Bearer "+tok }, body:JSON.stringify(body) });
+      if(!r.ok){ const j = await r.json().catch(()=>({})); throw new Error((j.error&&j.error.status)||"ERR"); }
+    }
+    for(const id of prev.keys()) if(!next.has(id)){
+      const r = await fetch(postsUrl(id), { method:"DELETE", headers:{ Authorization:"Bearer "+tok } });
+      if(!r.ok){ const j = await r.json().catch(()=>({})); throw new Error((j.error&&j.error.status)||"ERR"); }
+    }
+    await fetchSharedPosts(); showBoardBusy(""); renderBoard(); return true;
+  }catch(e){
+    showBoardBusy("");
+    const m = String(e && e.message || e);
+    alert(m.includes("PERMISSION") ? "올릴 권한이 없어요. 내 글만 수정·삭제할 수 있고, 관리자가 Firebase 게시판 규칙을 켜 둬야 해요." : m==="NETWORK"||m.includes("fetch") ? "인터넷 연결을 확인해 주세요." : "공개 글을 올리지 못했어요 ("+m+")");
+    return false;
+  }
+}
 function loadLocalPosts(){
   try{ const raw = localStorage.getItem(BOARD_KEY); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
 }
@@ -4583,6 +4624,7 @@ function getArtifactNs(){
   return artifactNsPromise;
 }
 async function detectPublish(){
+  if(FS_BOARD){ boardCanPublish = true; return; }
   if(!document.getElementById("srcBlob") || !(window.claude && window.claude.use) || typeof DecompressionStream==="undefined"){ boardCanPublish = false; return; }
   try{
     const user = await window.claude.use("user");
@@ -4602,6 +4644,7 @@ function showBoardBusy(msg){
   o.style.display = msg ? "flex" : "none";
 }
 async function publishShared(nextShared, pendingDraft){
+  if(FS_BOARD) return fsPublish(nextShared);
   if(boardBusy) return false;
   boardBusy = true;
   try{
@@ -4645,8 +4688,13 @@ function renderBoard(){
   document.getElementById("boardDetailView").style.display = "none";
   document.getElementById("boardFab").style.display = "flex";
 
+  if(FS_BOARD && !boardLoaded && !renderBoard._loading){ renderBoard._loading = true; fetchSharedPosts().then(()=>{ renderBoard._loading = false; boardLoaded = true; if(document.getElementById("boardListView").style.display!=="none") renderBoard(); }); }
   const note = document.getElementById("boardNote");
-  if(note){
+  if(note && FS_BOARD){
+    const A = window.__seoikAcc, a = A && A.acc();
+    note.textContent = boardLoadErr ? "공개 게시판을 불러오지 못했어요 ("+boardLoadErr+"). '나만 보기' 글은 쓸 수 있어요."
+      : "'공개' 글은 서익닷컴을 쓰는 모든 사람에게 보여요" + (a ? " · "+a.id+"(으)로 올려요." : " (쓰려면 로그인). '나만 보기'는 이 기기에만 저장돼요.");
+  } else if(note){
     note.textContent = boardCanPublish===false
       ? "공개 글은 링크로 들어온 모두가 볼 수 있어요. 이 화면에서는 '나만 보기' 글만 쓸 수 있어요."
       : "'공개' 글은 서익닷컴을 여는 모든 사람에게 보여요. '나만 보기' 글은 이 기기에만 저장돼요.";
@@ -4762,11 +4810,13 @@ function renderBoardDetail(id){
   const detailEl = document.getElementById("boardDetailView");
   detailEl.style.display = "block";
   if(!p){ detailEl.innerHTML = '<div class="empty-note">글을 찾을 수 없어요.</div>'; return; }
-  const canModify = !p.shared || boardCanPublish!==false;
+  const me = window.__seoikAcc && window.__seoikAcc.acc();
+  const canModify = !p.shared || (FS_BOARD ? !!(me && p.uid && me.uid===p.uid) : boardCanPublish!==false);
   detailEl.innerHTML =
     '<div class="board-detail">' +
       '<div class="bd-top"><span class="bp-cat">'+escapeHtml(p.cat)+'</span><span class="bp-vis '+(p.shared?'pub':'priv')+'">'+(p.shared?'공개':'나만 보기')+'</span><span class="bp-date">'+fmtDate(p.ts)+'</span></div>' +
       '<div class="bd-title">'+escapeHtml(p.title)+'</div>' +
+      (p.author ? '<div class="bp-date" style="margin:-8px 0 12px">작성자 '+escapeHtml(p.author)+'</div>' : '') +
       '<div class="bd-content">'+escapeHtml(p.content)+'</div>' +
       '<div class="bd-actions">' +
         '<button class="bd-back" id="bdBack">‹ 목록으로</button>' +
@@ -4996,6 +5046,9 @@ function ls(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function acc(){ try{ return JSON.parse(ls(ACC_KEY) || "null"); }catch(e){ return null; } }
 function setAcc(a){ try{ if(a) rawSet.call(localStorage, ACC_KEY, JSON.stringify(a)); else rawRemove.call(localStorage, ACC_KEY); }catch(e){} }
 
+/* 게시판 등 다른 기능이 로그인 정보를 쓸 수 있게 */
+window.__seoikAcc = { acc: ()=>acc(), idToken: ()=>idToken(), projectId: FB.projectId, on: ON,
+  login: ()=>{ const b = document.querySelector('[data-acc="in"]'); if(b) b.click(); } };
 const card = document.createElement("div");
 card.className = "acc-card"; card.id = "accCard";
 const myView = document.querySelector('[data-view="my"]');
