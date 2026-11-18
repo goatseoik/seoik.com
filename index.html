@@ -3527,6 +3527,13 @@ document.getElementById("resetAllBtn").addEventListener("click", ()=>{
 /* ================= QUIZ (shared engine) ================= */
 const MARK_O = '<svg viewBox="0 0 44 44" aria-hidden="true"><path d="M24 5.5C13 4.6 5.2 11.8 5.6 22.4c.4 9.6 8.6 16.4 18.2 15.6 9.8-.8 15.4-8.6 14.4-17.6C37.2 11.6 30 6 20.5 7.4"/></svg>';
 const MARK_X = '<svg viewBox="0 0 44 44" aria-hidden="true"><path d="M9 37 L36 6"/></svg>';
+/* 새 시험지를 열 때 무조건 맨 위로 (부드러운 스크롤·포커스 복원에 밀리지 않게 여러 번) */
+function toTopHard(){
+  try{ document.activeElement && document.activeElement.blur(); }catch(e){}
+  const go = ()=>{ try{ window.scrollTo({top:0, left:0, behavior:"instant"}); }catch(e){ window.scrollTo(0,0); }
+    if(document.scrollingElement) document.scrollingElement.scrollTop = 0; document.body.scrollTop = 0; };
+  go(); requestAnimationFrame(go); setTimeout(go, 120); setTimeout(go, 400);
+}
 function enterQuiz(subject, globalIdx, fromTab){
   const first = subject.quiz[globalIdx][0], notes = SUBJECT_NOTES[subject.id];
   if(first && first.cloze && notes && notes.paired){
@@ -3883,13 +3890,13 @@ function showQuizResult(){
   savePending(nextIdx!==null ? {subjectId:quizSubject.id, setIndex:nextIdx} : null);
 
   const reloadBtn = document.getElementById("reloadBtn");
-  if(reloadBtn) reloadBtn.addEventListener("click", ()=>{ const subj = quizSubject, tab = quizReturnTab; enterQuiz(subj, nextIdx, tab); window.scrollTo(0,0); });
+  if(reloadBtn) reloadBtn.addEventListener("click", ()=>{ const subj = quizSubject, tab = quizReturnTab; enterQuiz(subj, nextIdx, tab); toTopHard(); });
   const doneBtn = document.getElementById("doneBtn");
   if(doneBtn) doneBtn.addEventListener("click", ()=>{ savePending(null); goTab(quizReturnTab); });
   document.getElementById("retryBtn").addEventListener("click", ()=>{
     savePending({subjectId:quizSubject.id, setIndex:quizSet});
     const subj = quizSubject, idx = quizSet, tab = quizReturnTab;
-    enterQuiz(subj, idx, tab); window.scrollTo(0,0);
+    enterQuiz(subj, idx, tab); toTopHard();
   });
 }
 
