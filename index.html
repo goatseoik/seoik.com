@@ -3883,12 +3883,13 @@ function showQuizResult(){
   savePending(nextIdx!==null ? {subjectId:quizSubject.id, setIndex:nextIdx} : null);
 
   const reloadBtn = document.getElementById("reloadBtn");
-  if(reloadBtn) reloadBtn.addEventListener("click", ()=> location.reload());
+  if(reloadBtn) reloadBtn.addEventListener("click", ()=>{ const subj = quizSubject, tab = quizReturnTab; enterQuiz(subj, nextIdx, tab); window.scrollTo(0,0); });
   const doneBtn = document.getElementById("doneBtn");
   if(doneBtn) doneBtn.addEventListener("click", ()=>{ savePending(null); goTab(quizReturnTab); });
   document.getElementById("retryBtn").addEventListener("click", ()=>{
     savePending({subjectId:quizSubject.id, setIndex:quizSet});
-    location.reload();
+    const subj = quizSubject, idx = quizSet, tab = quizReturnTab;
+    enterQuiz(subj, idx, tab); window.scrollTo(0,0);
   });
 }
 
