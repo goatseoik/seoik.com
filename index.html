@@ -5492,7 +5492,17 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
     document.getElementById("privGo").onclick = go;
     document.getElementById("privPw").addEventListener("keydown", e=>{ if(e.key==="Enter") go(); });
   }
-  if(document.readyState==="complete") setTimeout(start, 300); else window.addEventListener("load", ()=> setTimeout(start, 300));
+  /* 처음 켤 때 + 나중에 로그인했을 때도 바로 열리게 (계정이 바뀌면 다시 확인) */
+  let lastId = null, busy = false;
+  async function check(){
+    if(busy) return; const A = window.__seoikAcc, a = A && A.acc && A.acc(); const id = a ? a.id : null;
+    if(id === lastId) return;
+    const s = window.__seoikSubjById && window.__seoikSubjById("kr_f");
+    if(lastId !== null && s && s.quiz.length && !(id && OK.includes(await h(id)))){ location.reload(); return; }  /* 로그아웃·다른 계정이면 숨김 */
+    lastId = id; busy = true; try{ await start(); }catch(e){} busy = false;
+  }
+  if(document.readyState==="complete") setTimeout(check, 300); else window.addEventListener("load", ()=> setTimeout(check, 300));
+  setInterval(check, 1500);
 })();
 </script>
 </body>
