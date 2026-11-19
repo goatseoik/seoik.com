@@ -2348,6 +2348,7 @@ let quizMode = "set";        // set | wrong | mock
 let quizItems = [];          // [{sid,set,q}]
 let mockState = null;        // {answers:[{order,picked}], endAt, timerId, sid}
 function subjById(id){ return ALL_SUBJECTS.find(s=>s.id===id); }
+window.__seoikSubjById = subjById; window.__seoikRerender = ()=>{ try{ renderStudy(); }catch(e){} try{ renderHome(); }catch(e){} };
 function curItem(){ return quizItems[quizQ]; }
 function curQData(){ const it = curItem(); return subjById(it.sid).quiz[it.set][it.q]; }
 function quizN(){ return quizItems.length; }
@@ -5154,7 +5155,7 @@ const LIVE_KEY = "seoik_acc_live";      /* 이번 접속(창) 동안 로그인 �
 const LASTID_KEY = "seoik_last_id";     /* 아이디 저장 */
 const OPT_KEY = "seoik_login_opt_v1";   /* 체크박스 선택 기억 {keep, saveId} */
 /* 계정을 따라다니는 기록: 진도, 오답노트, 모의고사 기록 */
-const SYNC_KEYS = ["jokbo_app_progress_v2", "seoik_wrong_v1", "seoik_mock_hist_v1", "seoik_mock_seen_v1", "seoik_en_orig_v1"];
+const SYNC_KEYS = ["jokbo_app_progress_v2", "seoik_wrong_v1", "seoik_mock_hist_v1", "seoik_mock_seen_v1", "seoik_en_orig_v1", "seoik_priv_k1"];
 const CLEAR_ALSO = ["jokbo_app_pending_v2"];
 const PROGRESS_KEY = "jokbo_app_progress_v2";
 const MAIL = "@seoik.example.com";   /* 실제 메일이 가지 않는 예약 도메인 */
@@ -5446,6 +5447,50 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
   try{ sessionStorage.setItem(PROMPT_KEY, "1"); }catch(e){}
   if(dim.hidden) openSheet("in", true);
 })();
+})();
+</script>
+<script>
+/* ---------- 잠긴 문제집: 정해진 계정만 보이고, 암호를 넣어야 풀림 (내용은 data/kr1.bin에 암호화) ---------- */
+(function(){
+  const OK = ["4459f7f3666d99f6","b49f569e57cca467"];
+  const KEY = "seoik_priv_k1";
+  async function h(t){ const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("").slice(0,16); }
+  async function open(pass){
+    const raw = Uint8Array.from(atob((await (await fetch("data/kr1.bin", {cache:"no-store"})).text()).trim()), c=>c.charCodeAt(0));
+    const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+    const key = await crypto.subtle.deriveKey({name:"PBKDF2", salt:raw.slice(0,16), iterations:200000, hash:"SHA-256"}, base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+    const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:raw.slice(16,28)}, key, raw.slice(28));
+    return JSON.parse(new TextDecoder().decode(pt));
+  }
+  function apply(d){
+    const s = window.__seoikSubjById && window.__seoikSubjById("kr_f"); if(!s) return;
+    s.quiz.length = 0; d.quiz.forEach(x=>s.quiz.push(x));
+    s.titles.length = 0; d.titles.forEach(x=>s.titles.push(x));
+    s.units.length = 0; d.units.forEach(x=>s.units.push(x));
+    s.desc = "🔒 비공개 문제집 — 올림포스 시험범위 작품 정리 · 뉴욕제과점 · 겨울 나들이";
+    if(window.__seoikRerender) window.__seoikRerender();
+  }
+  async function start(){
+    const A = window.__seoikAcc, a = A && A.acc && A.acc();
+    if(!a || !OK.includes(await h(a.id))) return;
+    let pass = null; try{ pass = localStorage.getItem(KEY); }catch(e){}
+    if(pass){ try{ apply(await open(pass)); return; }catch(e){ try{ localStorage.removeItem(KEY); }catch(_){} } }
+    const my = document.querySelector('[data-view="my"]'); if(!my || document.getElementById("privBox")) return;
+    const box = document.createElement("div"); box.id = "privBox"; box.className = "acc-card";
+    box.innerHTML = '<div class="acc-row"><div class="acc-txt"><b>🔒 잠긴 문제집</b><span>받은 암호를 한 번만 넣으면 공통국어에 문제가 열려요. 이 계정에서만 보여요.</span></div></div>'+
+      '<div style="display:flex;gap:6px;margin-top:10px"><input id="privPw" type="password" autocomplete="off" placeholder="암호" style="flex:1;min-height:40px;padding:0 12px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--ink);font-size:16px">'+
+      '<button type="button" class="acc-btn pri" id="privGo">열기</button></div><div id="privErr" style="margin-top:6px;font-size:12.5px;color:var(--red)"></div>';
+    const card = document.getElementById("accCard"); if(card && card.parentNode) card.after(box); else my.appendChild(box);
+    const go = async ()=>{
+      const v = document.getElementById("privPw").value.trim(); if(!v) return;
+      document.getElementById("privErr").textContent = "확인 중…";
+      try{ const d = await open(v); try{ localStorage.setItem(KEY, v); }catch(e){} apply(d); box.remove(); alert("열렸어요! 단원별 학습 › 공통국어에서 풀 수 있어요."); }
+      catch(e){ document.getElementById("privErr").textContent = "암호가 맞지 않아요."; }
+    };
+    document.getElementById("privGo").onclick = go;
+    document.getElementById("privPw").addEventListener("keydown", e=>{ if(e.key==="Enter") go(); });
+  }
+  if(document.readyState==="complete") setTimeout(start, 300); else window.addEventListener("load", ()=> setTimeout(start, 300));
 })();
 </script>
 </body>
