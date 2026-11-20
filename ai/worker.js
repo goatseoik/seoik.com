@@ -9,7 +9,8 @@ export default {
     const origin = req.headers.get("Origin") || "";
     const cors = { "Access-Control-Allow-Origin": ALLOW.includes(origin) ? origin : ALLOW[0], "Access-Control-Allow-Headers": "Content-Type", "Access-Control-Allow-Methods": "POST, OPTIONS" };
     if (req.method === "OPTIONS") return new Response(null, { headers: cors });
-    if (req.method !== "POST" || !ALLOW.includes(origin)) return new Response("forbidden", { status: 403, headers: cors });
+    if (req.method !== "POST") return new Response("seoik-ai OK (코드 배포됨) · 키 " + (env.GEMINI_KEY ? "있음" : "없음") + " · 모델 " + (env.MODEL || "gemini-4-hydrogen"), { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8" } });
+    if (!ALLOW.includes(origin)) return new Response("forbidden", { status: 403, headers: cors });
     let body; try { body = await req.json(); } catch (e) { return new Response("bad", { status: 400, headers: cors }); }
     const q = String(body.question || "").slice(0, 600), ctx = String(body.context || "").slice(0, 4000);
     const hist = (Array.isArray(body.history) ? body.history : []).slice(-6).flatMap(h => [
@@ -22,6 +23,7 @@ export default {
     });
     const j = await r.json().catch(() => ({}));
     const answer = (((j.candidates || [])[0] || {}).content || {}).parts?.map(p => p.text).join("") || "";
-    return new Response(JSON.stringify({ answer }), { headers: { ...cors, "Content-Type": "application/json" } });
+    const error = answer ? "" : ((j.error && (j.error.status + " " + j.error.message)) || ("HTTP " + r.status));
+    return new Response(JSON.stringify({ answer, error }), { headers: { ...cors, "Content-Type": "application/json" } });
   }
 };

@@ -5639,19 +5639,20 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
     add("ai-me", esc(q));
     const hits = search(q, sel.value);
     const bot = add("ai-bot", "찾는 중…");
-    let answer = "";
+    let answer = "", aiErr = "";
     if(AI_URL){
       try{
         const ctx = hits.map(h=>"["+h.label+"] "+h.text).join("\n\n");
         bot.textContent = "AI가 답을 쓰는 중…";
         const r = await fetch(AI_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ question:q, context:ctx, history:hist.slice(-6) }) });
-        const j = await r.json(); answer = j.answer || "";
+        const j = await r.json().catch(()=>({error:"서버 응답이 JSON이 아님 (worker.js 코드가 배포됐는지 확인)"})); answer = j.answer || ""; if(!answer) aiErr = j.error || "빈 응답";
         if(answer){ hist.push({q, a:answer}); }
-      }catch(e){ answer = ""; }
+      }catch(e){ answer = ""; aiErr = "서버에 연결 못 함 (" + (e && e.message || e) + ")"; }
     }
     let html = answer ? esc(answer) : (hits.length ? "사이트 자료에서 찾은 내용이야 👇" : "관련 내용을 못 찾았어. 다른 말로 물어보거나 과목을 골라 줘.\n(예: '엘니뇨 무역풍', '6·29 선언')");
     if(hits.length) html += (answer ? '<div style="margin-top:8px;font-size:12px;color:var(--ink-soft)">근거 자료</div>' : "") + hits.map((h,i)=>
       '<span class="ai-src"><em>'+esc(h.label)+'</em>'+hl(h.text, q)+(h.kind==="note" ? '<br><button type="button" data-n="'+h.sid+'|'+h.si+'">개념노트에서 보기 ›</button>' : '')+'</span>').join("");
+    if(aiErr) html = '<div style="font-size:12px;color:var(--red);margin-bottom:6px">AI 연결 오류: '+esc(aiErr)+'</div>' + html;
     bot.innerHTML = html;
     bot.querySelectorAll("[data-n]").forEach(b=> b.onclick = ()=>{ const [sid,si] = b.dataset.n.split("|"); close(); window.__seoikOpenNotes(sid, +si); });
     log.scrollTop = log.scrollHeight;
