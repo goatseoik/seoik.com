@@ -1290,6 +1290,9 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
   .nt-pdf .nt-sec{ box-shadow:none !important; border:none !important; padding:0 !important; margin:0 0 8mm !important; background:#fff !important; }
   .pdf-toast{ position:fixed; left:50%; bottom:calc(90px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:2000; max-width:90vw; padding:10px 16px; border-radius:12px; background:#1B1D21; color:#fff; font:600 13.5px var(--sans); box-shadow:0 6px 20px rgba(0,0,0,.25); text-align:center; }
   .pdf-toast[hidden]{ display:none; }
+  .sq-wexp{ margin:10px 0 2px; padding:10px 12px; border-left:3px solid var(--red); border-radius:8px; background:var(--red-soft); font-size:13.5px; line-height:1.6; color:var(--ink); }
+  .sq-wexp b{ color:var(--red); } .sq-wexp .mine{ margin-left:6px; font-size:12px; color:var(--ink-soft); } .sq-wexp p{ margin:4px 0 0; }
+  @media print{ .sq-wexp{ break-inside:avoid; } }
   .nb-bar{ display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); }
   .nt-sec.nb-on .nb-bar{ position:sticky; bottom:calc(64px + env(safe-area-inset-bottom,0px)); z-index:5; background:var(--card); padding:10px 0; }
   .nb-go{ width:100%; min-height:44px; border:0; border-radius:12px; background:var(--blue-soft); color:var(--blue); font:700 14px var(--sans); cursor:pointer; }
@@ -1883,6 +1886,7 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
 <script src="./english/october-2026.js"></script>
 <script src="./math/data.js"></script>
 <script src="./math/exam-sets.js"></script>
+<script src="./math/final2.js"></script>
 <script src="./math/transcribed-2026-06.js"></script>
 <script src="./math/transcribed-2025-06.js"></script>
 <script src="./math/transcribed-2025-09.js"></script>
@@ -2147,7 +2151,7 @@ function makeMathSubject(course){
   const originals = source.originals.filter(q=>q.course===course);
   const sourceById = new Map(source.originals.map(q=>[q.id,q]));
   const variants = source.variants.filter(q=>q.course===course).map(q=>Object.assign({},q,{year:sourceById.get(q.source).year,month:sourceById.get(q.source).month,number:sourceById.get(q.source).number,kind:"variant"}));
-  const subject = {id:"math"+course, name:"공통수학 "+course, desc:course===1?"다항식 · 방정식과 부등식 · 경우의 수 · 행렬":"도형의 방정식 · 집합·명제·함수 문제는 준비 중", quiz:[],titles:[],units:[],topics:{},math:true};
+  const subject = {id:"math"+course, name:"공통수학 "+course, desc:course===1?"다항식 · 방정식과 부등식 · 경우의 수 · 행렬":"2차고사: 집합 · 명제 · 함수 · 합성·역함수 · 유리함수 · 무리함수 / 도형의 방정식 기출", quiz:[],titles:[],units:[],topics:{},math:true};
   [...new Set(originals.map(q=>q.unit))].forEach(unit=>{
     const indices=[];
     const all=originals.filter(q=>q.unit===unit);
@@ -2194,6 +2198,12 @@ function makeMathSubject(course){
   [2,3,4].forEach(points=>pool.filter(q=>q.points===points).forEach(q=>{mixed[offset%mixedCount].push(q);offset++;}));
   addSets("기출 혼합 시험지","2·3·4점 기출을 섞은 시험지",mixed);
   addSets("변형 문제 시험지","기출 유형을 바탕으로 새로 만든 문제",((window.SEOIK_PRACTICE_EXTRA||{})[String(course)]||[]));
+  /* 2학기 2차고사 범위: 집합·명제·함수 (맨 위에 보이게) */
+  if(course===2 && Array.isArray(window.SEOIK_MATH2_FINAL)){
+    const before=subject.units.length;
+    window.SEOIK_MATH2_FINAL.forEach(u=>addSets("2차고사 · "+u.name,u.desc+" · 틀리면 문제 바로 아래 해설",u.sets));
+    subject.units=subject.units.slice(before).concat(subject.units.slice(0,before));
+  }
   // Append new material after existing sets so saved set indices remain stable.
   const added=((window.SEOIK_2026_03_GRADE2||{})[String(course)]||[]);
   function appendExam(name, questions){
@@ -4275,10 +4285,20 @@ function paintGrade(i){
   const st = sheetState.items[i], q = st.q, box = document.getElementById("sq"+i);
   const ans = st.order.indexOf(q.correct), ok = itemCorrect(st);
   box.classList.add("done");
-  if(isShort(st)){const input=box.querySelector("[data-short]");input.disabled=true;input.classList.add(ok?"is-answer":"is-wrong");box.querySelector(".sq-grade").innerHTML=ok?MARK_O:MARK_X;return;}
+  if(isShort(st)){const input=box.querySelector("[data-short]");input.disabled=true;input.classList.add(ok?"is-answer":"is-wrong");box.querySelector(".sq-grade").innerHTML=ok?MARK_O:MARK_X;addWrongExplain(i,ok);return;}
   box.querySelectorAll(".sq-c").forEach(b=>{ b.disabled = true; b.classList.toggle("is-answer", +b.dataset.k === ans); });
   if(!ok) box.querySelector('.sq-c[data-k="'+ans+'"] .sq-cn').insertAdjacentHTML("beforeend", MARK_O.replace("<svg ", '<svg class="mk-red" '));
   box.querySelector(".sq-grade").innerHTML = ok ? MARK_O : MARK_X;
+  addWrongExplain(i, ok);
+}
+/* 틀린 문제는 문제 바로 아래에 해설을 펼쳐 보여 줌 */
+function addWrongExplain(i, ok){
+  const st = sheetState.items[i], box = document.getElementById("sq"+i); if(!box || ok) return;
+  const old = box.querySelector(".sq-wexp"); if(old) old.remove();
+  const d = document.createElement("div"); d.className = "sq-wexp";
+  d.innerHTML = '<b>해설 · 정답 '+itemAnswer(st)+'</b> <span class="mine">내 답 '+itemPicked(st)+'</span><p>'+escapeHtml(String(st.q.explain || "")).replace(/\n/g,"<br>")+'</p>';
+  box.appendChild(d);
+  try{ formatMathNotation(d); }catch(e){}
 }
 function fillSheetScore(){
   const el = document.getElementById("shScore"); if(!el) return;
