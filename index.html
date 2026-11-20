@@ -1293,6 +1293,11 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
   /* ---------- AI 학습 도우미 ---------- */
   .ai-fab{ position:fixed; left:14px; bottom:calc(84px + env(safe-area-inset-bottom,0px)); z-index:1200; height:44px; padding:0 14px 0 12px; border:0; border-radius:22px; background:linear-gradient(135deg,#1E6FF1,#7B4DFF); color:#fff; font:800 13.5px var(--sans); box-shadow:0 6px 18px rgba(30,111,241,.35); cursor:pointer; display:flex; align-items:center; gap:6px; }
   body.sheet-mode .ai-fab, body.pmenu-open .ai-fab{ bottom:calc(84px + env(safe-area-inset-bottom,0px)); }
+  .ai-typing{ background:linear-gradient(90deg,var(--ink-soft) 0%,var(--ink-soft) 35%,#7B4DFF 50%,var(--ink-soft) 65%,var(--ink-soft) 100%); background-size:250% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:aiShine 1.6s linear infinite; font-weight:700; }
+  .ai-typing i{ font-style:normal; display:inline-block; animation:aiDot 1.2s infinite; color:#7B4DFF; -webkit-text-fill-color:#7B4DFF; }
+  .ai-typing i:nth-child(2){ animation-delay:.2s; } .ai-typing i:nth-child(3){ animation-delay:.4s; }
+  @keyframes aiShine{ from{ background-position:100% 0; } to{ background-position:-150% 0; } }
+  @keyframes aiDot{ 0%,60%,100%{ transform:translateY(0); opacity:.35; } 30%{ transform:translateY(-4px); opacity:1; } }
   .ai-dim{ position:fixed; inset:0; z-index:1400; background:rgba(6,10,24,.45); display:flex; align-items:flex-end; justify-content:center; }
   .ai-dim[hidden]{ display:none; }
   .ai-box{ width:100%; max-width:560px; height:min(82vh,720px); background:var(--card); color:var(--ink); border-radius:20px 20px 0 0; display:flex; flex-direction:column; overflow:hidden; }
@@ -5643,7 +5648,7 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
     if(AI_URL){
       try{
         const ctx = hits.map(h=>"["+h.label+"] "+h.text).join("\n\n");
-        bot.textContent = "서익이 열심히 답변 작성중..";
+        bot.innerHTML = '<span class="ai-typing">서익이 열심히 답변 작성중<i>.</i><i>.</i><i>.</i></span>';
         const r = await fetch(AI_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ question:q, context:ctx, history:hist.slice(-6) }) });
         const j = await r.json().catch(()=>({error:"서버 응답이 JSON이 아님 (worker.js 코드가 배포됐는지 확인)"})); answer = j.answer || ""; if(!answer) aiErr = j.error || "빈 응답";
         if(answer){ hist.push({q, a:answer}); }
