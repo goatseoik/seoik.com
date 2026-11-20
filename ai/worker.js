@@ -14,7 +14,7 @@ export default {
     const q = String(body.question || "").slice(0, 600), ctx = String(body.context || "").slice(0, 4000);
     const hist = (Array.isArray(body.history) ? body.history : []).slice(-6).flatMap(h => [
       { role: "user", parts: [{ text: String(h.q).slice(0, 400) }] }, { role: "model", parts: [{ text: String(h.a).slice(0, 1200) }] }]);
-    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + env.GEMINI_KEY, {
+    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + (env.MODEL || "gemini-4-hydrogen") + ":generateContent?key=" + env.GEMINI_KEY, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ systemInstruction: { parts: [{ text: SYSTEM }] },
         contents: hist.concat([{ role: "user", parts: [{ text: "[사이트 자료]\n" + ctx + "\n\n[질문]\n" + q }] }]),
