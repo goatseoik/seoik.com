@@ -4326,7 +4326,7 @@ function addWrongExplain(i, ok){
   const st = sheetState.items[i], box = document.getElementById("sq"+i); if(!box || ok) return;
   const old = box.querySelector(".sq-wexp"); if(old) old.remove();
   const d = document.createElement("div"); d.className = "sq-wexp";
-  d.innerHTML = '<b>해설 · 정답 '+itemAnswer(st)+'</b> <span class="mine">내 답 '+itemPicked(st)+'</span><p>'+escapeHtml(String(st.q.explain || "")).replace(/\n/g,"<br>")+'</p>';
+  d.innerHTML = '<b>해설 · 정답 '+itemAnswer(st)+'</b> <span class="mine">내 답 '+itemPicked(st)+'</span><p>'+escapeHtml(String(st.q.explain || "")).replace(/\n/g,"<br>")+'</p>'+(st.q.exfig && /^<div class="math-diagram"><svg /.test(st.q.exfig) ? st.q.exfig : '');
   const ab = document.createElement("button"); ab.type = "button"; ab.className = "sq-ask"; ab.textContent = "✨ 이 문제 AI에게 질문";
   ab.onclick = ()=>{ const t = (box.querySelector(".sq-stem")||box).textContent.replace(/\s+/g," ").trim().slice(0,80); if(window.__seoikAsk) window.__seoikAsk(t); };
   d.appendChild(ab);
