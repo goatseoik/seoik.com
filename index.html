@@ -5643,7 +5643,7 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
     if(AI_URL){
       try{
         const ctx = hits.map(h=>"["+h.label+"] "+h.text).join("\n\n");
-        bot.textContent = "AI가 답을 쓰는 중…";
+        bot.textContent = "서익이 열심히 답변 작성중..";
         const r = await fetch(AI_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ question:q, context:ctx, history:hist.slice(-6) }) });
         const j = await r.json().catch(()=>({error:"서버 응답이 JSON이 아님 (worker.js 코드가 배포됐는지 확인)"})); answer = j.answer || ""; if(!answer) aiErr = j.error || "빈 응답";
         if(answer){ hist.push({q, a:answer}); }

@@ -1,7 +1,7 @@
 /* Bump the version whenever an app-shell file changes. */
 "use strict";
 const CACHE_PREFIX = "seoik-app-";
-const CACHE_NAME = CACHE_PREFIX + "v65";
+const CACHE_NAME = CACHE_PREFIX + "v66";
 const BASE = new URL("./", self.location.href);
 const FILES = [
   "index.html",
