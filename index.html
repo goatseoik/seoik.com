@@ -2475,7 +2475,8 @@ function renderDrawer(){
   const s = subjById(drawerSel), ex = examOf(s.id), sw = wrongList(s.id).length;
   if(s.math){
     const body=document.getElementById("drawerBody");
-    body.innerHTML='<div class="mn-grp"><div class="mn-gh" data-math-study>단원별 학습<i>›</i></div>'+s.units.map((u,ui)=>'<button type="button" class="mn-it" data-math-unit="'+ui+'">'+escapeHtml(u.name)+'</button>').join("")+'</div>';
+    body.innerHTML=(SUBJECT_NOTES[s.id] ? '<div class="mn-grp"><div class="mn-gh" data-math-notes>개념학습<i>›</i></div><button type="button" class="mn-it" data-math-notes>개념노트 <em class="mn-tip">★ 형광펜</em></button></div>' : '')+'<div class="mn-grp"><div class="mn-gh" data-math-study>단원별 학습<i>›</i></div>'+s.units.map((u,ui)=>'<button type="button" class="mn-it" data-math-unit="'+ui+'">'+escapeHtml(u.name)+'</button>').join("")+'</div>';
+    body.querySelectorAll("[data-math-notes]").forEach(b=>b.onclick=()=>{ closeDrawer(); openNotes(s.id); });
     body.querySelector("[data-math-study]").onclick=()=>openSubjectStudy(s.id,-1);
     body.querySelectorAll("[data-math-unit]").forEach(b=>b.onclick=()=>openSubjectStudy(s.id,+b.dataset.mathUnit));
     return;
@@ -2874,7 +2875,9 @@ document.getElementById("notesPrintBtn").addEventListener("click", ()=>{
   document.body.classList.add("print-notes");
   setTimeout(()=>{ if(window.SeoikAndroid && typeof window.SeoikAndroid.print==="function") window.SeoikAndroid.print(); else window.print(); }, 80);
 });
-window.addEventListener("afterprint", ()=> document.body.classList.remove("print-notes"));
+// iPad/iPhone Safari는 인쇄 미리보기를 만들기 전에 afterprint가 먼저 오는 경우가 있어서, 정리는 사용자가 화면을 다시 만질 때 한다.
+function afterPrintLater(fn){ const run = ()=>{ ["pointerdown","keydown"].forEach(e=>window.removeEventListener(e, run, true)); fn(); }; setTimeout(()=>["pointerdown","keydown"].forEach(e=>window.addEventListener(e, run, true)), 300); }
+window.addEventListener("afterprint", ()=> afterPrintLater(()=> document.body.classList.remove("print-notes")));
 document.getElementById("notesPdfBtn").addEventListener("click", ()=>{
   const box = document.createElement("div"); box.className = "nt-body nt-pdf";
   box.innerHTML = document.getElementById("notesBody").innerHTML;
@@ -4519,7 +4522,7 @@ function doPrint(mode){
     alert("현재 앱에서는 인쇄창을 열 수 없어요. Chrome에서 goatseoik.github.io/seoik.com/을 열고 같은 시험지를 선택한 뒤 인쇄해 주세요.");
     return;
   }
-  document.body.classList.remove("pmenu-open", "ans-open", "print-doc", "print-graded");
+  document.body.classList.remove("pmenu-open", "ans-open", "print-doc", "print-graded", "print-notes");
   window.dispatchEvent(new Event("pen:leave"));
   const doc = document.getElementById("shPrintDoc");
   doc.innerHTML = printDocHTML(mode === "doc-key", mode === "graded");
@@ -4529,10 +4532,10 @@ function doPrint(mode){
   if (nativePrint) window.SeoikAndroid.print();
   else window.print();
 }
-window.addEventListener("afterprint", ()=>{
+window.addEventListener("afterprint", ()=> afterPrintLater(()=>{
   document.body.classList.remove("print-doc", "print-graded");
   const doc = document.getElementById("shPrintDoc"); if(doc) doc.innerHTML = "";
-});
+}));
 function printDocHTML(withKey, graded){
   const info = sheetInfo(), n = quizItems.length, pts = sheetPoints();
   const ex = {label: (curTerm && curTerm.label) || ""};
