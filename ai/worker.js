@@ -9,13 +9,13 @@ export default {
     const origin = req.headers.get("Origin") || "";
     const cors = { "Access-Control-Allow-Origin": ALLOW.includes(origin) ? origin : ALLOW[0], "Access-Control-Allow-Headers": "Content-Type", "Access-Control-Allow-Methods": "POST, OPTIONS" };
     if (req.method === "OPTIONS") return new Response(null, { headers: cors });
-    if (req.method !== "POST") return new Response("seoik-ai OK (코드 배포됨) · 키 " + (env.GEMINI_KEY ? "있음" : "없음") + " · 모델 " + (env.MODEL || "gemini-4-hydrogen"), { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8" } });
+    if (req.method !== "POST") return new Response("seoik-ai OK (코드 배포됨) · 키 " + (env.GEMINI_KEY ? "있음" : "없음") + " · 모델 " + (env.MODEL || "gemini-3.5-flash-lite"), { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8" } });
     if (!ALLOW.includes(origin)) return new Response("forbidden", { status: 403, headers: cors });
     let body; try { body = await req.json(); } catch (e) { return new Response("bad", { status: 400, headers: cors }); }
     const q = String(body.question || "").slice(0, 600), ctx = String(body.context || "").slice(0, 4000);
     const hist = (Array.isArray(body.history) ? body.history : []).slice(-6).flatMap(h => [
       { role: "user", parts: [{ text: String(h.q).slice(0, 400) }] }, { role: "model", parts: [{ text: String(h.a).slice(0, 1200) }] }]);
-    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + (env.MODEL || "gemini-4-hydrogen") + ":generateContent?key=" + env.GEMINI_KEY, {
+    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + (env.MODEL || "gemini-3.5-flash-lite") + ":generateContent?key=" + env.GEMINI_KEY, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ systemInstruction: { parts: [{ text: SYSTEM }] },
         contents: hist.concat([{ role: "user", parts: [{ text: "[사이트 자료]\n" + ctx + "\n\n[질문]\n" + q }] }]),
