@@ -584,7 +584,17 @@
   .ex-card-btns{ display:flex; gap:8px; margin-top:10px; }
   .ex-card-btns button, .ex-row button{ flex:1; min-height:40px; border-radius:10px; border:1px solid var(--border); background:var(--card); color:var(--ink); font-size:13.5px; font-weight:700; cursor:pointer; }
   .ex-card-btns button.go, .ex-row button.go{ background:var(--ink); border-color:var(--ink); color:var(--card); }
-  .ex-done{ font-size:11.5px; color:var(--blue); font-weight:700; }
+  .ex-done{ font-size:11.5px; color:var(--blue); font-weight:700; margin-left:6px; }
+  .ex-card-top em.n{ background:var(--ink); }
+  .ex-card .ex-prow{ padding:9px 0 0; margin-top:9px; border-top:1px solid var(--line-soft); }
+  .ex-card .ex-prow:first-of-type{ margin-top:12px; }
+  .ex-prow{ display:flex; align-items:center; gap:8px; }
+  .ex-prow .ex-pl{ flex:1; min-width:0; font-size:14px; }
+  .ex-prow button{ flex:0 0 auto; min-height:36px; padding:0 14px; border-radius:10px; border:1px solid var(--border); background:var(--card); color:var(--ink); font-size:13px; font-weight:700; cursor:pointer; }
+  .ex-prow button.go{ background:var(--ink); border-color:var(--ink); color:var(--card); }
+  .ex-subj{ border-bottom:1px solid var(--border); padding-bottom:8px; }
+  .ex-subj .ex-row{ border-bottom:none; padding-bottom:4px; }
+  .ex-subj .ex-prow{ padding:5px 16px 5px 60px; }
   .ex-all-sub{ margin:0; padding:10px 16px 4px; font-size:12px; line-height:1.5; color:var(--ink-soft); }
   .ex-row{ display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:1px solid var(--border); }
   .ex-row .ex-l{ flex-shrink:0; width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; }
@@ -2312,11 +2322,18 @@ MID_SUBJECTS.push(...MATH_SUBJECTS);
 FINAL_SUBJECTS.push(...MATH_SUBJECTS);
 /* 2회고사 예상 시험지(작년 형식): 기존 세트 번호가 안 바뀌게 맨 뒤에 붙이고, 단원 목록에는 넣지 않는다
    (문제은행 문항을 그대로 쓴 시험지라 모의고사·실전대비에 겹쳐 나오지 않게) */
-function attachExamPaper(subject, ex){
-  if(!subject || !ex || !Array.isArray(ex.items) || !ex.items.length || subject.exam) return;
-  const index = subject.quiz.length;
-  subject.quiz.push(ex.items); subject.titles.push(ex.title);
-  subject.exam = { index, name:ex.name, title:ex.title, desc:ex.desc, kind:ex.kind||"", pdf:ex.pdf||"", privPdf:ex.privPdf||"", pdfName:ex.pdfName||"" };
+function examPaperRec(ex, index, k){
+  return { index, no:ex.no||k+1, label:ex.label||("제"+(k+1)+"회"), name:ex.name, title:ex.title, desc:ex.desc, kind:ex.kind||"", pdf:ex.pdf||"", privPdf:ex.privPdf||"", pdfName:ex.pdfName||"" };
+}
+function attachExamPaper(subject, list){
+  if(!subject || subject.exams) return;
+  subject.exams = [];
+  (Array.isArray(list) ? list : [list]).forEach((ex,k)=>{
+    if(!ex || !Array.isArray(ex.items) || !ex.items.length) return;
+    const index = subject.quiz.length;
+    subject.quiz.push(ex.items); subject.titles.push(ex.title);
+    subject.exams.push(examPaperRec(ex, index, k));
+  });
 }
 Object.keys(window.SEOIK_EXAM2 || {}).forEach(sid=> attachExamPaper(FINAL_SUBJECTS.find(s=>s.id===sid), window.SEOIK_EXAM2[sid]));
 /* 시험별 묶음: final = 메인(지금 대비 중인 시험), mid = 지난 시험 · 왼쪽 메뉴 상단에서 선택 */
@@ -2330,7 +2347,7 @@ let SUBJECTS = curTerm.subjects;
 function isArchiveView(){ return curTerm !== TERMS.final; }
 
 function isAdvanced(subject, globalIdx){ return subject.titles[globalIdx].includes("심화"); }
-function subjectTotalQ(subject){ return subject.quiz.reduce((a,s,i)=>a+(subject.exam && subject.exam.index===i ? 0 : s.length),0); }
+function subjectTotalQ(subject){ return subject.quiz.reduce((a,s,i)=>a+(examPaperAt(subject,i) ? 0 : s.length),0); }
 
 /* ================= storage ================= */
 const STORAGE_KEY = "jokbo_app_progress_v2";
@@ -2521,9 +2538,9 @@ function renderDrawer(){
   const s = subjById(drawerSel), ex = examOf(s.id), sw = wrongList(s.id).length;
   if(s.math){
     const body=document.getElementById("drawerBody");
-    body.innerHTML=(SUBJECT_NOTES[s.id] ? '<div class="mn-grp"><div class="mn-gh" data-math-notes>개념학습<i>›</i></div><button type="button" class="mn-it" data-math-notes>개념노트 <em class="mn-tip">★ 형광펜</em></button></div>' : '')+(examPaperOf(s) ? '<div class="mn-grp"><div class="mn-gh" data-exam-go>실전대비<i>›</i></div><button type="button" class="mn-it" data-exam-go>2회고사 예상 시험지 <em class="mn-tip">작년 형식</em></button></div>' : '')+'<div class="mn-grp"><div class="mn-gh" data-math-study>단원별 학습<i>›</i></div>'+s.units.map((u,ui)=>'<button type="button" class="mn-it" data-math-unit="'+ui+'">'+escapeHtml(u.name)+'</button>').join("")+'</div>';
+    body.innerHTML=(SUBJECT_NOTES[s.id] ? '<div class="mn-grp"><div class="mn-gh" data-math-notes>개념학습<i>›</i></div><button type="button" class="mn-it" data-math-notes>개념노트 <em class="mn-tip">★ 형광펜</em></button></div>' : '')+(examPapersOf(s).length ? '<div class="mn-grp"><div class="mn-gh" data-exam-list>실전대비<i>›</i></div><button type="button" class="mn-it" data-exam-list>2회고사 예상 시험지 <em class="mn-tip">작년 형식 · '+examPapersOf(s).length+'회분</em></button></div>' : '')+'<div class="mn-grp"><div class="mn-gh" data-math-study>단원별 학습<i>›</i></div>'+s.units.map((u,ui)=>'<button type="button" class="mn-it" data-math-unit="'+ui+'">'+escapeHtml(u.name)+'</button>').join("")+'</div>';
     body.querySelectorAll("[data-math-notes]").forEach(b=>b.onclick=()=>{ closeDrawer(); openNotes(s.id); });
-    body.querySelectorAll("[data-exam-go]").forEach(b=>b.onclick=()=> openExamPaper(s.id, "study"));
+    body.querySelectorAll("[data-exam-list]").forEach(b=>b.onclick=()=>{ closeDrawer(); showExamDim(s.id); });
     body.querySelector("[data-math-study]").onclick=()=>openSubjectStudy(s.id,-1);
     body.querySelectorAll("[data-math-unit]").forEach(b=>b.onclick=()=>openSubjectStudy(s.id,+b.dataset.mathUnit));
     return;
@@ -2545,7 +2562,7 @@ function renderDrawer(){
   html += '<div class="mn-grp"><div class="mn-gh" data-act="notes">개념학습<i>›</i></div>'+(SUBJECT_NOTES[s.id] ? '<button type="button" class="mn-it" data-act="notes">개념노트 <em class="mn-tip">★ 형광펜</em></button>' : '<div class="mn-it off">개념노트 준비 중</div>')+'</div>';
   html += '<div class="mn-grp"><div class="mn-gh" data-act="study">단원별 학습<i>›</i></div>'+s.units.map((u,ui)=>'<button type="button" class="mn-it" data-unit="'+ui+'">'+escapeHtml(u.name)+'</button>').join("")+'</div>';
   html += '<div class="mn-grp"><div class="mn-gh" data-act="basic">실전대비<i>›</i></div>'+
-    (examPaperOf(s) ? '<button type="button" class="mn-it" data-act="exam">2회고사 예상 시험지 <em class="mn-tip">작년 형식</em></button>' : '')+
+    (examPapersOf(s).length ? '<button type="button" class="mn-it" data-act="exam">2회고사 예상 시험지 <em class="mn-tip">작년 형식'+(examPapersOf(s).length>1 ? ' · '+examPapersOf(s).length+'회분' : '')+'</em></button>' : '')+
     '<button type="button" class="mn-it" data-act="basic">기본 공략</button>'+
     (hasAdv ? '<button type="button" class="mn-it" data-act="adv">심화 공략 <em class="mn-tip">보기형 TIP</em></button>' : '')+
     '<button type="button" class="mn-it" data-act="mock">실전 모의고사 <em class="mn-tip">'+(s.id==="sci"?"26문항":"20문항")+'</em></button></div>';
@@ -2558,7 +2575,7 @@ function renderDrawer(){
   body.querySelectorAll("[data-act]").forEach(b=> b.onclick = ()=>{
     const a = b.dataset.act; closeDrawer();
     if(a==="study") openSubjectStudy(s.id, -1);
-    else if(a==="exam") openExamPaper(s.id, "study");
+    else if(a==="exam"){ if(examPapersOf(s).length>1) showExamDim(s.id); else openExamPaper(s.id, "study"); }
     else if(a==="notes"){ if(SUBJECT_NOTES[s.id]) openNotes(s.id); else openSubjectStudy(s.id, -1); }
     else if(a==="basic"||a==="adv"){ drillDiff = a==="adv" ? "advanced" : "basic"; drillSubjectId = s.id; drillUnitKey = "ALL"; goTab("drill"); window.scrollTo(0,0); }
     else if(a==="mock"){ mockSid = s.id; mockUnits = null; mockCount = s.id==="sci" ? 26 : 20; goTab("mock"); window.scrollTo(0,0); }
@@ -2580,51 +2597,57 @@ function closeDrawer(){
   document.body.style.overflow = "";
 }
 /* ================= 2회고사 예상 시험지 ================= */
-function examPaperOf(s){ return s && s.exam && !isArchiveView() && s.quiz[s.exam.index] && s.quiz[s.exam.index].length ? s.exam : null; }
-function examPapers(){ return SUBJECTS.filter(s=>examPaperOf(s)); }
-function isExamSet(subject, idx){ return !!(subject && subject.exam && subject.exam.index===idx); }
-function openExamPaper(sid, from){
-  const s = subjById(sid), ex = examPaperOf(s); if(!ex) return;
+function examPapersOf(s){ return s && s.exams && !isArchiveView() ? s.exams.filter(p=> s.quiz[p.index] && s.quiz[p.index].length) : []; }
+function examPapers(){ return SUBJECTS.filter(s=>examPapersOf(s).length); }
+function examPaperAt(subject, idx){ return (subject && subject.exams || []).find(p=>p.index===idx) || null; }
+function isExamSet(subject, idx){ return !!examPaperAt(subject, idx); }
+function examPick(sid, no){ const s = subjById(sid), L = examPapersOf(s); return { s, p: L.find(p=>p.no===+no) || L[0] || null }; }
+function openExamPaper(sid, from, no){
+  const {s, p} = examPick(sid, no); if(!p) return;
   closeDrawer(); hideExamDim();
   studySubjectId = sid;
-  enterQuiz(s, ex.index, from || "study");
+  enterQuiz(s, p.index, from || "study");
 }
 function inAndroidApp(){ return !!(window.SeoikAndroid || (/Android/i.test(navigator.userAgent) && /;\s*wv\)/i.test(navigator.userAgent))); }
-function openExamPdf(sid){
-  const s = subjById(sid), ex = examPaperOf(s); if(!ex) return;
+function openExamPdf(sid, no){
+  const {p} = examPick(sid, no); if(!p) return;
   if(inAndroidApp()){ pdfToast("앱에서는 PDF가 안 열려요. Chrome에서 서익닷컴을 열고 받아 주세요"); return; }
-  if(ex.privPdf){ if(window.__seoikPrivPdf) window.__seoikPrivPdf(ex.privPdf, ex.pdfName); return; }
-  if(!ex.pdf) return;
-  const a = document.createElement("a"); a.href = ex.pdf; a.target = "_blank"; a.rel = "noopener";
+  if(p.privPdf){ if(window.__seoikPrivPdf) window.__seoikPrivPdf(p.privPdf, p.pdfName); return; }
+  if(!p.pdf) return;
+  const a = document.createElement("a"); a.href = p.pdf; a.target = "_blank"; a.rel = "noopener";
   document.body.appendChild(a); a.click(); a.remove();
 }
-function examDoneMark(s){ return progress[s.id] && progress[s.id][s.exam.index] ? '<span class="ex-done">✓ 풀어 봄</span>' : ''; }
+function examDoneMark(s, p){ return progress[s.id] && progress[s.id][p.index] ? '<span class="ex-done">✓ 풀어 봄</span>' : ''; }
+function examRowsHTML(s){
+  return examPapersOf(s).map(p=>'<div class="ex-prow"><span class="ex-pl"><b>'+escapeHtml(p.label)+'</b>'+examDoneMark(s,p)+'</span>'+
+    '<button type="button" class="go" data-exam-go="'+s.id+'" data-no="'+p.no+'">풀기</button><button type="button" data-exam-pdf="'+s.id+'" data-no="'+p.no+'">PDF</button></div>').join("");
+}
 function examCardHTML(s){
-  const ex = examPaperOf(s); if(!ex) return '';
-  return '<div class="ex-card" id="studyExamCard"><div class="ex-card-top"><b>📝 2회고사 예상 시험지</b><em>작년 형식</em>'+examDoneMark(s)+
-    '<small>'+escapeHtml(ex.desc)+'</small></div>'+
-    '<div class="ex-card-btns"><button type="button" class="go" data-exam-go>사이트에서 풀기</button><button type="button" data-exam-pdf>시험지 PDF</button></div></div>';
+  const L = examPapersOf(s); if(!L.length) return '';
+  return '<div class="ex-card" id="studyExamCard"><div class="ex-card-top"><b>📝 2회고사 예상 시험지</b><em>작년 형식</em>'+(L.length>1 ? '<em class="n">'+L.length+'회분</em>' : '')+
+    '<small>'+escapeHtml(L[0].desc)+(L.length>1 ? ' · 회차마다 다른 문제' : '')+'</small></div>'+examRowsHTML(s)+'</div>';
 }
-function bindExamButtons(root, sid, from){
-  root.querySelectorAll("[data-exam-go]").forEach(b=> b.onclick = ()=> openExamPaper(b.dataset.examGo || sid, from));
-  root.querySelectorAll("[data-exam-pdf]").forEach(b=> b.onclick = ()=> openExamPdf(b.dataset.examPdf || sid));
+function bindExamButtons(root, from){
+  root.querySelectorAll("[data-exam-go]").forEach(b=> b.onclick = ()=> openExamPaper(b.dataset.examGo, from, b.dataset.no));
+  root.querySelectorAll("[data-exam-pdf]").forEach(b=> b.onclick = ()=> openExamPdf(b.dataset.examPdf, b.dataset.no));
 }
-function showExamDim(){
-  const list = examPapers();
+function showExamDim(onlySid){
+  const list = examPapers().filter(s=> !onlySid || s.id===onlySid);
   if(!list.length) return;
+  document.getElementById("examDimTitle").textContent = onlySid ? list[0].exams[0].name+" 예상 시험지" : "2회고사 예상 시험지";
   document.getElementById("examDimList").innerHTML = list.map(s=>{
-    const st = subjStyle(s.id), ex = s.exam;
-    return '<div class="ex-row"><span class="ex-l" style="background:'+st.soft+';color:'+st.color+'">'+st.emoji+'</span>'+
-      '<span class="ex-t"><b>'+escapeHtml(ex.name || s.name)+' '+examDoneMark(s)+'</b><small>'+escapeHtml(ex.kind || (s.quiz[ex.index].length+"문항"))+' · 100점</small></span>'+
-      '<button type="button" class="go" data-exam-go="'+s.id+'">풀기</button><button type="button" data-exam-pdf="'+s.id+'">PDF</button></div>';
+    const st = subjStyle(s.id), L = examPapersOf(s), p0 = L[0];
+    return '<div class="ex-subj"><div class="ex-row"><span class="ex-l" style="background:'+st.soft+';color:'+st.color+'">'+st.emoji+'</span>'+
+      '<span class="ex-t"><b>'+escapeHtml(p0.name || s.name)+'</b><small>'+escapeHtml(p0.kind || (s.quiz[p0.index].length+"문항"))+' · 100점 · '+L.length+'회분</small></span></div>'+examRowsHTML(s)+'</div>';
   }).join("");
-  bindExamButtons(document.getElementById("examDimList"), null, "home");
+  bindExamButtons(document.getElementById("examDimList"), "home");
   document.getElementById("examDim").hidden = false;
+  document.querySelector("#examDim .ad-all").scrollTop = 0;
 }
 function hideExamDim(){ const d = document.getElementById("examDim"); if(d) d.hidden = true; }
 document.getElementById("examDimX").addEventListener("click", hideExamDim);
 document.getElementById("examDim").addEventListener("click", e=>{ if(e.target.id==="examDim") hideExamDim(); });
-document.getElementById("homeExamBtn").addEventListener("click", showExamDim);
+document.getElementById("homeExamBtn").addEventListener("click", ()=> showExamDim());
 /* 안드로이드 앱 뒤로가기: 메뉴·팝업 닫기 → 홈으로 → (홈이면) 앱 종료 */
 window.__seoikBack = function(){
   const d = document.getElementById("subjectDrawer");
@@ -3063,7 +3086,7 @@ function renderWrong(){
     const s = subjById(e.sid), q = s.quiz[e.set][e.q];
     const u = s.units.find(u=>u.indices.includes(e.set));
     const stem = q.type==="order" ? (q.q+" 문장 배열") : plainText(q.q);
-    return '<div class="wr-item" style="--subj:'+subjStyle(e.sid).color+'"><div class="wr-meta"><span class="wr-sub">'+escapeHtml(s.name)+'</span>'+(u?escapeHtml(u.name):(isExamSet(s, e.set)?'2회고사 예상 시험지':''))+(e.unsure? ' · <b class="wr-unsure">헷갈림</b>':'')+(e.streak? ' · <b>1번 맞힘</b>':'')+(e.misses>1? ' · '+e.misses+'번 틀림':'')+'</div>' +
+    return '<div class="wr-item" style="--subj:'+subjStyle(e.sid).color+'"><div class="wr-meta"><span class="wr-sub">'+escapeHtml(s.name)+'</span>'+(u?escapeHtml(u.name):(isExamSet(s, e.set)?'예상 시험지 '+escapeHtml(examPaperAt(s, e.set).label):''))+(e.unsure? ' · <b class="wr-unsure">헷갈림</b>':'')+(e.streak? ' · <b>1번 맞힘</b>':'')+(e.misses>1? ' · '+e.misses+'번 틀림':'')+'</div>' +
       '<div class="wr-stem">'+escapeHtml(stem.length>90? stem.slice(0,90)+'…' : stem)+'</div>' +
       '<button class="wr-del" data-k="'+wkey(e)+'" aria-label="오답노트에서 빼기">빼기</button></div>';
   }).join("") + '</div>';
@@ -3494,7 +3517,7 @@ function renderStudy(){
   document.getElementById("studyHead").innerHTML = '<h2>'+escapeHtml(subject.name)+(exS && exN>=0 ? ' <span class="zb-fire">'+fmtDay(exS.date)+' '+exS.p+'교시 · '+ddText(exN)+' 🔥</span>' : '')+'</h2><p>'+escapeHtml(subject.desc)+'</p><p>'+subject.units.length+'개 단원 · '+doneAll+'/'+subject.quiz.length+' 세트 완료</p>' +
     (SUBJECT_NOTES[subject.id] ? '<button type="button" class="nt-open" id="studyNotesBtn"><span class="nt-open-t">개념노트</span><span class="nt-open-s">'+escapeHtml(SUBJECT_NOTES[subject.id].sub)+'</span><span class="nt-open-a">›</span></button>' : '') + examCardHTML(subject);
   if(SUBJECT_NOTES[subject.id]) document.getElementById("studyNotesBtn").onclick = ()=> openNotes(subject.id);
-  bindExamButtons(document.getElementById("studyHead"), subject.id, "study");
+  bindExamButtons(document.getElementById("studyHead"), "study");
   const list = document.getElementById("studyUnitList");
   list.innerHTML = "";
 
@@ -3703,7 +3726,7 @@ function enterQuiz(subject, globalIdx, fromTab){
   document.getElementById("quizArea").style.display = "block";
   document.getElementById("resultArea").style.display = "none";
   const unitOf = subject.units.find(u=>u.indices.includes(globalIdx));
-  document.getElementById("quizCrumb").textContent = isExamSet(subject, globalIdx) ? subject.name + " · 2회고사 예상 시험지 · 작년 형식" : subject.name + " · SET " + (globalIdx+1) + " · " + (isAdvanced(subject, globalIdx) ? "심화" : "기본") + (unitOf ? " · " + unitOf.name : "");
+  document.getElementById("quizCrumb").textContent = isExamSet(subject, globalIdx) ? subject.name + " · 2회고사 예상 시험지 " + examPaperAt(subject, globalIdx).label + " · 작년 형식" : subject.name + " · SET " + (globalIdx+1) + " · " + (isAdvanced(subject, globalIdx) ? "심화" : "기본") + (unitOf ? " · " + unitOf.name : "");
   document.getElementById("quizSetTitle").textContent = subject.titles[globalIdx];
 
   const top3Box = document.getElementById("top3Box");
@@ -4101,7 +4124,7 @@ function sheetInfo(){
     const u = quizSubject.units.find(u=>u.indices.includes(quizSet));
     range = u ? u.name : ""; kind = (isAdvanced(quizSubject, quizSet) ? "심화" : "기본") + " SET " + (quizSet+1);
     subjName = quizSubject.name;
-    if(isExamSet(quizSubject, quizSet)){ range = "작년(2025) 2학기 지필 2회고사 형식"; kind = "예상 시험지"; subjName = quizSubject.exam.name || quizSubject.name; }
+    const xp = examPaperAt(quizSubject, quizSet); if(xp){ range = "작년(2025) 2학기 지필 2회고사 형식"; kind = "예상 시험지 " + xp.label; subjName = xp.name || quizSubject.name; }
   } else if(quizMode === "mock"){ range = "전 범위"; kind = "실전 모의고사"; }
   else { subjName = "오답노트"; range = "틀렸던 문제"; kind = "오답 다시 풀기"; }
   return { title, subjName, range, kind };
@@ -4316,7 +4339,7 @@ function renderSheet(){
   html += '<div class="sh-ans sh-pmenu" id="shPMenu" aria-label="인쇄">'+
     '<div class="sh-ans-head"><b>인쇄</b><span>A4 · 아이패드는 인쇄 화면에서 공유 → PDF로 저장</span><button type="button" class="sh-bar-btn ghost" id="shPClose">닫기</button></div>'+
     '<div class="sh-pmenu-body">'+
-      (quizMode==="set" && isExamSet(quizSubject, quizSet) && examPaperOf(quizSubject) ? '<button type="button" class="sh-popt pdf" data-exam-pdf="'+quizSubject.id+'"><b>📝 작년 형식 시험지 PDF</b><span>실제 시험지처럼 2단 · 배점 · 맨 뒤 문항정보표와 정답·해설 (문항·선지 순서가 지금 시험지와 같아요)</span></button>' : '')+
+      (quizMode==="set" && isExamSet(quizSubject, quizSet) && examPapersOf(quizSubject).length ? '<button type="button" class="sh-popt pdf" data-exam-pdf="'+quizSubject.id+'" data-no="'+examPaperAt(quizSubject, quizSet).no+'"><b>📝 작년 형식 시험지 PDF</b><span>실제 시험지처럼 2단 · 배점 · 맨 뒤 문항정보표와 정답·해설 (문항·선지 순서가 지금 시험지와 같아요)</span></button>' : '')+
       '<button type="button" class="sh-popt" data-p="doc-key"><b>학습지로 인쇄</b><span>깨끗한 문제지 2단 + 맨 뒤 정답과 해설</span></button>'+
       '<button type="button" class="sh-popt" data-p="doc"><b>문제만 인쇄</b><span>정답·해설 없이 종이에 풀 문제지만</span></button>'+
       '<button type="button" class="sh-popt" data-p="graded"><b>지금 시험지 그대로</b><span>내가 고른 답·채점 표시·해설 쪽까지</span></button>'+
@@ -4352,7 +4375,7 @@ function renderSheet(){
   document.getElementById("shPrintBtn").addEventListener("click", printSheet);
   document.getElementById("shPClose").addEventListener("click", ()=> document.body.classList.remove("pmenu-open"));
   document.querySelectorAll("#shPMenu .sh-popt[data-p]").forEach(b=> b.addEventListener("click", ()=> doPrint(b.dataset.p)));
-  document.querySelectorAll("#shPMenu .sh-popt[data-exam-pdf]").forEach(b=> b.addEventListener("click", ()=>{ document.body.classList.remove("pmenu-open"); openExamPdf(b.dataset.examPdf); }));
+  document.querySelectorAll("#shPMenu .sh-popt[data-exam-pdf]").forEach(b=> b.addEventListener("click", ()=>{ document.body.classList.remove("pmenu-open"); openExamPdf(b.dataset.examPdf, b.dataset.no); }));
   document.querySelectorAll("#shPMenu .sh-popt[data-pdf]").forEach(b=> b.addEventListener("click", ()=>{
     document.body.classList.remove("pmenu-open");
     const box = document.createElement("div"); box.className = "pd";
@@ -5646,7 +5669,7 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
     s.quiz.length = 0; d.quiz.forEach(x=>s.quiz.push(x));
     s.titles.length = 0; d.titles.forEach(x=>s.titles.push(x));
     s.units.length = 0; d.units.forEach(x=>s.units.push(x));
-    s.exam = d.exam && d.quiz[d.exam.index] ? d.exam : null;
+    s.exams = (Array.isArray(d.exams) ? d.exams : d.exam ? [d.exam] : []).filter(x=> x && d.quiz[x.index]).map((x,k)=> Object.assign({no:k+1, label:"제"+(k+1)+"회"}, x));
     s.desc = "작품 정리 · 학습지 심화 · 중세 국어 · 향수 · 작품 비교 (지정한 사람만 보여요)";
     if(window.__seoikRerender) window.__seoikRerender();
   }
