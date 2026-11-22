@@ -1,0 +1,2779 @@
+{
+ "source": "공통영어2 교과서 Lesson 3 (Go Beyond Korea) · Lesson 4 (Technology and Our Lives) — 사진으로 받은 Read On · Read More 본문",
+ "note": "해석은 교과서 본문을 바탕으로 만든 자체 번역",
+ "passages": [
+  {
+   "id": "L3-1",
+   "lesson": "Lesson 3 · Go Beyond Korea (Read On)",
+   "title": "Korea's Heritage ① 한류를 넘어 – 한지의 가치를 알린 한국인",
+   "sentences": [
+    {
+     "english": "Korean pop culture is loved all over the world under the name \"Korean Wave.\"",
+     "korean": "한국 대중문화는 '한류'라는 이름으로 전 세계에서 사랑받고 있다."
+    },
+    {
+     "english": "Korean pop music has topped global music charts.",
+     "korean": "한국 대중음악은 세계 음악 차트 정상에 올랐다."
+    },
+    {
+     "english": "Korean films and TV shows attract fans from across the globe.",
+     "korean": "한국 영화와 TV 프로그램은 전 세계의 팬들을 끌어모은다."
+    },
+    {
+     "english": "Now, beyond pop culture, the world is starting to pay attention to Korea's traditional culture.",
+     "korean": "이제 대중문화를 넘어, 세계는 한국의 전통문화에 관심을 기울이기 시작하고 있다."
+    },
+    {
+     "english": "Let's take a look at some Korean heritage recognized abroad.",
+     "korean": "해외에서 인정받은 몇몇 한국 유산을 살펴보자."
+    },
+    {
+     "english": "In Europe, paper is used for the restoration of cultural assets.",
+     "korean": "유럽에서 종이는 문화재 복원에 사용된다."
+    },
+    {
+     "english": "For example, paper can be used to repair the damaged areas of paintings and other things made of paper.",
+     "korean": "예를 들어, 종이는 그림과 종이로 만든 다른 물건들의 손상된 부분을 수리하는 데 쓰일 수 있다."
+    },
+    {
+     "english": "It can also bring new life to decaying furniture and sculptures by filling in the cracks.",
+     "korean": "그것은 또한 갈라진 틈을 메워 부식되어 가는 가구와 조각품에 새 생명을 불어넣을 수도 있다."
+    },
+    {
+     "english": "For such purposes, the Japanese paper called washi has been widely used.",
+     "korean": "그러한 목적으로, '와시'라고 불리는 일본 종이가 널리 사용되어 왔다."
+    },
+    {
+     "english": "The Louvre Museum in France was no exception.",
+     "korean": "프랑스의 루브르 박물관도 예외가 아니었다."
+    },
+    {
+     "english": "However, a Korean who was working at the Louvre in 2014 wanted to let the world know the value of hanji, traditional handmade Korean paper.",
+     "korean": "그러나 2014년에 루브르에서 일하던 한 한국인은 한국의 전통 수제 종이인 한지의 가치를 세계에 알리고 싶었다."
+    },
+    {
+     "english": "He convinced the head of the museum's restoration team to read his study on the comparison of traditional papers from Korea and Japan.",
+     "korean": "그는 박물관 복원팀장을 설득하여 한국과 일본의 전통 종이를 비교한 자신의 연구를 읽게 했다."
+    }
+   ],
+   "topic": [
+    "the growing global interest in Korean traditional culture and the value of hanji",
+    [
+     "the history of K-pop on global music charts",
+     "how Japanese paper is made by hand",
+     "the most famous paintings in the Louvre",
+     "why Europeans stopped restoring cultural assets"
+    ]
+   ],
+   "title_q": [
+    "Beyond the Korean Wave: Hanji Steps into the Louvre",
+    [
+     "K-pop Tops the Global Charts",
+     "Washi: The Best Paper for Every Purpose",
+     "How to Paint on Traditional Paper",
+     "Why the Louvre Closed Its Restoration Team"
+    ]
+   ],
+   "tf": [
+    [
+     "한류는 대중음악, 영화, TV 프로그램 등으로 전 세계에서 사랑받고 있다.",
+     true
+    ],
+    [
+     "유럽에서는 종이를 문화재 복원에 사용한다.",
+     true
+    ],
+    [
+     "종이는 갈라진 틈을 메워 가구와 조각품을 되살리는 데에도 쓰인다.",
+     true
+    ],
+    [
+     "루브르 박물관도 복원에 일본 종이인 와시를 사용해 왔다.",
+     true
+    ],
+    [
+     "2014년 루브르에서 일하던 한국인은 한지의 가치를 알리고자 했다.",
+     true
+    ],
+    [
+     "유럽에서는 오래전부터 한지를 문화재 복원에 널리 사용해 왔다.",
+     false
+    ],
+    [
+     "루브르 박물관은 와시를 한 번도 사용한 적이 없다.",
+     false
+    ],
+    [
+     "한국인 직원은 복원팀장에게 한지로 그린 그림을 선물했다.",
+     false
+    ],
+    [
+     "세계는 이제 한국의 대중문화에만 관심을 기울이고 있다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "is loved",
+     "loves",
+     "한국 대중문화가 '사랑받는' 것이므로 수동태 is loved"
+    ],
+    [
+     "has topped",
+     "have topped",
+     "주어 Korean pop music은 단수 → has"
+    ],
+    [
+     "attract fans",
+     "attracts fans",
+     "주어 Korean films and TV shows는 복수 → attract"
+    ],
+    [
+     "recognized abroad",
+     "recognizing abroad",
+     "유산이 '인정받은' 것이므로 과거분사 recognized"
+    ],
+    [
+     "made of paper",
+     "making of paper",
+     "종이로 '만들어진' 물건 → 과거분사 made"
+    ],
+    [
+     "by filling in",
+     "by fill in",
+     "전치사 by 뒤에는 동명사 filling"
+    ],
+    [
+     "called washi",
+     "calling washi",
+     "'와시라고 불리는' 종이 → 과거분사 called"
+    ],
+    [
+     "has been widely used",
+     "has widely used",
+     "종이가 '사용되어 온' 것 → 현재완료 수동태"
+    ],
+    [
+     "who was working",
+     "which was working",
+     "선행사 a Korean은 사람 → who"
+    ],
+    [
+     "let the world know",
+     "let the world to know",
+     "사역동사 let + 목적어 + 동사원형"
+    ],
+    [
+     "to read his study",
+     "reading his study",
+     "convince + 목적어 + to부정사"
+    ]
+   ],
+   "vocab": [
+    [
+     "attract",
+     "repel",
+     "팬들을 '끌어모은다'(attract)가 자연스럽다. repel은 '쫓아내다'"
+    ],
+    [
+     "the [restoration] of cultural",
+     "destruction",
+     "문화재 '복원'에 종이를 쓴다. destruction(파괴)은 반대"
+    ],
+    [
+     "repair",
+     "damage",
+     "손상된 부분을 '수리'(repair)한다"
+    ],
+    [
+     "new life",
+     "an end",
+     "틈을 메워 가구에 '새 생명'을 불어넣는다"
+    ],
+    [
+     "widely",
+     "rarely",
+     "와시가 '널리' 쓰여 왔기에 루브르도 예외가 아니었다"
+    ],
+    [
+     "value",
+     "weakness",
+     "한지의 '가치'를 세계에 알리고 싶었다"
+    ]
+   ],
+   "insert": [
+    10,
+    8
+   ],
+   "order": {
+    "given": 5,
+    "blocks": [
+     [
+      6,
+      7,
+      8
+     ],
+     [
+      9,
+      10
+     ],
+     [
+      11,
+      12
+     ]
+    ]
+   },
+   "blank": [
+    [
+     4,
+     "traditional culture",
+     [
+      "modern technology",
+      "pop music charts",
+      "economic growth",
+      "film industry"
+     ],
+     "대중문화를 '넘어(beyond)' 세계가 관심을 갖기 시작한 것은 한국의 '전통문화'이다."
+    ]
+   ],
+   "irrelevant": {
+    "window": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "sentence": "Many tourists visit Paris every year to see the Eiffel Tower.",
+    "at": 8
+   },
+   "summary": [
+    "The world is now paying attention not only to Korean pop culture but also to Korea's (A) ______ culture, and a Korean at the Louvre tried to show the (B) ______ of hanji.",
+    [
+     "traditional",
+     "value"
+    ],
+    [
+     [
+      "modern",
+      "price"
+     ],
+     [
+      "traditional",
+      "weakness"
+     ],
+     [
+      "popular",
+      "value"
+     ],
+     [
+      "foreign",
+      "history"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "L3-2",
+   "lesson": "Lesson 3 · Go Beyond Korea (Read On)",
+   "title": "Korea's Heritage ② Hanji, a Rising Star of the Louvre – 루브르의 실험",
+   "sentences": [
+    {
+     "english": "After reading his study, the Louvre became interested in hanji and carried out an experiment to see whether it would be suitable for use in restoration.",
+     "korean": "그의 연구를 읽은 후, 루브르는 한지에 관심을 갖게 되었고 그것이 복원에 사용하기에 적합한지 알아보기 위해 실험을 수행했다."
+    },
+    {
+     "english": "They wet both washi and hanji to compare their durability.",
+     "korean": "그들은 내구성을 비교하기 위해 와시와 한지를 모두 물에 적셨다."
+    },
+    {
+     "english": "Ultimately, hanji was found to be more durable than washi.",
+     "korean": "결국, 한지가 와시보다 내구성이 더 강한 것으로 밝혀졌다."
+    },
+    {
+     "english": "Unlike washi, which has its fibers lined up in one direction, hanji is made with both horizontal and vertical fibers.",
+     "korean": "섬유가 한 방향으로 정렬된 와시와 달리, 한지는 가로 섬유와 세로 섬유로 모두 만들어진다."
+    },
+    {
+     "english": "This means that the fibers in hanji are more closely woven, making the paper stronger.",
+     "korean": "이것은 한지의 섬유가 더 촘촘하게 엮여 있어 종이를 더 튼튼하게 만든다는 것을 의미한다."
+    },
+    {
+     "english": "This also allows hanji to maintain its original size and shape better when there is a change in its moisture content.",
+     "korean": "이것은 또한 수분 함량에 변화가 있을 때 한지가 원래의 크기와 모양을 더 잘 유지하게 해 준다."
+    },
+    {
+     "english": "Because of its durability, hanji was proven to be excellent material for restoration.",
+     "korean": "그 내구성 덕분에, 한지는 복원에 훌륭한 재료임이 입증되었다."
+    },
+    {
+     "english": "Thus, in 2017, the Louvre used hanji for the first time to restore a relic from its collection.",
+     "korean": "그리하여 2017년, 루브르는 소장품 중 한 유물을 복원하기 위해 처음으로 한지를 사용했다."
+    },
+    {
+     "english": "Since then, hanji has been used more and more to restore various cultural assets of the museum.",
+     "korean": "그 이후로, 한지는 박물관의 다양한 문화재를 복원하는 데 점점 더 많이 사용되어 왔다."
+    },
+    {
+     "english": "Who knows?",
+     "korean": "누가 알겠는가?"
+    },
+    {
+     "english": "Maybe someday the Mona Lisa, one of the museum's most famous paintings, will be restored with hanji.",
+     "korean": "어쩌면 언젠가 박물관의 가장 유명한 그림 중 하나인 모나리자가 한지로 복원될지도 모른다."
+    }
+   ],
+   "topic": [
+    "why hanji proved to be excellent material for restoration at the Louvre",
+    [
+     "the reason washi is stronger than hanji",
+     "how the Mona Lisa was painted",
+     "the process of making paper by machine",
+     "the dangers of moisture in museums"
+    ]
+   ],
+   "title_q": [
+    "Woven Strong: How Hanji Won the Louvre's Test",
+    [
+     "Washi Wins Again",
+     "The Mona Lisa Is Already Restored",
+     "Paper That Melts in Water",
+     "One Direction Is Always Better"
+    ]
+   ],
+   "tf": [
+    [
+     "루브르는 한지가 복원에 적합한지 알아보기 위해 실험을 했다.",
+     true
+    ],
+    [
+     "실험에서 와시와 한지를 모두 물에 적셔 내구성을 비교했다.",
+     true
+    ],
+    [
+     "와시는 섬유가 한 방향으로 정렬되어 있다.",
+     true
+    ],
+    [
+     "한지는 수분 함량이 변해도 원래 크기와 모양을 더 잘 유지한다.",
+     true
+    ],
+    [
+     "루브르는 2017년에 처음으로 한지로 유물을 복원했다.",
+     true
+    ],
+    [
+     "실험 결과 와시가 한지보다 내구성이 더 강했다.",
+     false
+    ],
+    [
+     "한지는 섬유가 한 방향으로만 정렬되어 있다.",
+     false
+    ],
+    [
+     "모나리자는 이미 한지로 복원되었다.",
+     false
+    ],
+    [
+     "루브르는 2014년에 한지로 첫 유물 복원을 마쳤다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "whether it would be suitable",
+     "what it would be suitable",
+     "'~인지 아닌지'를 뜻하는 접속사 whether"
+    ],
+    [
+     "more durable than",
+     "most durable than",
+     "than이 있으므로 비교급 more"
+    ],
+    [
+     "which has its fibers",
+     "what has its fibers",
+     "선행사 washi를 받는 계속적 용법 관계대명사 which (what은 선행사를 포함)"
+    ],
+    [
+     "lined up",
+     "lining up",
+     "have + 목적어(its fibers) + 과거분사: 섬유가 '정렬된'"
+    ],
+    [
+     "making the paper stronger",
+     "making the paper strongly",
+     "make + 목적어 + 형용사 보어 → stronger"
+    ],
+    [
+     "allows hanji to maintain",
+     "allows hanji maintain",
+     "allow + 목적어 + to부정사"
+    ],
+    [
+     "for the first time to restore",
+     "for the first time restore",
+     "목적을 나타내는 to부정사 to restore"
+    ],
+    [
+     "has been used more and more",
+     "has used more and more",
+     "한지가 '사용되어 온' 것 → 현재완료 수동태"
+    ],
+    [
+     "will be restored",
+     "will restore",
+     "모나리자가 '복원될' 것 → 수동태"
+    ]
+   ],
+   "vocab": [
+    [
+     "interested",
+     "disappointed",
+     "연구를 읽은 뒤 한지에 '관심을 갖게' 되어 실험을 했다"
+    ],
+    [
+     "durable",
+     "fragile",
+     "한지가 와시보다 '내구성이 강한' 것으로 밝혀졌다"
+    ],
+    [
+     "closely",
+     "loosely",
+     "가로·세로 섬유로 '촘촘하게' 엮여 더 튼튼하다"
+    ],
+    [
+     "stronger",
+     "weaker",
+     "촘촘하게 엮여 종이를 더 '튼튼하게' 만든다"
+    ],
+    [
+     "maintain",
+     "lose",
+     "원래 크기와 모양을 더 잘 '유지'한다"
+    ],
+    [
+     "excellent",
+     "poor",
+     "내구성 때문에 '훌륭한' 복원 재료로 입증되었다"
+    ],
+    [
+     "more and more",
+     "less and less",
+     "그 이후 '점점 더 많이' 사용되어 왔다"
+    ]
+   ],
+   "insert": [
+    5,
+    3
+   ],
+   "order": {
+    "given": 2,
+    "blocks": [
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      6,
+      7
+     ],
+     [
+      8,
+      9,
+      10,
+      11
+     ]
+    ]
+   },
+   "blank": [
+    [
+     4,
+     "both horizontal and vertical fibers",
+     [
+      "fibers lined up in one direction",
+      "a thin layer of red clay",
+      "chemicals that resist water",
+      "recycled plastic materials"
+     ],
+     "와시와 '달리(Unlike)' 한지는 가로·세로 섬유로 모두 만들어져 섬유가 촘촘하게 엮인다."
+    ],
+    [
+     6,
+     "maintain its original size and shape",
+     [
+      "absorb more moisture quickly",
+      "change its color easily",
+      "become thinner over time",
+      "dissolve in water"
+     ],
+     "수분 함량이 변할 때도 원래의 크기와 모양을 더 잘 유지한다 → 복원 재료로 적합."
+    ]
+   ],
+   "irrelevant": {
+    "window": [
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "sentence": "Japanese gardens are famous for their peaceful atmosphere.",
+    "at": 4
+   },
+   "summary": [
+    "Because its fibers are woven in two directions, hanji is more (A) ______ than washi, so the Louvre began to use it to (B) ______ cultural assets.",
+    [
+     "durable",
+     "restore"
+    ],
+    [
+     [
+      "fragile",
+      "restore"
+     ],
+     [
+      "durable",
+      "sell"
+     ],
+     [
+      "colorful",
+      "decorate"
+     ],
+     [
+      "expensive",
+      "replace"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "L3-3",
+   "lesson": "Lesson 3 · Go Beyond Korea (Read On)",
+   "title": "Korea's Heritage ③ Homi, Gardeners' New Favorite – 호미의 인기와 모양",
+   "sentences": [
+    {
+     "english": "Search for \"Korean homi\" on any online platform, and you can find reviews like these.",
+     "korean": "어느 온라인 플랫폼에서든 '한국 호미'를 검색해 보라, 그러면 이와 같은 후기들을 찾을 수 있다."
+    },
+    {
+     "english": "Also, there are many videos praising the homi and showing how to use it.",
+     "korean": "또한, 호미를 칭찬하고 사용법을 보여 주는 영상도 많다."
+    },
+    {
+     "english": "The Korean homi is becoming the hot new tool gardeners around the world must have.",
+     "korean": "한국 호미는 전 세계 정원사들이 꼭 가져야 할 인기 있는 새 도구가 되고 있다."
+    },
+    {
+     "english": "What is a homi and why is it so popular?",
+     "korean": "호미는 무엇이며 왜 그렇게 인기가 있을까?"
+    },
+    {
+     "english": "The Korean homi is a traditional farming tool that has gotten a lot of attention, not in Korea but in countries like the United States and Australia.",
+     "korean": "한국 호미는 한국이 아니라 미국과 호주 같은 나라에서 많은 관심을 받아 온 전통 농기구이다."
+    },
+    {
+     "english": "In 2019, a video of how to use a homi spread quickly and widely on the Internet.",
+     "korean": "2019년, 호미 사용법을 담은 영상이 인터넷에서 빠르고 널리 퍼졌다."
+    },
+    {
+     "english": "Suddenly, the homi had become one of the top selling gardening tools on the largest online shopping site in the world.",
+     "korean": "갑자기, 호미는 세계 최대 온라인 쇼핑 사이트에서 가장 많이 팔리는 원예 도구 중 하나가 되었다."
+    },
+    {
+     "english": "The homi became so popular because it can be used for a wide range of gardening tasks.",
+     "korean": "호미는 다양한 원예 작업에 사용될 수 있기 때문에 매우 인기를 얻게 되었다."
+    },
+    {
+     "english": "In fact, people in Europe and the U.S. use separate gardening tools to weed, dig, and firm the ground.",
+     "korean": "실제로, 유럽과 미국 사람들은 잡초를 뽑고, 땅을 파고, 땅을 다지는 데 각각 다른 원예 도구를 사용한다."
+    },
+    {
+     "english": "However, a homi has an ideal shape that makes all those activities possible with one tool.",
+     "korean": "그러나 호미는 그 모든 활동을 하나의 도구로 가능하게 하는 이상적인 모양을 가지고 있다."
+    },
+    {
+     "english": "Its thinnest blade is used for weeding, and the sharp point is used to dig the ground.",
+     "korean": "호미의 가장 얇은 날은 잡초를 뽑는 데 쓰이고, 뾰족한 끝은 땅을 파는 데 쓰인다."
+    },
+    {
+     "english": "The flat side is used to firm the ground.",
+     "korean": "평평한 면은 땅을 다지는 데 쓰인다."
+    }
+   ],
+   "topic": [
+    "why the Korean homi has become a popular gardening tool abroad",
+    [
+     "how to grow vegetables in small gardens",
+     "the history of farming in Australia",
+     "the dangers of using sharp gardening tools",
+     "why online reviews cannot be trusted"
+    ]
+   ],
+   "title_q": [
+    "One Tool for Every Garden Task: The Korean Homi",
+    [
+     "Separate Tools Work Best",
+     "The Decline of Traditional Farming Tools",
+     "Online Shopping Sites Lose Customers",
+     "A Homi Made Only for Korea"
+    ]
+   ],
+   "tf": [
+    [
+     "호미를 칭찬하고 사용법을 보여 주는 영상이 많다.",
+     true
+    ],
+    [
+     "호미는 미국과 호주 같은 나라에서 많은 관심을 받았다.",
+     true
+    ],
+    [
+     "2019년 호미 사용법 영상이 인터넷에서 빠르게 퍼졌다.",
+     true
+    ],
+    [
+     "호미의 가장 얇은 날은 잡초를 뽑는 데 쓰인다.",
+     true
+    ],
+    [
+     "호미의 평평한 면은 땅을 다지는 데 쓰인다.",
+     true
+    ],
+    [
+     "호미는 한국에서 처음으로 큰 관심을 받기 시작했다.",
+     false
+    ],
+    [
+     "유럽과 미국 사람들은 하나의 도구로 잡초 뽑기와 땅 파기를 모두 한다.",
+     false
+    ],
+    [
+     "호미의 뾰족한 끝은 땅을 다지는 데 쓰인다.",
+     false
+    ],
+    [
+     "호미는 세계 최대 온라인 쇼핑 사이트에서 판매가 금지되었다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "Search for",
+     "Searching for",
+     "'명령문, and ~'(~해라, 그러면 …) 구문 → 동사원형 Search"
+    ],
+    [
+     "praising the homi",
+     "praised the homi",
+     "영상이 호미를 '칭찬하는' 것 → 현재분사 praising"
+    ],
+    [
+     "how to use it",
+     "how use it",
+     "'~하는 방법' → how to + 동사원형"
+    ],
+    [
+     "that has gotten",
+     "what has gotten",
+     "선행사 a traditional farming tool → 관계대명사 that"
+    ],
+    [
+     "spread quickly and widely",
+     "spread quick and widely",
+     "동사 spread를 수식하는 부사 quickly"
+    ],
+    [
+     "one of the top selling gardening tools",
+     "one of the top selling gardening tool",
+     "one of + 복수 명사"
+    ],
+    [
+     "can be used for",
+     "can use for",
+     "호미가 '사용될' 수 있는 것 → 수동태"
+    ],
+    [
+     "dig, and firm the ground",
+     "dig, and firming the ground",
+     "to weed, dig, and firm: 병렬 구조 → 동사원형"
+    ],
+    [
+     "makes all those activities possible",
+     "makes all those activities possibly",
+     "make + 목적어 + 형용사 보어 → possible"
+    ],
+    [
+     "is used for weeding",
+     "is used for weed",
+     "전치사 for 뒤에는 동명사 weeding"
+    ]
+   ],
+   "vocab": [
+    [
+     "praising",
+     "criticizing",
+     "호미를 '칭찬하는' 영상이 많아 인기 도구가 되었다"
+    ],
+    [
+     "quickly",
+     "slowly",
+     "영상이 '빠르게' 퍼져 갑자기 베스트셀러가 되었다"
+    ],
+    [
+     "separate",
+     "the same",
+     "유럽·미국은 작업마다 '서로 다른' 도구를 쓴다 ↔ 호미는 하나로"
+    ],
+    [
+     "ideal",
+     "awkward",
+     "모든 작업을 하나로 가능하게 하는 '이상적인' 모양"
+    ],
+    [
+     "thinnest",
+     "thickest",
+     "가장 '얇은' 날로 잡초를 뽑는다"
+    ],
+    [
+     "sharp",
+     "dull",
+     "'뾰족한' 끝으로 땅을 판다"
+    ],
+    [
+     "flat",
+     "round",
+     "'평평한' 면으로 땅을 다진다"
+    ]
+   ],
+   "insert": [
+    9,
+    7
+   ],
+   "order": {
+    "given": 4,
+    "blocks": [
+     [
+      5,
+      6,
+      7
+     ],
+     [
+      8,
+      9,
+      10
+     ],
+     [
+      11,
+      12
+     ]
+    ]
+   },
+   "blank": [
+    [
+     10,
+     "all those activities possible with one tool",
+     [
+      "each task possible only with machines",
+      "gardening slower but safer",
+      "the ground harder to dig",
+      "weeding impossible for beginners"
+     ],
+     "유럽·미국은 작업마다 다른 도구를 쓰지만(In fact) 호미는 하나로 모든 작업이 가능하다(However)."
+    ]
+   ],
+   "irrelevant": {
+    "window": [
+     8,
+     9,
+     10,
+     11,
+     12
+    ],
+    "sentence": "Many people prefer buying fresh vegetables at local markets.",
+    "at": 10
+   },
+   "summary": [
+    "The Korean homi became popular abroad because its (A) ______ shape allows gardeners to do many different tasks with (B) ______ tool.",
+    [
+     "ideal",
+     "one"
+    ],
+    [
+     [
+      "ideal",
+      "many"
+     ],
+     [
+      "heavy",
+      "one"
+     ],
+     [
+      "strange",
+      "another"
+     ],
+     [
+      "simple",
+      "no"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "L3-4",
+   "lesson": "Lesson 3 · Go Beyond Korea (Read On)",
+   "title": "Korea's Heritage ④ 대장장이가 만든 호미 – 편안한 디자인과 한국 유산의 가치",
+   "sentences": [
+    {
+     "english": "Next, a homi has a comfortable design.",
+     "korean": "다음으로, 호미는 편안한 디자인을 가지고 있다."
+    },
+    {
+     "english": "The Korean homi is usually handmade by blacksmiths.",
+     "korean": "한국 호미는 보통 대장장이가 손으로 만든다."
+    },
+    {
+     "english": "From decades of experience, they have found the best angles between the handle and the blade so that users can tend gardens without pain in their arms and hands.",
+     "korean": "수십 년의 경험으로, 그들은 사용자가 팔과 손에 통증 없이 정원을 가꿀 수 있도록 손잡이와 날 사이의 가장 좋은 각도를 찾아냈다."
+    },
+    {
+     "english": "During the manufacturing process, a homi is hammered several times by hand, which makes it stronger and more elaborate.",
+     "korean": "제작 과정에서 호미는 손으로 여러 번 망치질되는데, 이것이 호미를 더 튼튼하고 정교하게 만든다."
+    },
+    {
+     "english": "This is what differentiates the handmade Korean homi from gardening tools made by machine.",
+     "korean": "이것이 수제 한국 호미를 기계로 만든 원예 도구와 구별해 주는 점이다."
+    },
+    {
+     "english": "As you see above, the reputation of Korean heritage is spreading throughout the world.",
+     "korean": "위에서 보듯이, 한국 유산의 명성이 전 세계로 퍼지고 있다."
+    },
+    {
+     "english": "This proves that the world is discovering its value and potential.",
+     "korean": "이것은 세계가 그것(한국 유산)의 가치와 잠재력을 발견하고 있음을 증명한다."
+    },
+    {
+     "english": "What do you think will be the next Korean heritage item that will be recognized abroad?",
+     "korean": "해외에서 인정받을 다음 한국 유산은 무엇이 될 거라고 생각하는가?"
+    }
+   ],
+   "topic": [
+    "the comfortable, handmade design of the homi and the spreading reputation of Korean heritage",
+    [
+     "the dangers of machine-made tools",
+     "how to become a blacksmith in Korea",
+     "why gardeners suffer from arm pain",
+     "the decline of traditional crafts"
+    ]
+   ],
+   "title_q": [
+    "Hammered by Hand: What Makes the Homi Special",
+    [
+     "Machines Make Better Tools",
+     "Pain-Free Gardening Is Impossible",
+     "The End of Korean Heritage",
+     "Why Blacksmiths Quit Their Jobs"
+    ]
+   ],
+   "tf": [
+    [
+     "한국 호미는 보통 대장장이가 손으로 만든다.",
+     true
+    ],
+    [
+     "대장장이들은 손잡이와 날 사이의 가장 좋은 각도를 찾아냈다.",
+     true
+    ],
+    [
+     "호미는 제작 과정에서 손으로 여러 번 망치질된다.",
+     true
+    ],
+    [
+     "손 망치질이 수제 호미를 기계로 만든 도구와 구별해 준다.",
+     true
+    ],
+    [
+     "한국 유산의 명성이 전 세계로 퍼지고 있다.",
+     true
+    ],
+    [
+     "한국 호미는 대부분 공장의 기계로 만든다.",
+     false
+    ],
+    [
+     "호미는 사용자의 팔과 손에 통증을 주기 쉬운 디자인이다.",
+     false
+    ],
+    [
+     "망치질을 많이 할수록 호미는 약해진다.",
+     false
+    ],
+    [
+     "글쓴이는 한국 유산의 가치가 세계에서 사라지고 있다고 말한다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "is usually handmade",
+     "usually handmade",
+     "호미가 '만들어지는' 것 → be동사가 필요한 수동태"
+    ],
+    [
+     "they have found",
+     "they has found",
+     "주어 they(blacksmiths)는 복수 → have"
+    ],
+    [
+     "so that users can tend",
+     "so what users can tend",
+     "'~하도록' → so that"
+    ],
+    [
+     "which makes it stronger",
+     "that makes it stronger",
+     "콤마 뒤 계속적 용법에는 that을 쓸 수 없다 → which"
+    ],
+    [
+     "more elaborate",
+     "more elaborately",
+     "makes it stronger and more elaborate: 목적격 보어로 형용사"
+    ],
+    [
+     "This is what differentiates",
+     "This is that differentiates",
+     "선행사가 없으므로 what"
+    ],
+    [
+     "made by machine",
+     "making by machine",
+     "기계로 '만들어진' 도구 → 과거분사 made"
+    ],
+    [
+     "that the world is discovering",
+     "what the world is discovering",
+     "proves의 목적어인 완전한 절 → 접속사 that"
+    ],
+    [
+     "will be recognized abroad",
+     "will recognize abroad",
+     "유산이 '인정받을' 것 → 수동태"
+    ]
+   ],
+   "vocab": [
+    [
+     "comfortable",
+     "uncomfortable",
+     "통증 없이 쓸 수 있는 '편안한' 디자인"
+    ],
+    [
+     "best",
+     "worst",
+     "경험으로 '가장 좋은' 각도를 찾았다"
+    ],
+    [
+     "without pain",
+     "with pain",
+     "팔과 손에 '통증 없이' 정원을 가꾸도록"
+    ],
+    [
+     "stronger",
+     "weaker",
+     "망치질로 더 '튼튼하게' 만든다"
+    ],
+    [
+     "elaborate",
+     "rough",
+     "망치질로 더 '정교하게' 만든다"
+    ],
+    [
+     "spreading",
+     "shrinking",
+     "한국 유산의 명성이 '퍼지고' 있다"
+    ],
+    [
+     "value",
+     "limits",
+     "세계가 한국 유산의 '가치'와 잠재력을 발견하고 있다"
+    ]
+   ],
+   "insert": [
+    4,
+    7
+   ],
+   "order": {
+    "given": 1,
+    "blocks": [
+     [
+      2,
+      3
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      6,
+      7,
+      8
+     ]
+    ]
+   },
+   "blank": [
+    [
+     3,
+     "without pain in their arms and hands",
+     [
+      "faster than any machine",
+      "at a much lower price",
+      "without any experience",
+      "only on rainy days"
+     ],
+     "'편안한 디자인'의 내용 → 팔과 손에 통증 없이 정원을 가꿀 수 있는 각도."
+    ]
+   ],
+   "irrelevant": {
+    "window": [
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "sentence": "In the past, blacksmiths in Europe also made swords for knights.",
+    "at": 4
+   },
+   "summary": [
+    "Handmade by experienced blacksmiths, the homi is (A) ______ to use and strong, which shows that the world is discovering the (B) ______ of Korean heritage.",
+    [
+     "comfortable",
+     "value"
+    ],
+    [
+     [
+      "difficult",
+      "value"
+     ],
+     [
+      "comfortable",
+      "danger"
+     ],
+     [
+      "expensive",
+      "history"
+     ],
+     [
+      "heavy",
+      "price"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "L3-5",
+   "lesson": "Lesson 3 · Go Beyond Korea (Read More)",
+   "title": "Ondol: A Unique and Scientific Heating System – 온돌",
+   "sentences": [
+    {
+     "english": "Ondol is a traditional Korean heating system that has been used for thousands of years to warm rooms.",
+     "korean": "온돌은 방을 데우기 위해 수천 년 동안 사용되어 온 한국의 전통 난방 방식이다."
+    },
+    {
+     "english": "It is quite different from the heating systems commonly found in other countries.",
+     "korean": "그것은 다른 나라에서 흔히 볼 수 있는 난방 방식과는 꽤 다르다."
+    },
+    {
+     "english": "While most other countries warm their rooms using heating devices in the room, ondol warms the floor and the entire room using heat that is created outside the room.",
+     "korean": "대부분의 다른 나라들이 방 안의 난방 기구를 사용해 방을 데우는 반면, 온돌은 방 밖에서 만들어진 열을 이용해 바닥과 방 전체를 데운다."
+    },
+    {
+     "english": "This is made possible through its unique and scientific structure.",
+     "korean": "이것은 그것의 독특하고 과학적인 구조를 통해 가능해진다."
+    },
+    {
+     "english": "A fire is lit in an agungi, which is a kind of stove usually found in traditional Korean kitchens.",
+     "korean": "전통 한국 부엌에서 흔히 볼 수 있는 일종의 화덕인 아궁이에 불을 지핀다."
+    },
+    {
+     "english": "The hot air then travels through an area which runs under the room's floor.",
+     "korean": "그러면 뜨거운 공기가 방바닥 아래로 이어지는 공간을 통해 이동한다."
+    },
+    {
+     "english": "On top of the area are flat and wide stones, which are covered with a layer of red mud clay.",
+     "korean": "그 공간 위에는 평평하고 넓은 돌들이 있는데, 그것들은 붉은 진흙 층으로 덮여 있다."
+    },
+    {
+     "english": "As the hot air passes through the area under the room's floor, it heats up the stones.",
+     "korean": "뜨거운 공기가 방바닥 아래 공간을 지나가면서 돌들을 데운다."
+    },
+    {
+     "english": "The heated stones raise the temperature of the floor, and this warmth spreads and warms the entire room.",
+     "korean": "데워진 돌들은 바닥의 온도를 높이고, 이 온기가 퍼져 방 전체를 데운다."
+    }
+   ],
+   "topic": [
+    "how ondol warms a room through its unique structure",
+    [
+     "why other countries use heating devices in the room",
+     "the history of traditional Korean kitchens",
+     "how to build a stove with red clay",
+     "the danger of fire in old houses"
+    ]
+   ],
+   "title_q": [
+    "Warm Floors from Outside Fires: The Science of Ondol",
+    [
+     "Heaters Inside Every Room",
+     "Cooking with Agungi",
+     "Why Stones Stay Cold",
+     "The End of Traditional Heating"
+    ]
+   ],
+   "tf": [
+    [
+     "온돌은 수천 년 동안 사용되어 온 한국의 전통 난방 방식이다.",
+     true
+    ],
+    [
+     "온돌은 방 밖에서 만든 열로 바닥과 방 전체를 데운다.",
+     true
+    ],
+    [
+     "아궁이는 전통 한국 부엌에서 흔히 볼 수 있는 화덕이다.",
+     true
+    ],
+    [
+     "평평하고 넓은 돌은 붉은 진흙 층으로 덮여 있다.",
+     true
+    ],
+    [
+     "데워진 돌이 바닥의 온도를 높인다.",
+     true
+    ],
+    [
+     "대부분의 다른 나라들도 방 밖에서 만든 열로 바닥을 데운다.",
+     false
+    ],
+    [
+     "온돌은 방 안의 난방 기구로 불을 피운다.",
+     false
+    ],
+    [
+     "뜨거운 공기는 방의 천장 위를 지나간다.",
+     false
+    ],
+    [
+     "돌 위에는 얇은 나무판이 덮여 있다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "that has been used",
+     "that has used",
+     "온돌이 '사용되어 온' 것 → 현재완료 수동태"
+    ],
+    [
+     "commonly found",
+     "commonly finding",
+     "'흔히 발견되는' 난방 방식 → 과거분사"
+    ],
+    [
+     "most other countries warm",
+     "most other countries warms",
+     "주어 most other countries는 복수 → warm"
+    ],
+    [
+     "that is created outside",
+     "that creates outside",
+     "열이 '만들어지는' 것 → 수동태"
+    ],
+    [
+     "is made possible",
+     "is made possibly",
+     "make + 목적어 + 형용사 보어의 수동태 → possible"
+    ],
+    [
+     "which is a kind of stove",
+     "where is a kind of stove",
+     "뒤에 주어가 없는 불완전한 절 → 관계대명사 which"
+    ],
+    [
+     "which runs under",
+     "which run under",
+     "선행사 an area는 단수 → runs"
+    ],
+    [
+     "On top of the area are",
+     "On top of the area is",
+     "장소 부사구 도치: 주어 flat and wide stones가 복수 → are"
+    ],
+    [
+     "which are covered with",
+     "which is covered with",
+     "선행사 stones는 복수 → are"
+    ],
+    [
+     "raise the temperature",
+     "rise the temperature",
+     "목적어(the temperature)가 있으므로 타동사 raise"
+    ]
+   ],
+   "vocab": [
+    [
+     "different",
+     "similar",
+     "다른 나라의 난방 방식과는 꽤 '다르다'"
+    ],
+    [
+     "outside",
+     "inside",
+     "방 '밖'에서 만든 열을 이용한다"
+    ],
+    [
+     "unique",
+     "ordinary",
+     "'독특하고' 과학적인 구조 덕분"
+    ],
+    [
+     "runs [under]",
+     "above",
+     "방바닥 '아래'로 이어지는 공간"
+    ],
+    [
+     "heats up",
+     "cools down",
+     "뜨거운 공기가 지나가며 돌을 '데운다'"
+    ],
+    [
+     "raise",
+     "lower",
+     "데워진 돌이 바닥 온도를 '높인다'"
+    ],
+    [
+     "spreads",
+     "disappears",
+     "온기가 '퍼져' 방 전체를 데운다"
+    ]
+   ],
+   "insert": [
+    7,
+    4
+   ],
+   "order": {
+    "given": 2,
+    "blocks": [
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      7,
+      8,
+      9
+     ]
+    ]
+   },
+   "blank": [
+    [
+     3,
+     "using heat that is created outside the room",
+     [
+      "using heating devices in the room",
+      "by burning fuel under the bed",
+      "with electric fans on the ceiling",
+      "by opening all the windows"
+     ],
+     "'While(반면에)'로 다른 나라(방 안의 난방 기구)와 대조 → 방 밖에서 만든 열."
+    ]
+   ],
+   "irrelevant": {
+    "window": [
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "sentence": "Many people prefer air conditioners on hot summer days.",
+    "at": 5
+   },
+   "summary": [
+    "Ondol uses heat from a fire (A) ______ the room, which passes under the floor and (B) ______ the stones that warm the whole room.",
+    [
+     "outside",
+     "heats"
+    ],
+    [
+     [
+      "inside",
+      "heats"
+     ],
+     [
+      "outside",
+      "cools"
+     ],
+     [
+      "above",
+      "breaks"
+     ],
+     [
+      "inside",
+      "covers"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "L4-1",
+   "lesson": "Lesson 4 · Technology and Our Lives (Read On)",
+   "title": "Space Technology for Everyday Use ① 메모리폼",
+   "sentences": [
+    {
+     "english": "Did you know that many technologies around us originated from space technology?",
+     "korean": "우리 주변의 많은 기술이 우주 기술에서 비롯되었다는 것을 알고 있었는가?"
+    },
+    {
+     "english": "You may not have realized it, but we have been enjoying the enormous benefits of space technology in our daily lives for a long time.",
+     "korean": "깨닫지 못했을 수도 있지만, 우리는 오랫동안 일상생활에서 우주 기술의 엄청난 혜택을 누려 왔다."
+    },
+    {
+     "english": "Let's see how some examples of it have been invented and integrated into our daily lives already.",
+     "korean": "그 몇몇 사례들이 어떻게 발명되어 이미 우리의 일상생활에 통합되었는지 살펴보자."
+    },
+    {
+     "english": "Memory foam was initially developed to minimize the effects of the force of gravity on astronauts during takeoff and landing.",
+     "korean": "메모리폼은 처음에 이륙과 착륙 중에 우주 비행사에게 미치는 중력의 영향을 최소화하기 위해 개발되었다."
+    },
+    {
+     "english": "Memory foam absorbs shock by changing its shape in reaction to pressure, and it can change its shape to match the body shape of an astronaut.",
+     "korean": "메모리폼은 압력에 반응하여 모양을 바꿈으로써 충격을 흡수하며, 우주 비행사의 몸 형태에 맞게 모양을 바꿀 수 있다."
+    },
+    {
+     "english": "Once the pressure is lifted, memory foam gradually returns to its original shape, as if it remembered its original form.",
+     "korean": "일단 압력이 사라지면, 메모리폼은 마치 원래 형태를 기억하는 것처럼 서서히 원래 모양으로 돌아간다."
+    },
+    {
+     "english": "Because of this characteristic, it is called \"memory\" foam.",
+     "korean": "이러한 특성 때문에, 그것은 '메모리'폼이라고 불린다."
+    },
+    {
+     "english": "It provides astronauts with improved protection and comfort when they are in their seats.",
+     "korean": "그것은 우주 비행사들이 좌석에 있을 때 향상된 보호와 편안함을 제공한다."
+    },
+    {
+     "english": "Since memory foam was first introduced into the public domain, it has been used in a number of products such as beds and sofas.",
+     "korean": "메모리폼이 처음 일반에 공개된 이후, 그것은 침대와 소파 같은 많은 제품에 사용되어 왔다."
+    }
+   ],
+   "topic": [
+    "how memory foam, developed for astronauts, became part of our daily lives",
+    [
+     "the dangers of gravity during space travel",
+     "why astronauts need special seats on Earth",
+     "the history of beds and sofas",
+     "how to exercise in space"
+    ]
+   ],
+   "title_q": [
+    "From Spacecraft Seats to Your Bed: Memory Foam",
+    [
+     "Gravity Cannot Be Controlled",
+     "Foam That Forgets Its Shape",
+     "Astronauts Hate Their Seats",
+     "Sofas of the Future"
+    ]
+   ],
+   "tf": [
+    [
+     "우리 주변의 많은 기술이 우주 기술에서 비롯되었다.",
+     true
+    ],
+    [
+     "메모리폼은 이착륙 때 중력의 영향을 줄이려고 개발되었다.",
+     true
+    ],
+    [
+     "메모리폼은 압력에 반응해 모양을 바꿔 충격을 흡수한다.",
+     true
+    ],
+    [
+     "압력이 사라지면 메모리폼은 서서히 원래 모양으로 돌아간다.",
+     true
+    ],
+    [
+     "메모리폼은 침대와 소파 같은 제품에 쓰인다.",
+     true
+    ],
+    [
+     "메모리폼은 처음부터 가정용 침대를 위해 개발되었다.",
+     false
+    ],
+    [
+     "메모리폼은 압력이 사라져도 바뀐 모양을 그대로 유지한다.",
+     false
+    ],
+    [
+     "메모리폼은 우주 비행사에게 불편함을 주어 사용이 중단되었다.",
+     false
+    ],
+    [
+     "메모리폼이라는 이름은 개발자의 이름에서 왔다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "originated from",
+     "were originated from",
+     "originate는 자동사 → 수동태 불가"
+    ],
+    [
+     "have been enjoying",
+     "have been enjoyed",
+     "우리가 혜택을 '누려 온' 것 → 현재완료 진행(능동)"
+    ],
+    [
+     "have been invented",
+     "have invented",
+     "사례들이 '발명된' 것 → 수동태"
+    ],
+    [
+     "to minimize the effects",
+     "to minimizing the effects",
+     "목적의 to부정사 → to + 동사원형"
+    ],
+    [
+     "by changing its shape",
+     "by change its shape",
+     "전치사 by 뒤에는 동명사"
+    ],
+    [
+     "it is called",
+     "it calls",
+     "'~라고 불린다' → 수동태"
+    ],
+    [
+     "provides astronauts with",
+     "provides astronauts of",
+     "provide A with B (A에게 B를 제공하다)"
+    ],
+    [
+     "was first introduced",
+     "first introduced",
+     "메모리폼이 '도입된' 것 → 수동태"
+    ],
+    [
+     "it has been used",
+     "it has used",
+     "메모리폼이 '사용되어 온' 것 → 수동태"
+    ]
+   ],
+   "vocab": [
+    [
+     "enormous",
+     "tiny",
+     "우주 기술의 '엄청난' 혜택을 누려 왔다"
+    ],
+    [
+     "minimize",
+     "maximize",
+     "중력의 영향을 '최소화'하기 위해"
+    ],
+    [
+     "absorbs",
+     "reflects",
+     "모양을 바꾸며 충격을 '흡수'한다"
+    ],
+    [
+     "gradually",
+     "never",
+     "압력이 사라지면 '서서히' 원래 모양으로 돌아간다"
+    ],
+    [
+     "returns to its [original] shape",
+     "new",
+     "'원래' 형태를 기억하는 것처럼"
+    ],
+    [
+     "improved",
+     "reduced",
+     "'향상된' 보호와 편안함을 제공한다"
+    ]
+   ],
+   "insert": [
+    6,
+    7
+   ],
+   "order": {
+    "given": 3,
+    "blocks": [
+     [
+      4,
+      5
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      8,
+      9
+     ]
+    ]
+   },
+   "blank": [
+    [
+     6,
+     "as if it remembered its original form",
+     [
+      "as if it lost its shape forever",
+      "because it absorbs water",
+      "since it is made of metal",
+      "as if it became heavier"
+     ],
+     "다음 문장 'Because of this characteristic, it is called \"memory\" foam.'의 근거 → 원래 형태를 '기억'하는 것처럼 돌아감."
+    ]
+   ],
+   "irrelevant": {
+    "window": [
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "sentence": "Astronauts have to exercise for hours every day to keep their muscles strong.",
+    "at": 6
+   },
+   "summary": [
+    "Memory foam, first developed to (A) ______ astronauts from the force of gravity, returns to its original shape and is now used in (B) ______ products.",
+    [
+     "protect",
+     "everyday"
+    ],
+    [
+     [
+      "protect",
+      "military"
+     ],
+     [
+      "separate",
+      "everyday"
+     ],
+     [
+      "push",
+      "space"
+     ],
+     [
+      "hide",
+      "expensive"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "L4-2",
+   "lesson": "Lesson 4 · Technology and Our Lives (Read On)",
+   "title": "Space Technology for Everyday Use ② 정수기",
+   "sentences": [
+    {
+     "english": "Today's water purifier also originated from space technology.",
+     "korean": "오늘날의 정수기 또한 우주 기술에서 비롯되었다."
+    },
+    {
+     "english": "While planning their human space exploration program, NASA scientists realized that it was impossible to load a sufficient amount of clean water into a spacecraft.",
+     "korean": "유인 우주 탐사 프로그램을 계획하던 중, NASA 과학자들은 우주선에 충분한 양의 깨끗한 물을 싣는 것이 불가능하다는 것을 깨달았다."
+    },
+    {
+     "english": "Then, they hit upon an idea that wastewater could be recycled once harmful bacteria were removed.",
+     "korean": "그러다가 그들은 해로운 박테리아만 제거되면 폐수를 재활용할 수 있다는 아이디어를 떠올렸다."
+    },
+    {
+     "english": "So they developed a water purification system that could successfully kill off bacteria.",
+     "korean": "그래서 그들은 박테리아를 성공적으로 없앨 수 있는 정수 시스템을 개발했다."
+    },
+    {
+     "english": "Continued research led to the invention of a better water purification system that uses cartridges for longer missions that did not need to be replaced frequently.",
+     "korean": "계속된 연구는 더 긴 임무를 위해 자주 교체할 필요가 없는 카트리지를 사용하는 더 나은 정수 시스템의 발명으로 이어졌다."
+    },
+    {
+     "english": "This water purifying technique was developed for several decades and then marketed for domestic use.",
+     "korean": "이 정수 기술은 수십 년 동안 개발된 후 가정용으로 시판되었다."
+    }
+   ],
+   "topic": [
+    "how the water purifier developed from NASA's need for clean water in space",
+    [
+     "why spacecraft cannot carry any water",
+     "the dangers of drinking wastewater on Earth",
+     "how bacteria help astronauts stay healthy",
+     "the cost of space exploration programs"
+    ]
+   ],
+   "title_q": [
+    "Recycling Water in Space: The Origin of Water Purifiers",
+    [
+     "Bacteria: Friends of Astronauts",
+     "Why NASA Stopped Exploring Space",
+     "Cartridges That Break Every Day",
+     "Bottled Water for Spacecraft"
+    ]
+   ],
+   "tf": [
+    [
+     "오늘날의 정수기도 우주 기술에서 비롯되었다.",
+     true
+    ],
+    [
+     "NASA는 우주선에 충분한 깨끗한 물을 싣는 것이 불가능하다고 깨달았다.",
+     true
+    ],
+    [
+     "해로운 박테리아를 제거하면 폐수를 재활용할 수 있다는 아이디어를 떠올렸다.",
+     true
+    ],
+    [
+     "개선된 정수 시스템은 자주 교체하지 않아도 되는 카트리지를 쓴다.",
+     true
+    ],
+    [
+     "이 정수 기술은 수십 년간 개발된 뒤 가정용으로 시판되었다.",
+     true
+    ],
+    [
+     "NASA는 우주선에 깨끗한 물을 충분히 실을 수 있었다.",
+     false
+    ],
+    [
+     "정수 시스템은 박테리아를 늘리기 위해 개발되었다.",
+     false
+    ],
+    [
+     "카트리지는 짧은 임무를 위해 매일 교체해야 했다.",
+     false
+    ],
+    [
+     "이 정수 기술은 개발되자마자 바로 가정용으로 판매되었다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "also originated from",
+     "also was originated from",
+     "originate는 자동사 → 수동태 불가"
+    ],
+    [
+     "While planning",
+     "While planned",
+     "NASA 과학자들이 '계획하던' 중 → 현재분사"
+    ],
+    [
+     "impossible to load",
+     "impossible for load",
+     "가주어 it – 진주어 to부정사"
+    ],
+    [
+     "could be recycled",
+     "could recycle",
+     "폐수가 '재활용되는' 것 → 수동태"
+    ],
+    [
+     "that could successfully kill off",
+     "what could successfully kill off",
+     "선행사 a water purification system → 관계대명사 that"
+    ],
+    [
+     "led to the invention",
+     "led to invent",
+     "lead to + 명사(구)"
+    ],
+    [
+     "need to be replaced",
+     "need to replace",
+     "카트리지가 '교체되는' 것 → to be p.p."
+    ],
+    [
+     "then marketed",
+     "then marketing",
+     "was developed ... and then (was) marketed: 병렬 수동태"
+    ]
+   ],
+   "vocab": [
+    [
+     "impossible",
+     "easy",
+     "충분한 깨끗한 물을 싣는 것이 '불가능'해서 재활용을 생각했다"
+    ],
+    [
+     "sufficient",
+     "small",
+     "'충분한' 양의 깨끗한 물"
+    ],
+    [
+     "recycled",
+     "wasted",
+     "박테리아를 제거하면 폐수를 '재활용'할 수 있다"
+    ],
+    [
+     "harmful",
+     "helpful",
+     "'해로운' 박테리아를 제거"
+    ],
+    [
+     "longer",
+     "shorter",
+     "'더 긴' 임무를 위해 자주 교체하지 않아도 되는 카트리지"
+    ],
+    [
+     "domestic",
+     "military",
+     "'가정용'으로 시판되었다"
+    ]
+   ],
+   "insert": [
+    3,
+    5
+   ],
+   "order": {
+    "given": 1,
+    "blocks": [
+     [
+      2,
+      3
+     ],
+     [
+      4
+     ],
+     [
+      5,
+      6
+     ]
+    ]
+   },
+   "blank": [
+    [
+     3,
+     "wastewater could be recycled",
+     [
+      "clean water could be bought in space",
+      "bacteria could be grown on purpose",
+      "more water tanks could be loaded",
+      "rainwater could be collected in space"
+     ],
+     "물을 충분히 실을 수 없다는 문제 → '박테리아를 제거하면 폐수를 재활용할 수 있다'는 해결책."
+    ]
+   ],
+   "irrelevant": null,
+   "summary": [
+    "Because NASA could not (A) ______ enough clean water into a spacecraft, it developed a system to (B) ______ wastewater, which led to today's water purifier.",
+    [
+     "load",
+     "recycle"
+    ],
+    [
+     [
+      "load",
+      "waste"
+     ],
+     [
+      "sell",
+      "recycle"
+     ],
+     [
+      "drink",
+      "heat"
+     ],
+     [
+      "find",
+      "freeze"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "L4-3",
+   "lesson": "Lesson 4 · Technology and Our Lives (Read On)",
+   "title": "Space Technology for Everyday Use ③ 공기 청정기",
+   "sentences": [
+    {
+     "english": "Another everyday item developed from space technology is the air purifier.",
+     "korean": "우주 기술에서 개발된 또 다른 일상용품은 공기 청정기이다."
+    },
+    {
+     "english": "A reliable source of food was vital for survival in space.",
+     "korean": "믿을 만한 식량 공급원은 우주에서의 생존에 필수적이었다."
+    },
+    {
+     "english": "In order to get fresh food, astronauts had to cultivate crops in the spacecraft.",
+     "korean": "신선한 음식을 얻기 위해, 우주 비행사들은 우주선 안에서 작물을 재배해야 했다."
+    },
+    {
+     "english": "However, there was a major obstacle.",
+     "korean": "그러나 큰 장애물이 있었다."
+    },
+    {
+     "english": "When plants grow, ethylene gas is produced.",
+     "korean": "식물이 자랄 때 에틸렌 가스가 생성된다."
+    },
+    {
+     "english": "It accelerates the aging of plants and the decaying of fruits.",
+     "korean": "그것은 식물의 노화와 과일의 부패를 가속한다."
+    },
+    {
+     "english": "Since it was impossible to exchange gas for clean air while in space, scientists developed an air purification system to remove the gas.",
+     "korean": "우주에 있는 동안 가스를 깨끗한 공기로 교환하는 것이 불가능했기 때문에, 과학자들은 그 가스를 제거하기 위한 공기 정화 시스템을 개발했다."
+    },
+    {
+     "english": "Although the goal was to eliminate ethylene, the system could get rid of other unwanted things from the air, too.",
+     "korean": "목표는 에틸렌을 없애는 것이었지만, 그 시스템은 공기 중의 다른 원치 않는 것들도 제거할 수 있었다."
+    },
+    {
+     "english": "A private company recognized the potential of the air purification system and obtained a license to develop and commercialize it.",
+     "korean": "한 민간 기업이 공기 정화 시스템의 잠재력을 알아보고 그것을 개발하고 상용화할 수 있는 허가를 얻었다."
+    }
+   ],
+   "topic": [
+    "how a system to remove ethylene in space led to the air purifier",
+    [
+     "why astronauts cannot eat fresh food",
+     "the benefits of ethylene for fruit",
+     "how private companies explore space",
+     "the best crops to grow at home"
+    ]
+   ],
+   "title_q": [
+    "Clean Air from Space Farms: The Air Purifier's Origin",
+    [
+     "Ethylene Keeps Fruit Fresh",
+     "No Plants Allowed in Spacecraft",
+     "Companies Refuse Space Technology",
+     "Fresh Air Is Free in Space"
+    ]
+   ],
+   "tf": [
+    [
+     "우주에서는 믿을 만한 식량 공급원이 생존에 필수적이었다.",
+     true
+    ],
+    [
+     "우주 비행사들은 신선한 음식을 위해 우주선에서 작물을 재배했다.",
+     true
+    ],
+    [
+     "식물이 자랄 때 에틸렌 가스가 생성된다.",
+     true
+    ],
+    [
+     "에틸렌은 식물의 노화와 과일의 부패를 빠르게 한다.",
+     true
+    ],
+    [
+     "한 민간 기업이 공기 정화 시스템을 상용화할 허가를 얻었다.",
+     true
+    ],
+    [
+     "우주에서는 가스를 깨끗한 공기로 쉽게 교환할 수 있었다.",
+     false
+    ],
+    [
+     "에틸렌은 과일이 썩는 것을 막아 준다.",
+     false
+    ],
+    [
+     "공기 정화 시스템은 에틸렌만 제거할 수 있었다.",
+     false
+    ],
+    [
+     "공기 정화 시스템은 정부 기관만 사용하도록 금지되었다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "developed from space technology is",
+     "developed from space technology are",
+     "주어 Another everyday item은 단수 → is"
+    ],
+    [
+     "had to cultivate",
+     "had to cultivating",
+     "had to + 동사원형"
+    ],
+    [
+     "ethylene gas is produced",
+     "ethylene gas produces",
+     "가스가 '생성되는' 것 → 수동태"
+    ],
+    [
+     "It accelerates",
+     "It accelerate",
+     "주어 It은 3인칭 단수 → accelerates"
+    ],
+    [
+     "impossible to exchange",
+     "impossible exchange",
+     "가주어 it – 진주어 to부정사"
+    ],
+    [
+     "Although the goal was",
+     "Despite the goal was",
+     "절이 이어지므로 접속사 Although (Despite는 전치사)"
+    ],
+    [
+     "could get rid of",
+     "could get rid",
+     "get rid of + 목적어"
+    ],
+    [
+     "and obtained a license",
+     "and obtaining a license",
+     "recognized ... and obtained: 병렬 구조"
+    ],
+    [
+     "to develop and commercialize it",
+     "to develop and commercializing it",
+     "to develop and (to) commercialize: 병렬"
+    ]
+   ],
+   "vocab": [
+    [
+     "vital",
+     "useless",
+     "식량 공급원은 생존에 '필수적'이었다"
+    ],
+    [
+     "fresh",
+     "frozen",
+     "'신선한' 음식을 얻기 위해 작물을 재배"
+    ],
+    [
+     "obstacle",
+     "advantage",
+     "'큰 장애물'이 있었다(However) → 에틸렌 문제"
+    ],
+    [
+     "accelerates",
+     "slows",
+     "에틸렌은 노화와 부패를 '가속'한다"
+    ],
+    [
+     "eliminate",
+     "increase",
+     "목표는 에틸렌을 '없애는' 것"
+    ],
+    [
+     "unwanted",
+     "useful",
+     "다른 '원치 않는' 것들도 제거"
+    ],
+    [
+     "potential",
+     "danger",
+     "시스템의 '잠재력'을 알아보고 상용화"
+    ]
+   ],
+   "insert": [
+    4,
+    8
+   ],
+   "order": {
+    "given": 2,
+    "blocks": [
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      7,
+      8,
+      9
+     ]
+    ]
+   },
+   "blank": [
+    [
+     8,
+     "get rid of other unwanted things from the air",
+     [
+      "produce more ethylene gas",
+      "help crops grow faster",
+      "make fruits decay quickly",
+      "turn the air into water"
+     ],
+     "Although(~이지만) → 목표는 에틸렌 제거였지만 다른 원치 않는 것들도 제거할 수 있었다."
+    ]
+   ],
+   "irrelevant": {
+    "window": [
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "sentence": "Many astronauts say that the Earth looks beautiful from space.",
+    "at": 6
+   },
+   "summary": [
+    "To protect crops in space from (A) ______ gas, scientists made an air purification system, which a private company later (B) ______.",
+    [
+     "ethylene",
+     "commercialized"
+    ],
+    [
+     [
+      "ethylene",
+      "banned"
+     ],
+     [
+      "oxygen",
+      "commercialized"
+     ],
+     [
+      "smoke",
+      "destroyed"
+     ],
+     [
+      "oxygen",
+      "ignored"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "L4-4",
+   "lesson": "Lesson 4 · Technology and Our Lives (Read On)",
+   "title": "Space Technology for Everyday Use ④ 무선 헤드셋 · 우주 기술과 미래",
+   "sentences": [
+    {
+     "english": "The fourth invention is the wireless headset.",
+     "korean": "네 번째 발명품은 무선 헤드셋이다."
+    },
+    {
+     "english": "It was devised after an unexpected incident NASA had experienced.",
+     "korean": "그것은 NASA가 겪었던 예상치 못한 사건 이후에 고안되었다."
+    },
+    {
+     "english": "The second manned spacecraft launched by the U.S. completed its mission and successfully landed in the Atlantic Ocean.",
+     "korean": "미국이 발사한 두 번째 유인 우주선은 임무를 완수하고 대서양에 성공적으로 착수했다."
+    },
+    {
+     "english": "The command pilot was waiting for the recovery team that would get him and the capsule from the ocean.",
+     "korean": "기장은 자신과 캡슐을 바다에서 건져 올릴 회수팀을 기다리고 있었다."
+    },
+    {
+     "english": "Everything was going smoothly until unexpectedly, the capsule started to leak.",
+     "korean": "예기치 않게 캡슐이 새기 시작할 때까지는 모든 것이 순조롭게 진행되고 있었다."
+    },
+    {
+     "english": "Water flooded into the cabin before the team arrived, and the pilot had to escape, abandoning all of the spacecraft's radio communications equipment.",
+     "korean": "회수팀이 도착하기 전에 물이 선실로 밀려들었고, 조종사는 우주선의 모든 무선 통신 장비를 버린 채 탈출해야 했다."
+    },
+    {
+     "english": "This prevented him from communicating with the recovery team.",
+     "korean": "이것은 그가 회수팀과 교신하지 못하게 했다."
+    },
+    {
+     "english": "He was left floating in the ocean until he succeeded in visibly getting the rescue helicopter's attention.",
+     "korean": "그는 눈에 보이게 구조 헬리콥터의 주의를 끄는 데 성공할 때까지 바다에 떠 있는 채로 남겨졌다."
+    },
+    {
+     "english": "After this accident, NASA and a partner company developed helmets equipped with a radio system that could communicate with a designated base station.",
+     "korean": "이 사고 후, NASA와 협력 회사는 지정된 기지국과 교신할 수 있는 무선 시스템을 갖춘 헬멧을 개발했다."
+    },
+    {
+     "english": "Later, wireless headsets using this system were introduced to the world.",
+     "korean": "이후, 이 시스템을 사용한 무선 헤드셋이 세상에 소개되었다."
+    },
+    {
+     "english": "These days, Bluetooth technology has been incorporated into wireless headsets.",
+     "korean": "요즘에는 블루투스 기술이 무선 헤드셋에 통합되었다."
+    },
+    {
+     "english": "Now we can connect headsets wirelessly with mobile digital devices such as smartphones and laptops.",
+     "korean": "이제 우리는 헤드셋을 스마트폰과 노트북 같은 휴대용 디지털 기기와 무선으로 연결할 수 있다."
+    },
+    {
+     "english": "In our daily lives, there are many other inventions that have their origins in space technology including the smartphone camera and the computer mouse.",
+     "korean": "일상생활에는 스마트폰 카메라와 컴퓨터 마우스를 포함하여 우주 기술에서 기원한 다른 많은 발명품이 있다."
+    },
+    {
+     "english": "Private firms as well as government organizations have invested heavily in space technology for space exploration.",
+     "korean": "정부 기관뿐만 아니라 민간 기업들도 우주 탐사를 위해 우주 기술에 막대한 투자를 해 왔다."
+    },
+    {
+     "english": "Therefore, we can expect that our future lives will be significantly influenced by space technology that has not yet been invented.",
+     "korean": "따라서 우리는 우리의 미래 삶이 아직 발명되지 않은 우주 기술에 의해 크게 영향을 받을 것이라고 예상할 수 있다."
+    }
+   ],
+   "topic": [
+    "how an accident in the ocean led to the wireless headset and how space technology shapes our lives",
+    [
+     "why NASA stopped sending manned spacecraft",
+     "the history of the Atlantic Ocean",
+     "how to repair a leaking capsule",
+     "the dangers of Bluetooth technology"
+    ]
+   ],
+   "title_q": [
+    "Lost Signal at Sea: The Birth of the Wireless Headset",
+    [
+     "A Perfect Landing Without Problems",
+     "Helicopters Replace Spacecraft",
+     "Why Smartphones Have No Cameras",
+     "Space Technology Is Already Finished"
+    ]
+   ],
+   "tf": [
+    [
+     "무선 헤드셋은 NASA가 겪은 예상치 못한 사건 이후 고안되었다.",
+     true
+    ],
+    [
+     "미국의 두 번째 유인 우주선은 대서양에 착수했다.",
+     true
+    ],
+    [
+     "캡슐이 새면서 조종사는 무선 통신 장비를 버리고 탈출해야 했다.",
+     true
+    ],
+    [
+     "사고 후 NASA는 지정된 기지국과 교신하는 무선 시스템 헬멧을 개발했다.",
+     true
+    ],
+    [
+     "스마트폰 카메라와 컴퓨터 마우스도 우주 기술에서 기원했다.",
+     true
+    ],
+    [
+     "조종사는 캡슐 안에서 불이 나서 탈출했다.",
+     false
+    ],
+    [
+     "조종사는 무선 장비로 회수팀과 계속 교신할 수 있었다.",
+     false
+    ],
+    [
+     "무선 헤드셋에는 아직 블루투스 기술이 쓰이지 않는다.",
+     false
+    ],
+    [
+     "우주 기술에는 정부 기관만 투자하고 있다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "It was devised",
+     "It devised",
+     "헤드셋이 '고안된' 것 → 수동태"
+    ],
+    [
+     "launched by the U.S.",
+     "launching by the U.S.",
+     "우주선이 '발사된' 것 → 과거분사"
+    ],
+    [
+     "successfully landed",
+     "successful landed",
+     "동사 landed를 수식 → 부사 successfully"
+    ],
+    [
+     "was waiting for",
+     "was waited for",
+     "기장이 '기다리고 있던' 것 → 과거진행(능동)"
+    ],
+    [
+     "abandoning all of",
+     "abandoned all of",
+     "주어(the pilot)가 '버리는' 능동 → 현재분사 abandoning"
+    ],
+    [
+     "prevented him from communicating",
+     "prevented him to communicate",
+     "prevent + 목적어 + from -ing"
+    ],
+    [
+     "left floating",
+     "left float",
+     "be left + 현재분사(~한 채로 남겨지다)"
+    ],
+    [
+     "succeeded in visibly getting",
+     "succeeded in visibly get",
+     "전치사 in 뒤에는 동명사"
+    ],
+    [
+     "helmets equipped with",
+     "helmets equipping with",
+     "헬멧이 '갖춰진' 것 → 과거분사"
+    ],
+    [
+     "were introduced to the world",
+     "introduced to the world",
+     "헤드셋이 '소개된' 것 → 수동태"
+    ],
+    [
+     "has been incorporated into",
+     "has incorporated into",
+     "기술이 '통합된' 것 → 수동태"
+    ],
+    [
+     "that have their origins",
+     "that has their origins",
+     "선행사 many other inventions는 복수 → have"
+    ],
+    [
+     "will be significantly influenced",
+     "will significantly influence",
+     "삶이 '영향을 받을' 것 → 수동태"
+    ],
+    [
+     "has not yet been invented",
+     "has not yet invented",
+     "기술이 '발명되지 않은' 것 → 수동태"
+    ]
+   ],
+   "vocab": [
+    [
+     "after an [unexpected] incident",
+     "planned",
+     "'예상치 못한' 사건 이후 고안되었다"
+    ],
+    [
+     "smoothly",
+     "badly",
+     "캡슐이 새기 전까지는 '순조로웠다'"
+    ],
+    [
+     "abandoning",
+     "carrying",
+     "통신 장비를 '버린' 채 탈출 → 교신 불가"
+    ],
+    [
+     "prevented",
+     "helped",
+     "장비를 버려 교신을 '못 하게' 했다"
+    ],
+    [
+     "visibly",
+     "secretly",
+     "'눈에 보이게' 헬리콥터의 주의를 끌었다"
+    ],
+    [
+     "wirelessly",
+     "only with cables",
+     "'무선으로' 연결할 수 있다"
+    ],
+    [
+     "heavily",
+     "little",
+     "우주 기술에 '막대한' 투자를 해 왔다 → 그래서(Therefore) 크게 영향"
+    ],
+    [
+     "significantly",
+     "hardly",
+     "미래 삶이 '크게' 영향을 받을 것"
+    ]
+   ],
+   "insert": [
+    7,
+    10
+   ],
+   "order": {
+    "given": 2,
+    "blocks": [
+     [
+      3,
+      4,
+      5
+     ],
+     [
+      6,
+      7,
+      8
+     ],
+     [
+      9,
+      10,
+      11,
+      12
+     ]
+    ]
+   },
+   "blank": [
+    [
+     9,
+     "communicate with a designated base station",
+     [
+      "float safely on the ocean",
+      "keep water out of the cabin",
+      "play music for the pilot",
+      "track the rescue helicopter"
+     ],
+     "사고의 원인 = 장비를 버려 교신하지 못함 → 해결책: 지정된 기지국과 '교신할 수 있는' 무선 시스템."
+    ],
+    [
+     15,
+     "space technology that has not yet been invented",
+     [
+      "technology that NASA has given up",
+      "inventions that were never useful",
+      "the oldest tools in history",
+      "machines that need no electricity"
+     ],
+     "정부·민간의 막대한 투자 → 따라서 '아직 발명되지 않은' 우주 기술이 미래에 큰 영향."
+    ]
+   ],
+   "irrelevant": {
+    "window": [
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "sentence": "The Atlantic Ocean is the second largest ocean in the world.",
+    "at": 5
+   },
+   "summary": [
+    "After a pilot could not (A) ______ with the recovery team, NASA developed a radio system, which led to (B) ______ headsets we use today.",
+    [
+     "communicate",
+     "wireless"
+    ],
+    [
+     [
+      "communicate",
+      "heavy"
+     ],
+     [
+      "compete",
+      "wireless"
+     ],
+     [
+      "argue",
+      "broken"
+     ],
+     [
+      "travel",
+      "wired"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "L4-5",
+   "lesson": "Lesson 4 · Technology and Our Lives (Read More)",
+   "title": "Drones in Our Lives – 우리 삶 속의 드론",
+   "sentences": [
+    {
+     "english": "Drones are planes that can fly without a pilot.",
+     "korean": "드론은 조종사 없이 날 수 있는 비행기이다."
+    },
+    {
+     "english": "They were first developed for military purposes in the U.K.",
+     "korean": "드론은 처음에 영국에서 군사적 목적으로 개발되었다."
+    },
+    {
+     "english": "The first one was called Queen Bee.",
+     "korean": "최초의 드론은 '퀸 비(여왕벌)'라고 불렸다."
+    },
+    {
+     "english": "The U.S. then created their own version and named it \"Drone,\" after male, worker bees.",
+     "korean": "그 후 미국은 자신들만의 버전을 만들어 수벌의 이름을 따서 '드론'이라고 이름 붙였다."
+    },
+    {
+     "english": "Since then, the term \"drone\" has represented all unmanned flying vehicles.",
+     "korean": "그 이후로, '드론'이라는 용어는 모든 무인 비행체를 나타내 왔다."
+    },
+    {
+     "english": "These days, drones are used to make our lives more convenient and prosperous.",
+     "korean": "요즘 드론은 우리의 삶을 더 편리하고 풍요롭게 만드는 데 사용된다."
+    },
+    {
+     "english": "Drones are used to conduct difficult tasks instead of people.",
+     "korean": "드론은 사람 대신 어려운 일을 수행하는 데 사용된다."
+    },
+    {
+     "english": "They deliver essential items to remote areas, rescue people injured in extreme places, and even put out fire in hazardous locations where there is a risk of explosion.",
+     "korean": "드론은 외딴 지역에 필수품을 배달하고, 극한의 장소에서 다친 사람들을 구조하며, 심지어 폭발 위험이 있는 위험한 장소에서 불을 끄기도 한다."
+    },
+    {
+     "english": "Drones also help farmers to manage their crops more efficiently.",
+     "korean": "드론은 또한 농부들이 작물을 더 효율적으로 관리하도록 돕는다."
+    },
+    {
+     "english": "They can monitor the condition of the farm regularly, track the growth of crops, and maintain the health of crops.",
+     "korean": "드론은 농장의 상태를 정기적으로 관찰하고, 작물의 생장을 추적하며, 작물의 건강을 유지할 수 있다."
+    },
+    {
+     "english": "In addition, drones are considered a powerful tool in monitoring our natural environment.",
+     "korean": "게다가, 드론은 우리의 자연환경을 관찰하는 데 강력한 도구로 여겨진다."
+    },
+    {
+     "english": "They can provide crucial information by keeping track of endangered species, marine life, and so on in real time.",
+     "korean": "드론은 멸종 위기종, 해양 생물 등을 실시간으로 추적함으로써 매우 중요한 정보를 제공할 수 있다."
+    },
+    {
+     "english": "With technological advancements, the possibilities for using drones are limitless.",
+     "korean": "기술의 발전과 함께, 드론을 활용할 가능성은 무한하다."
+    }
+   ],
+   "topic": [
+    "the origin of drones and their uses today",
+    [
+     "economic impacts of drones",
+     "great inventions from insignificant ideas",
+     "the dangers of military drones",
+     "how bees communicate with each other"
+    ]
+   ],
+   "title_q": [
+    "From Queen Bee to Everyday Helper: Drones",
+    [
+     "Drones Are Only for War",
+     "Why Farmers Hate New Technology",
+     "Bees That Fly Without Wings",
+     "The Limits of Drone Technology"
+    ]
+   ],
+   "tf": [
+    [
+     "드론은 조종사 없이 날 수 있는 비행기이다.",
+     true
+    ],
+    [
+     "드론은 처음에 영국에서 군사적 목적으로 개발되었다.",
+     true
+    ],
+    [
+     "최초의 드론은 '퀸 비'라고 불렸다.",
+     true
+    ],
+    [
+     "드론은 외딴 지역에 필수품을 배달한다.",
+     true
+    ],
+    [
+     "드론은 멸종 위기종과 해양 생물을 실시간으로 추적할 수 있다.",
+     true
+    ],
+    [
+     "'드론'이라는 이름은 영국이 처음 붙였다.",
+     false
+    ],
+    [
+     "드론은 사람이 직접 타고 조종해야 한다.",
+     false
+    ],
+    [
+     "드론은 폭발 위험이 있는 장소에는 투입되지 않는다.",
+     false
+    ],
+    [
+     "글쓴이는 드론의 활용 가능성이 거의 남아 있지 않다고 본다.",
+     false
+    ]
+   ],
+   "grammar": [
+    [
+     "can fly without",
+     "can flying without",
+     "조동사 can + 동사원형"
+    ],
+    [
+     "were first developed",
+     "first developed",
+     "드론이 '개발된' 것 → 수동태"
+    ],
+    [
+     "was called Queen Bee",
+     "called Queen Bee",
+     "'~라고 불렸다' → 수동태"
+    ],
+    [
+     "has represented",
+     "have represented",
+     "주어 the term \"drone\"은 단수 → has"
+    ],
+    [
+     "more convenient and prosperous",
+     "more conveniently and prosperous",
+     "make + 목적어 + 형용사 보어"
+    ],
+    [
+     "to conduct difficult tasks",
+     "to conducting difficult tasks",
+     "be used to + 동사원형(~하는 데 사용되다)"
+    ],
+    [
+     "people injured in",
+     "people injuring in",
+     "사람들이 '다친' 것 → 과거분사"
+    ],
+    [
+     "where there is a risk",
+     "which there is a risk",
+     "뒤에 완전한 절 → 관계부사 where"
+    ],
+    [
+     "are considered a powerful tool",
+     "consider a powerful tool",
+     "드론이 '여겨지는' 것 → 수동태"
+    ],
+    [
+     "by keeping track of",
+     "by keep track of",
+     "전치사 by 뒤에는 동명사"
+    ],
+    [
+     "are limitless",
+     "is limitless",
+     "주어 the possibilities는 복수 → are"
+    ]
+   ],
+   "vocab": [
+    [
+     "without",
+     "with",
+     "조종사 '없이' 나는 비행기"
+    ],
+    [
+     "unmanned",
+     "manned",
+     "모든 '무인' 비행체"
+    ],
+    [
+     "convenient",
+     "complicated",
+     "삶을 더 '편리하고' 풍요롭게"
+    ],
+    [
+     "difficult",
+     "easy",
+     "사람 대신 '어려운' 일을 수행"
+    ],
+    [
+     "remote",
+     "nearby",
+     "'외딴' 지역에 필수품 배달"
+    ],
+    [
+     "hazardous",
+     "safe",
+     "폭발 위험이 있는 '위험한' 장소"
+    ],
+    [
+     "crucial",
+     "useless",
+     "'매우 중요한' 정보를 제공"
+    ],
+    [
+     "limitless",
+     "limited",
+     "기술 발전으로 가능성은 '무한'하다"
+    ]
+   ],
+   "insert": [
+    4,
+    11
+   ],
+   "order": {
+    "given": 1,
+    "blocks": [
+     [
+      2,
+      3,
+      4,
+      5
+     ],
+     [
+      6,
+      7,
+      8
+     ],
+     [
+      9,
+      10,
+      11,
+      12,
+      13
+     ]
+    ]
+   },
+   "blank": [
+    [
+     7,
+     "conduct difficult tasks instead of people",
+     [
+      "replace all pilots in airplanes",
+      "entertain people at parties",
+      "create new kinds of bees",
+      "build houses in big cities"
+     ],
+     "다음 문장의 예시(외딴 지역 배달, 구조, 위험 지역 화재 진압) → 사람 대신 어려운 일."
+    ]
+   ],
+   "irrelevant": {
+    "window": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "sentence": "Bees play an important role in pollinating flowers and crops.",
+    "at": 8
+   },
+   "summary": [
+    "Drones, which were first developed for (A) ______ purposes, are now used in many areas such as rescue, farming, and environmental (B) ______.",
+    [
+     "military",
+     "monitoring"
+    ],
+    [
+     [
+      "military",
+      "pollution"
+     ],
+     [
+      "medical",
+      "monitoring"
+     ],
+     [
+      "artistic",
+      "destruction"
+     ],
+     [
+      "medical",
+      "pollution"
+     ]
+    ]
+   ]
+  }
+ ],
+ "vocab": [
+  [
+   "heritage",
+   "the traditions, buildings, and objects that belong to a country's culture and history",
+   "L3"
+  ],
+  [
+   "restoration",
+   "the act of bringing something back to its original condition",
+   "L3"
+  ],
+  [
+   "durability",
+   "the ability to last a long time without being damaged",
+   "L3"
+  ],
+  [
+   "relic",
+   "an object from the past that has historical value",
+   "L3"
+  ],
+  [
+   "fiber",
+   "a thin thread that forms paper, cloth, or plants",
+   "L3"
+  ],
+  [
+   "moisture",
+   "a small amount of water in the air or in a material",
+   "L3"
+  ],
+  [
+   "blacksmith",
+   "a person who makes and repairs things made of iron by hand",
+   "L3"
+  ],
+  [
+   "elaborate",
+   "carefully made with many detailed parts",
+   "L3"
+  ],
+  [
+   "reputation",
+   "the opinion that people have about someone or something",
+   "L3"
+  ],
+  [
+   "weed",
+   "to remove wild plants that grow where they are not wanted",
+   "L3"
+  ],
+  [
+   "absorb",
+   "to take in a liquid, a shock, or energy",
+   "L4"
+  ],
+  [
+   "sufficient",
+   "enough for a particular purpose",
+   "L4"
+  ],
+  [
+   "domestic",
+   "relating to the home or family",
+   "L4"
+  ],
+  [
+   "cultivate",
+   "to grow plants or crops",
+   "L4"
+  ],
+  [
+   "accelerate",
+   "to make something happen faster",
+   "L4"
+  ],
+  [
+   "commercialize",
+   "to use something to make a profit by selling it",
+   "L4"
+  ],
+  [
+   "abandon",
+   "to leave something behind and not come back for it",
+   "L4"
+  ],
+  [
+   "unmanned",
+   "without a person on board to control it",
+   "L4"
+  ],
+  [
+   "hazardous",
+   "dangerous, especially to people's health or safety",
+   "L4"
+  ],
+  [
+   "remote",
+   "far away from towns and cities",
+   "L4"
+  ],
+  [
+   "prosperous",
+   "rich and successful",
+   "L4"
+  ],
+  [
+   "devise",
+   "to invent a new method or tool",
+   "L4"
+  ]
+ ]
+}

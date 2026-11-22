@@ -1949,6 +1949,7 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
 <script type="application/json" id="boardShared">[]</script>
 
 <script src="./english/october-2026.js"></script>
+<script src="./english/textbook-2026.js"></script>
 <script src="./math/data.js"></script>
 <script src="./math/exam-sets.js"></script>
 <script src="./math/final2.js"></script>
@@ -2208,7 +2209,7 @@ const FINAL_SUBJECTS = [
   { id: "kh_f", name: "한국사", desc: "시험 범위 6~10단원 — 정부 수립 · 이승만~장면 · 박정희 · 전두환~노무현 · 남북 관계", quiz: KH_F_QUIZ, titles: KH_F_SET_TITLES, units: KH_F_UNITS, topics: {} },
   { id: "is_f", name: "통합사회", desc: "통합사회2 2학기 2차고사 범위 — 시민 참여·인권 문제 · 정의관·불평등 · 시장 실패·자산 관리·무역 · 남북 관계 · 자원·미래 사회", quiz: IS_F_QUIZ, titles: IS_F_SET_TITLES, units: IS_F_UNITS, topics: IS_F_SET_TOPICS },
   { id: "info_f", name: "정보", desc: "2학기 2차고사 범위 — 문제 준비 중", quiz: [], titles: [], units: [], topics: {} },
-  { id: "en_f", name: "영어", desc: "2026년 10월 모의고사 1학년 18~24·29~45번 — 모의고사 주제·요지·순서 · 문장·해석 빈칸 암기노트 · 삽입·배열", quiz: EN_F_QUIZ, titles: EN_F_SET_TITLES, units: EN_F_UNITS, topics: EN_F_SET_TOPICS },
+  { id: "en_f", name: "영어", desc: "교과서 Lesson 3·4 (한지·호미·온돌·우주 기술·드론) + 10월 모의고사 18~24·29~45번 — 어법·어휘·삽입·순서·빈칸 · 문장·해석 빈칸 암기노트", quiz: EN_F_QUIZ, titles: EN_F_SET_TITLES, units: EN_F_UNITS, topics: EN_F_SET_TOPICS },
   { id: "sci_f", name: "통합과학", desc: "통합과학2 2학기 2차고사 범위 — 생물다양성 · 생태계와 평형 · 온실 효과·지구 환경 변화 · 에너지 자원 · 산과 염기 · 중화 반응 · 에너지 출입", quiz: SCI_F_QUIZ, titles: SCI_F_SET_TITLES, units: SCI_F_UNITS, topics: SCI_F_SET_TOPICS },
   { id: "kr_f", name: "공통국어", desc: "2학기 2차고사 범위 — 문제 준비 중", quiz: [], titles: [], units: [], topics: {} },
   { id: "pe_f", name: "체육", desc: "체육2 서논술 암기장 — 밑줄 친 부분 빈칸 21칸", quiz: [], titles: [], units: [], topics: {}, memo: true }
@@ -2336,6 +2337,21 @@ function attachExamPaper(subject, list){
   });
 }
 Object.keys(window.SEOIK_EXAM2 || {}).forEach(sid=> attachExamPaper(FINAL_SUBJECTS.find(s=>s.id===sid), window.SEOIK_EXAM2[sid]));
+/* 영어 교과서 Lesson 3·4: 예상 시험지보다 뒤에 붙여서 기존 세트 번호(학습 기록)가 그대로 유지되게 */
+{
+  const tb = window.SEOIK_ENGLISH_TEXTBOOK, en = FINAL_SUBJECTS.find(s=>s.id==="en_f");
+  if(tb && en){
+    const offset = en.quiz.length;
+    en.quiz.push(...tb.quiz); en.titles.push(...tb.titles);
+    Object.entries(tb.topics).forEach(([i, v])=>{ en.topics[Number(i) + offset] = v; });
+    const tbUnits = tb.units.map(u=>({...u, indices: u.indices.map(i=>i + offset)}));
+    en.units.unshift(...tbUnits.filter(u=>!u.notebook));   /* 교과서 단원을 목록 맨 위에 */
+    const nbAt = en.units.findIndex(u=>u.notebook);
+    en.units.splice(nbAt < 0 ? en.units.length : nbAt, 0, ...tbUnits.filter(u=>u.notebook));
+    const nt = SUBJECT_NOTES.en_f;
+    if(nt){ nt.title = "영어 · 문장·해석 빈칸"; nt.sub = "교과서 Lesson 3·4 본문 + 10월 고1 모의고사 18~24·29~45번 · 영어 한 줄, 해석 한 줄을 함께 채워요."; nt.legend = "교과서 해석은 본문을 바탕으로 옮긴 것이고, 모의고사 해석은 첨부한 「해석.pdf」 기준입니다. 문장 속 빈칸에 바로 입력하고, 지문별로 채점하거나 정답을 확인하세요."; nt.sections.unshift(...tb.sections); }
+  }
+}
 /* 시험별 묶음: final = 메인(지금 대비 중인 시험), mid = 지난 시험 · 왼쪽 메뉴 상단에서 선택 */
 const TERMS = {
   final: { key:"final", label:"2학기 2차고사", subjects: FINAL_SUBJECTS, schedule: [] },
@@ -2950,7 +2966,7 @@ function nbStart(sec, focus){
     inp.type = "text"; inp.className = "nb-in"; inp.dataset.a = a; inp.autocomplete = "off"; inp.spellcheck = false;
     const pair = el.closest('.en-note-pair');
     const english = pair && el.closest('[lang]').lang==='en';
-    if(pair) inp.setAttribute('aria-label', sec.dataset.passage+'번 '+pair.dataset.sentence+'번째 문장 '+(english ? '영어' : '해석')+' 빈칸');
+    if(pair) inp.setAttribute('aria-label', sec.dataset.passage+(/^\d/.test(sec.dataset.passage)?'번 ':' ')+pair.dataset.sentence+'번째 문장 '+(english ? '영어' : '해석')+' 빈칸');
     inp.style.width = Math.min(16, Math.max(3, a.length*(english ? 0.65 : 1.15)+1)) + "em";
     inp.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); const all=[...body.querySelectorAll(".nb-in")]; const nx=all[all.indexOf(inp)+1]; if(nx) nx.focus(); else nbGrade(sec); } });
     el.textContent = ""; el.appendChild(inp);
@@ -3018,6 +3034,7 @@ function pdfToast(msg, keep){
   if(!keep) el._t = setTimeout(()=> el.hidden = true, 2600);
 }
 window.__seoikToast = (m, keep)=> pdfToast(m, keep);
+window.__seoikSetNotes = (id, n)=>{ if(n && n.sections) SUBJECT_NOTES[id] = n; };
 async function savePdf(node, name, widthPx, fallback, afterMount){
   /* 안드로이드 앱(웹뷰)은 파일 다운로드를 못 받으니 인쇄 화면의 'PDF로 저장'으로 */
   if(window.SeoikAndroid || (/Android/i.test(navigator.userAgent) && /;\s*wv\)/i.test(navigator.userAgent))){
@@ -3493,7 +3510,7 @@ function setRowHTML(subject, globalIdx, showTag){
   const adv = isAdvanced(subject, globalIdx);
   const first = subject.quiz[globalIdx][0];
   if(first && first.cloze && SUBJECT_NOTES[subject.id] && SUBJECT_NOTES[subject.id].paired){
-    return '<i class="sr-bub'+(done?' on':'')+'"></i><span class="sr-main"><span class="sr-no">'+subject.quiz[globalIdx].length+'문장 · 영어+해석</span><span class="sr-title">'+escapeHtml(first.passage)+'번 · 문장·해석 빈칸</span></span>';
+    return '<i class="sr-bub'+(done?' on':'')+'"></i><span class="sr-main"><span class="sr-no">'+subject.quiz[globalIdx].length+'문장 · 영어+해석</span><span class="sr-title">'+escapeHtml(first.passage)+(/^\d/.test(first.passage)?'번':'')+' · 문장·해석 빈칸</span></span>';
   }
   return '<i class="sr-bub'+(done?' on':'')+'"></i><span class="sr-main"><span class="sr-no">SET '+(globalIdx+1)+(done?' · 완료':'')+'</span><span class="sr-title">'+escapeHtml(subject.titles[globalIdx])+'</span></span>'+
     (showTag ? '<span class="sr-tag '+(adv?'adv':'basic')+'">'+(adv?'심화':'기본')+'</span>' : '');
@@ -5670,6 +5687,7 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
     s.titles.length = 0; d.titles.forEach(x=>s.titles.push(x));
     s.units.length = 0; d.units.forEach(x=>s.units.push(x));
     s.exams = (Array.isArray(d.exams) ? d.exams : d.exam ? [d.exam] : []).filter(x=> x && d.quiz[x.index]).map((x,k)=> Object.assign({no:k+1, label:"제"+(k+1)+"회"}, x));
+    if(d.notes && window.__seoikSetNotes) window.__seoikSetNotes(s.id, d.notes);
     s.desc = "작품 정리 · 학습지 심화 · 중세 국어 · 향수 · 작품 비교 (지정한 사람만 보여요)";
     if(window.__seoikRerender) window.__seoikRerender();
   }
