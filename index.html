@@ -5669,8 +5669,12 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
       }catch(e){ answer = ""; aiErr = "서버에 연결 못 함 (" + (e && e.message || e) + ")"; }
     }
     let html = answer ? esc(answer) : (hits.length ? "사이트 자료에서 찾은 내용이야 👇" : "관련 내용을 못 찾았어. 다른 말로 물어보거나 과목을 골라 줘.\n(예: '엘니뇨 무역풍', '6·29 선언')");
-    if(hits.length) html += (answer ? '<div style="margin-top:8px;font-size:12px;color:var(--ink-soft)">근거 자료</div>' : "") + hits.map((h,i)=>
-      '<span class="ai-src"><em>'+esc(h.label)+'</em>'+hl(h.text, q)+(h.kind==="note" ? '<br><button type="button" data-n="'+h.sid+'|'+h.si+'">개념노트에서 보기 ›</button>' : '')+'</span>').join("");
+    if(hits.length){
+      const cards = hits.map((h,i)=>
+        '<span class="ai-src"><em>'+esc(h.label)+'</em>'+hl(h.text, q)+(h.kind==="note" ? '<br><button type="button" data-n="'+h.sid+'|'+h.si+'">개념노트에서 보기 ›</button>' : '')+'</span>').join("");
+      /* AI가 답했으면 사이트 자료는 접어 두고 필요할 때만 펼쳐 보기 */
+      html += answer ? '<details style="margin-top:8px"><summary style="font-size:12px;color:var(--ink-soft);cursor:pointer">📚 비슷한 시험 범위 자료 보기</summary>'+cards+'</details>' : cards;
+    }
     if(aiErr) html = '<div style="font-size:12px;color:var(--red);margin-bottom:6px">AI 연결 오류: '+esc(aiErr)+'</div>' + html;
     bot.innerHTML = html;
     bot.querySelectorAll("[data-n]").forEach(b=> b.onclick = ()=>{ const [sid,si] = b.dataset.n.split("|"); close(); window.__seoikOpenNotes(sid, +si); });
