@@ -2136,6 +2136,7 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
 
 <script src="./english/october-2026.js"></script>
 <script src="./english/textbook-2026.js"></script>
+<script src="./english/olympus-2026.js"></script>
 <script src="./math/data.js"></script>
 <script src="./math/exam-sets.js"></script>
 <script src="./math/final2.js"></script>
@@ -2536,6 +2537,21 @@ Object.keys(window.SEOIK_EXAM2 || {}).forEach(sid=> attachExamPaper(FINAL_SUBJEC
     en.units.splice(nbAt < 0 ? en.units.length : nbAt, 0, ...tbUnits.filter(u=>u.notebook));
     const nt = SUBJECT_NOTES.en_f;
     if(nt){ nt.title = "영어 · 문장·해석 빈칸"; nt.sub = "교과서 Lesson 3·4 본문 + 10월 고1 모의고사 18~24·29~45번 · 영어 한 줄, 해석 한 줄을 함께 채워요."; nt.legend = "교과서 해석은 본문을 바탕으로 옮긴 것이고, 모의고사 해석은 첨부한 「해석.pdf」 기준입니다. 문장 속 빈칸에 바로 입력하고, 지문별로 채점하거나 정답을 확인하세요."; nt.sections.unshift(...tb.sections); }
+  }
+}
+/* 올림포스 영어독해의 기본2 (10·11·12·14강): 교과서 세트보다 뒤에 붙여 기존 세트 번호(학습 기록)가 그대로 유지되게 */
+{
+  const ol = window.SEOIK_ENGLISH_OLYMPUS, en = FINAL_SUBJECTS.find(s=>s.id==="en_f");
+  if(ol && en){
+    const offset = en.quiz.length;
+    en.quiz.push(...ol.quiz); en.titles.push(...ol.titles);
+    Object.entries(ol.topics).forEach(([i, v])=>{ en.topics[Number(i) + offset] = v; });
+    const olUnits = ol.units.map(u=>({...u, indices: u.indices.map(i=>i + offset)}));
+    en.units.unshift(...olUnits.filter(u=>!u.notebook));   /* 올림포스 단원을 목록 맨 위에 */
+    const nbAt = en.units.findIndex(u=>u.notebook);
+    en.units.splice(nbAt < 0 ? en.units.length : nbAt, 0, ...olUnits.filter(u=>u.notebook));
+    const nt = SUBJECT_NOTES.en_f;
+    if(nt){ nt.sub = "올림포스 독해의 기본2 10·11·12·14강 + " + nt.sub; nt.sections.unshift(...ol.sections); }
   }
 }
 /* 시험별 묶음: final = 메인(지금 대비 중인 시험), mid = 지난 시험 · 왼쪽 메뉴 상단에서 선택 */
