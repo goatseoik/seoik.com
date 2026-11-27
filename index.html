@@ -3267,16 +3267,57 @@ async function savePdf(node, name, widthPx, fallback, afterMount){
   if(afterMount) try{ afterMount(); }catch(e){}
   const file = (name || "서익닷컴").replace(/[\\/:*?"<>|]+/g, " ").trim() + ".pdf";
   try{
-    await window.html2pdf().set({
+    /* 휴대폰 브라우저는 한 장의 캔버스 크기에 한도가 있어서(아이폰 약 1,600만 화소), 긴 노트·시험지는 한 번에 그리면 실패한다.
+       → 내용을 높이 MAX 정도의 조각으로 나눠 조각마다 따로 그려서 이어 붙인다. */
+    const MAX = 2600, AREA = 6e6;
+    const pieces = splitForPdf(node, MAX);
+    const scaleFor = h => Math.max(0.8, Math.min(2, Math.sqrt(AREA / (widthPx * Math.max(h, 1)))));
+    const opt = h => ({
       margin:[10,10,12,10], filename:file,
-      image:{ type:"jpeg", quality:0.95 },
-      html2canvas:{ scale:2, useCORS:true, backgroundColor:"#ffffff", windowWidth:widthPx },
+      image:{ type:"jpeg", quality:0.92 },
+      html2canvas:{ scale:scaleFor(h), useCORS:true, backgroundColor:"#ffffff", windowWidth:(window.innerWidth >= 720 ? window.innerWidth : 718), scrollX:0, scrollY:0 },
       jsPDF:{ unit:"mm", format:"a4", orientation:"portrait" },
       pagebreak:{ mode:["css","legacy"], before:[".pd-page + .pd-page", ".nt-sec + .nt-sec"], avoid:[".sq", ".pd-q", "tr", "li", "h3", "h4", ".mat-wrap"] }
-    }).from(node).save();
+    });
+    wrap.innerHTML = "";
+    let w = window.html2pdf().set(opt(pieces[0].h)).from(pieces[0].node).toPdf();
+    pieces.slice(1).forEach((pc, k)=>{
+      w = w.get("pdf").then(pdf=>{ pdf.addPage(); pdfToast("PDF 만드는 중… " + (k + 2) + "/" + pieces.length, true); })
+           .set(opt(pc.h)).from(pc.node).toContainer().toCanvas().toPdf();
+    });
+    await w.save();
     pdfToast("PDF를 저장했어요 · " + file);
-  }catch(e){ pdfToast("PDF를 못 만들었어요. 인쇄 화면에서 저장할게요"); if(fallback) fallback(); }
+  }catch(e){ console.error(e); pdfToast("PDF를 못 만들었어요. 인쇄 화면에서 저장할게요"); if(fallback) fallback(); }
   finally{ wrap.remove(); }
+}
+/* 화면에 붙여 둔 node를 높이 max 안쪽의 조각들로 나눈다. 조각은 바깥 상자(클래스·스타일)를 그대로 복제해서 감싸므로 모양이 유지된다. */
+function splitForPdf(root, max){
+  const H = el => el.getBoundingClientRect().height || el.offsetHeight || 0;
+  function parts(el){
+    const h = H(el), kids = [...el.children];
+    if(h <= max || kids.length < 2 || /^(TABLE|THEAD|TBODY|TR|UL|OL|SVG|svg|PRE|IMG|CANVAS)$/.test(el.tagName) && kids.length < 2) return [{node:el.cloneNode(true), h}];
+    if(el.tagName === "TABLE" || el.tagName === "TBODY"){
+      /* 표는 행 단위로 나누고 머리행은 조각마다 반복 */
+      const head = el.querySelector(":scope > thead"), body = el.tagName === "TBODY" ? el : el.querySelector(":scope > tbody") || el;
+      const rows = [...body.children].filter(r=>r.tagName === "TR"); if(rows.length < 2) return [{node:el.cloneNode(true), h}];
+      const out = []; let cur = null, ch = 0, hh = head ? H(head) : 0;
+      rows.forEach(r=>{ const rh = H(r);
+        if(!cur || ch + rh > max){ const t = (el.tagName === "TABLE" ? el : el.closest("table")).cloneNode(false); if(head) t.appendChild(head.cloneNode(true)); const tb = document.createElement("tbody"); t.appendChild(tb); cur = {node:t, tb, h:hh}; out.push(cur); ch = hh; }
+        cur.tb.appendChild(r.cloneNode(true)); ch += rh; cur.h = ch; });
+      return out.map(o=>({node:o.node, h:o.h}));
+    }
+    const out = []; let cur = null;
+    kids.forEach(c=>{
+      parts(c).forEach(pc=>{
+        if(!cur || (cur.h + pc.h > max && cur.n > 0)){ cur = {node:el.cloneNode(false), h:0, n:0}; out.push(cur); }
+        cur.node.appendChild(pc.node); cur.h += pc.h; cur.n++;
+      });
+    });
+    return out;
+  }
+  const res = parts(root).map(p=>({node:p.node, h:p.h}));
+  /* 조각이 root 바깥 상자를 잃었으면(표 등) root 껍데기로 다시 감싼다 */
+  return res.map(p=>{ if(p.node.className === root.className && p.node.tagName === root.tagName) return p; const sh = root.cloneNode(false); sh.appendChild(p.node); return {node:sh, h:p.h}; });
 }
 
 /* ================= 오답 기록 ================= */
