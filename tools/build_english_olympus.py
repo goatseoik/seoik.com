@@ -198,6 +198,95 @@ for lang, label in [('english', '영어 빈칸'), ('korean', '해석 빈칸')]:
 units.append(dict(name='올림포스 독해의 기본2 · 문장·해석 빈칸', notebook=True, desc='개념노트처럼 올림포스 원문 영어와 해석을 한 화면에서 함께 채우기', indices=cloze_idx))
 
 
+# ── 유형별 추가 문제 (단원마다 일치·불일치 / 주제·제목 / 글의 순서 / 빈칸 / 문장 삽입) ──
+# 위 세트들 뒤에 붙이므로 먼저 만든 세트 번호(학습 기록)는 그대로 유지된다.
+def order_q(p, pi, g, cut, perm, tag):
+    S = p['sentences']; n = len(S)
+    rest = list(range(g + 1, n + 1))
+    blocks = [rest[:cut[0]], rest[cut[0]:cut[1]], rest[cut[1]:]]
+    assert all(blocks), (p['id'], g, cut)
+    shown = [blocks[j] for j in perm]
+    ans = ' → '.join('ABC'[perm.index(j)] for j in range(3))
+    order_all = ['A → B → C', 'A → C → B', 'B → A → C', 'B → C → A', 'C → A → B', 'C → B → A']
+    ch = [c for c in order_all if c != ans and c != 'A → B → C'][:4] + [ans]
+    ch.sort(key=order_all.index)
+    prompt = '주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?' + box('주어진 글', esc(text_of(p, range(1, g + 1))))
+    for L, b in zip('ABC', shown):
+        prompt += box(f'({L})', esc(text_of(p, b)))
+    hint = ' / '.join(f'({"ABC"[perm.index(j)]}) {S[blocks[j][0] - 1]["english"].split()[0]}…' for j in range(3))
+    return dict(q=prompt, choices=ch, correct=ch.index(ans), explain=f'정답 순서: {ans}\n연결 단서: {hint}\n\n해석: ' + full_ko(p), source=p['lesson'],
+                kind='sequence', passage=p['id'], fixed=True)
+
+
+def insert_q(p, pi, k, shift):
+    S = p['sentences']
+    given = S[k - 1]['english']
+    rest_s = [s['english'] for i, s in enumerate(S, 1) if i != k]
+    pos = k - 1
+    slots = list(range(1, len(rest_s) + 1))
+    start = max(0, min(slots.index(pos) - shift % 5, len(slots) - 5))
+    win = slots[start:start + 5]
+    assert pos in win and len(win) == 5, (p['id'], k, win)
+    out = ''
+    for j, s2 in enumerate(rest_s):
+        if j in win: out += f' ( {CIRC[win.index(j)]} ) '
+        out += esc(s2) + ' '
+    if len(rest_s) in win: out += f' ( {CIRC[win.index(len(rest_s))]} )'
+    return q_pos(p, 'insert', '글의 흐름으로 보아, 주어진 문장이 들어가기에 가장 적절한 곳은?' + box('주어진 문장', esc(given)) + box('지문', out.strip()),
+                 win.index(pos), f'정답 {CIRC[win.index(pos)]}\n주어진 문장: {given}\n해석: {S[k - 1]["korean"]}\n\n전체 해석: ' + full_ko(p))
+
+
+PERMS = [(1, 0, 2), (2, 0, 1), (1, 2, 0), (2, 1, 0), (0, 2, 1)]
+for ui, (u, uname) in enumerate(UNITS):
+    tf, tt, od, bl, ins = [], [], [], [], []
+    for pi, p in enumerate(P):
+        if p['unit'] != u: continue
+        rnd = random.Random(5000 + pi)
+        S = p['sentences']; n = len(S)
+        whole = esc(text_of(p))
+        T = [x for x, v in p['tf'] if v]; F = [x for x, v in p['tf'] if not v]
+        for k in range(len(F)):
+            tr = [T[(k + j) % len(T)] for j in range(4)]
+            tf.append(q_choice(p, 'detail', '다음 글의 내용과 일치하지 않는 것은?' + box('지문', whole), F[k], tr,
+                               f'정답: {F[k]}\n(본문과 다른 내용)\n\n해석: ' + full_ko(p), rnd))
+        for k in (len(T) - 2, len(T) - 1):
+            tf.append(q_choice(p, 'detail', '다음 글의 내용과 일치하는 것은?' + box('지문', whole), T[k], F[:4],
+                               f'정답: {T[k]}\n나머지는 본문과 다르다.\n\n해석: ' + full_ko(p), rnd))
+        tt.append(q_choice(p, 'topic', '다음 글의 주제로 가장 적절한 것은?' + box('지문', whole), p['topic_en'], p['topic_wrong'],
+                           f'정답: {p["topic_en"]}\n({p["topic_ko"]})\n\n해석: ' + full_ko(p), rnd))
+        tt.append(q_choice(p, 'title', '다음 글의 제목으로 가장 적절한 것은?' + box('지문', whole), p['title'], p['title_wrong'],
+                           f'정답: {p["title"]}\n({p["title_ko"]})\n\n해석: ' + full_ko(p), rnd))
+        tt.append(q_choice(p, 'topic', '다음 글의 주제로 가장 적절한 것은?' + box('지문', whole), p['topic_en'], p['topic_wrong'][2:] + others(p, 'topic_en', 2, rnd),
+                           f'정답: {p["topic_en"]}\n({p["topic_ko"]})\n\n해석: ' + full_ko(p), rnd))
+        # 글의 순서: 주어진 글 길이·나누는 위치·배열을 바꿔 여러 문항
+        variants = []
+        for g in ([1, 2] if n >= 6 else [1]) + ([3] if n >= 8 else []):
+            m = n - g
+            for cut in [(round(m / 3), round(2 * m / 3)), (1, m - 1), (m // 2, m - 1)]:
+                if 0 < cut[0] < cut[1] < m and (g, cut) not in [(a, b) for a, b in variants]:
+                    variants.append((g, cut))
+        for v, (g, cut) in enumerate(variants[:4]):
+            od.append(order_q(p, pi, g, cut, PERMS[(pi + v) % len(PERMS)], v))
+        # 빈칸: 기존 1개 + 추가 2개
+        for si, phrase, wrong, why in p['blank_more'] + [p['blank']]:
+            body = ' '.join(esc(s['english'].replace(phrase, '__________', 1) if i == si else s['english']) for i, s in enumerate(S, 1))
+            bl.append(q_choice(p, 'blank', '다음 빈칸에 들어갈 말로 가장 적절한 것은?' + box('지문', body), phrase, wrong,
+                               f'정답: {phrase}\n{why}\n\n빈칸 문장 해석: {S[si - 1]["korean"]}\n\n전체 해석: ' + full_ko(p), rnd))
+        # 문장 삽입: 6문장 이상 지문에서 넣을 문장을 바꿔 최대 4문항
+        if n >= 6:
+            ks = sorted({k for k in [3, n // 2 + 1, n - 1, n] if 2 <= k <= n})
+            for v, k in enumerate(ks[:4]):
+                ins.append(insert_q(p, pi, k, pi + v * 2))
+    new = []
+    for name, qs in [('일치·불일치', tf), ('주제·제목', tt), ('글의 순서', od), ('빈칸', bl), ('문장 삽입', ins)]:
+        if qs:
+            new.append(add(f'올림포스 {u}강 · 유형별 {name} ({len(qs)}문제)', [{k: v for k, v in q.items() if v is not None} for q in qs],
+                           ['올림포스 분석 자료 원문 그대로', f'{u}강 {uname}', f'유형: {name}']))
+    units[ui]['indices'] = units[ui]['indices'] + new
+    units[ui]['desc'] = '지문별 종합 + 유형별(일치·불일치 / 주제·제목 / 글의 순서 / 빈칸 / 문장 삽입)'
+
+
+
 def hl(text, ans):
     a, b = text.split(ans, 1)
     return esc(a) + '<mark class="mk-hl">' + esc(ans) + '</mark>' + esc(b)

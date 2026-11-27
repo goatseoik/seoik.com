@@ -70,6 +70,80 @@
      "isolation"
     ],
     "0.5초의 지연이 있는데도 즉시 느끼는 것처럼 착각한다 → 즉시성(immediacy)의 착각."
+   ],
+   "tf": [
+    [
+     "무의식이 감각 자극을 의식적 지각으로 처리하는 데 평균 0.5초가 걸린다.",
+     true
+    ],
+    [
+     "우리는 지각 처리의 시간 지연을 알아차리지 못한다.",
+     true
+    ],
+    [
+     "뇌는 의식적 지각을 자극이 처음 뇌에 들어온 시점으로 소급한다.",
+     true
+    ],
+    [
+     "대뇌 피질 신호가 의식으로 처리되는 데는 동일한 실제 시간이 걸린다.",
+     true
+    ],
+    [
+     "의식은 여러 개의 병렬적 흐름으로 이루어져 있다고 설명할 수 있다.",
+     true
+    ],
+    [
+     "감각 자극은 들어오는 즉시 의식적 지각으로 바뀐다.",
+     false
+    ],
+    [
+     "사람들은 발가락을 찧고 한참 뒤에야 알아차린다고 느낀다.",
+     false
+    ],
+    [
+     "뇌는 의식의 흐름 하나만을 끝까지 유지한다.",
+     false
+    ],
+    [
+     "즉시성의 착각은 대뇌 피질 신호가 더 빨리 전달되어 생긴다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "why sensory stimuli never reach conscious awareness",
+    "ways to shorten the delay in processing sensory stimuli",
+    "the role of the unconscious mind in storing long-term memories",
+    "how injuries to the body affect the speed of perception"
+   ],
+   "title_wrong": [
+    "Why We Feel Pain Later Than Others",
+    "How to Speed Up Your Brain's Processing",
+    "The Unconscious Mind Never Lies",
+    "Consciousness: A Single, Steady Stream"
+   ],
+   "blank_more": [
+    [
+     2,
+     "aware",
+     [
+      "capable",
+      "proud",
+      "tired",
+      "afraid"
+     ],
+     "이 지연을 '인식하지' 못하기 때문에 움직이는 순간 바로 본다고 생각한다."
+    ],
+    [
+     5,
+     "revising them and redrafting them",
+     [
+      "ignoring them and deleting them",
+      "slowing them and stopping them",
+      "copying them and storing them",
+      "hiding them and forgetting them"
+     ],
+     "여러 흐름 사이를 오가며 '수정하고 다시 작성'해 지각 시점을 앞당긴다."
+    ]
    ]
   },
   {
@@ -141,6 +215,80 @@
      "independence"
     ],
     "모두가 똑같이 희생하면 괜찮고 남이 이용하면 태만해진다 → 타고난 공정성(fairness) 감각."
+   ],
+   "tf": [
+    [
+     "우리는 옳고 그름의 정의를 집단으로부터 흡수한다.",
+     true
+    ],
+    [
+     "집단은 협력과 태만에 관한 단서를 전달한다.",
+     true
+    ],
+    [
+     "다른 사람도 그렇게 한다고 느끼면 사람들은 집단을 위해 이기심을 억제하기 쉽다.",
+     true
+    ],
+    [
+     "이런 현상의 심리적 기제는 명확하지 않다.",
+     true
+    ],
+    [
+     "모두가 똑같이 희생한다면 우리는 대체로 집단을 위한 희생을 꺼리지 않는다.",
+     true
+    ],
+    [
+     "도덕 규범은 집단과 관계없이 개인이 혼자 만든다.",
+     false
+    ],
+    [
+     "이 현상의 심리적 기제는 이미 명확하게 밝혀졌다.",
+     false
+    ],
+    [
+     "다른 사람이 자신을 이용한다고 느끼면 사람들은 더 협력한다.",
+     false
+    ],
+    [
+     "공정성 감각은 태어난 뒤 교육을 통해서만 생긴다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "why individuals should always put self-interest before the group",
+    "how groups punish members who act in an untrustworthy way",
+    "the origin of moral codes in religious traditions",
+    "the economic benefits of competition among group members"
+   ],
+   "title_wrong": [
+    "Self-Interest Always Wins in the End",
+    "Punishment: The Key to Group Loyalty",
+    "Where Do Moral Codes Come From?",
+    "Competition Makes Groups Stronger"
+   ],
+   "blank_more": [
+    [
+     2,
+     "suppress their self-interest",
+     [
+      "express their true feelings",
+      "compete with each other",
+      "leave the group entirely",
+      "ignore the group rules"
+     ],
+     "다른 사람도 그렇게 하면 집단 이익을 위해 '이기심을 억제'한다."
+    ],
+    [
+     5,
+     "defect as well",
+     [
+      "sacrifice even more",
+      "forgive them quickly",
+      "leave the group",
+      "report them to others"
+     ],
+     "남이 태만하며 나를 이용한다고 느끼면 '우리도 태만해진다'."
+    ]
    ]
   },
   {
@@ -224,6 +372,80 @@
      "suspicion"
     ],
     "처음 만난 인간을 위협과 연관 짓지 않았다 → 신뢰(trust)와 온순함으로 반응."
+   ],
+   "tf": [
+    [
+     "포식 이전 단계의 영장류 조상은 자신을 두려워하지 않는 동물들 사이에서 살았다.",
+     true
+    ],
+    [
+     "직립 영장류는 대부분 동물에게 자동으로 포식자로 인식되지 않았다.",
+     true
+    ],
+    [
+     "지난 5세기의 사례는 많은 야생 동물이 처음에 인간을 위협과 연관 짓지 않았음을 보여 준다.",
+     true
+    ],
+    [
+     "이런 현상을 가리키는 전문 용어는 '생물학적 최초 접촉'이다.",
+     true
+    ],
+    [
+     "많은 동물은 교훈을 받아들이지 못한 채 서서 바라보다가 죽었다.",
+     true
+    ],
+    [
+     "큰 고양잇과 동물과 늑대는 포식자로 여겨지지 않았다.",
+     false
+    ],
+    [
+     "많은 종은 인간을 처음 만났을 때 공격성과 두려움으로 반응했다.",
+     false
+    ],
+    [
+     "야생 동물은 태어날 때부터 인간을 두려워했다.",
+     false
+    ],
+    [
+     "생물학적 최초 접촉은 인간이 처음 다른 영장류를 만난 사건을 말한다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "how early primates learned to fear big cats and wolves",
+    "why carnivory made humans the strongest predators on earth",
+    "methods wild animals use to hide from human hunters",
+    "the extinction of species caused by climate change"
+   ],
+   "title_wrong": [
+    "Why Wolves Became Our Best Friends",
+    "Hiding Skills of Wild Prey",
+    "Climate, Not Humans, Wiped Out Species",
+    "Early Humans Feared Every Animal"
+   ],
+   "blank_more": [
+    [
+     3,
+     "fit the predator template",
+     [
+      "look like a harmless plant",
+      "follow the herd's movements",
+      "attract the prey's attention",
+      "match the size of big cats"
+     ],
+     "큰 고양잇과·늑대와 달리 직립 영장류는 '포식자 틀에 들어맞지' 않았다."
+    ],
+    [
+     7,
+     "learn to be afraid of us",
+     [
+      "learn to hunt with us",
+      "stay away from water",
+      "teach us their habits",
+      "hide their young from wolves"
+     ],
+     "처음엔 위협으로 여기지 않았으니, 우리가 새 지역에 나타나면 동물들은 '우리를 두려워하는 법을 배워야' 했다."
+    ]
    ]
   },
   {
@@ -303,6 +525,80 @@
      "outdated"
     ],
     "은유는 시인·예술가의 특별한 도구가 아니라 일상 언어 곳곳에 있다 → 평범한(ordinary) 사고 기제."
+   ],
+   "tf": [
+    [
+     "'선거가 우리 앞에 있다'는 문자 그대로는 이치에 맞지 않는다.",
+     true
+    ],
+    [
+     "겨울은 물리적으로 우리 뒤에 있을 수 있는 것이 아니다.",
+     true
+    ],
+    [
+     "일상 언어에서 은유적 표현은 수십만 개가 관찰된다.",
+     true
+    ],
+    [
+     "은유는 평범한 사고의 기제이다.",
+     true
+    ],
+    [
+     "은유는 상상을 가능하게 한다.",
+     true
+    ],
+    [
+     "은유는 주로 시인과 예술가만 쓰는 특별한 도구이다.",
+     false
+    ],
+    [
+     "은유는 대개 의식적으로 많은 노력을 들여 작동한다.",
+     false
+    ],
+    [
+     "은유는 기술적 언어에서는 거의 쓰이지 않는다.",
+     false
+    ],
+    [
+     "'시장이 침체되어 있다'는 문자 그대로의 표현이다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "the difficulty of translating poetic metaphors into other languages",
+    "how election campaigns use metaphors to persuade voters",
+    "why technical language avoids figurative expressions",
+    "the history of metaphor in classical poetry"
+   ],
+   "title_wrong": [
+    "Poets' Secret Tool for Persuasion",
+    "Metaphors Lost in Translation",
+    "Why Science Rejects Figurative Language",
+    "Elections Ahead: Campaign Slogans Explained"
+   ],
+   "blank_more": [
+    [
+     2,
+     "do not make any sense",
+     [
+      "are easy to measure",
+      "describe physical facts",
+      "are used only by poets",
+      "are grammatically wrong"
+     ],
+     "선거는 물리적으로 '앞에' 있을 수 없으므로 문자 그대로는 '이치에 맞지 않는다'."
+    ],
+    [
+     4,
+     "not literal but metaphorical",
+     [
+      "not metaphorical but literal",
+      "neither clear nor useful",
+      "purely scientific",
+      "always poetic"
+     ],
+     "차가운 사람·강한 의견처럼 의미가 '문자 그대로가 아니라 은유적'인 표현."
+    ]
    ]
   },
   {
@@ -382,6 +678,80 @@
      "a single color"
     ],
     "형태·색·맛·냄새 없이 주변에 따라 쉽게 바뀐다 → 가변적인 성격."
+   ],
+   "tf": [
+    [
+     "물은 본질적으로 자신만의 페르소나가 없다.",
+     true
+    ],
+    [
+     "액체 상태의 물은 주변 환경에 의해 쉽게 형태가 정해진다.",
+     true
+    ],
+    [
+     "물은 빠른 속도로 충돌하면 콘크리트처럼 단단하다.",
+     true
+    ],
+    [
+     "순수한 물은 맛이 없지만 용해된 물질의 맛을 전달한다.",
+     true
+    ],
+    [
+     "물은 대기의 습기로 주변의 향기를 퍼뜨린다.",
+     true
+    ],
+    [
+     "투명한 용기 속의 물은 선명한 파란색을 띤다.",
+     false
+    ],
+    [
+     "물은 어떤 속도로 부딪혀도 부드럽게 순응한다.",
+     false
+    ],
+    [
+     "물은 자신만의 고유한 냄새를 가지고 있다.",
+     false
+    ],
+    [
+     "물은 주변 환경에 동화되지 않고 늘 같은 성격을 유지한다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "the dangers of drinking water from the ocean",
+    "how water pollution changes the color of the sea",
+    "the chemical structure that gives water its taste",
+    "ways to purify water for daily use"
+   ],
+   "title_wrong": [
+    "Why the Ocean Is Always Blue",
+    "The Hidden Taste of Pure Water",
+    "Water Pollution: A Growing Threat",
+    "Purify Your Water in Three Steps"
+   ],
+   "blank_more": [
+    [
+     2,
+     "readily defined by its surroundings",
+     [
+      "completely free from its surroundings",
+      "rarely affected by its surroundings",
+      "harder than its surroundings",
+      "hidden from its surroundings"
+     ],
+     "형태가 없지만 '주변 환경에 의해 쉽게 정의된다'."
+    ],
+    [
+     4,
+     "readily reflects",
+     [
+      "completely hides",
+      "slowly destroys",
+      "rarely changes",
+      "quickly absorbs"
+     ],
+     "바다에서는 표면에 주변의 모든 것을 '쉽게 반사한다'."
+    ]
    ]
   },
   {
@@ -465,6 +835,80 @@
      "professionally made"
     ],
     "똑같은 지도도, 축척대로 된 지도도 없지만(Nevertheless) 대부분 쉽게 이해된다."
+   ],
+   "tf": [
+    [
+     "필자는 학생들에게 5분 안에 수업을 오가는 경로를 손으로 그리게 한다.",
+     true
+    ],
+    [
+     "완전히 똑같은 두 지도는 없다.",
+     true
+    ],
+    [
+     "학생들의 지도는 축척대로 그려지지 않는다.",
+     true
+    ],
+    [
+     "심상 지도는 어디서 돌아야 하는지 도로를 표시하는 경향이 있다.",
+     true
+    ],
+    [
+     "심상 지도는 눈에 띄는 특징을 참조해 경로를 설명하는 경향이 있다.",
+     true
+    ],
+    [
+     "학생들이 그린 지도는 대부분 이해하기 어렵다.",
+     false
+    ],
+    [
+     "심상 지도는 전문 지도처럼 번호가 매겨진 주소를 주로 쓴다.",
+     false
+    ],
+    [
+     "필자는 학생들에게 30분 동안 지도를 그리게 한다.",
+     false
+    ],
+    [
+     "심상 지도는 문화적 참조 표시를 피하는 경향이 있다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "why professional maps are more accurate than hand-drawn ones",
+    "how to draw maps to scale in five minutes",
+    "the history of street addresses in big cities",
+    "why students often get lost on their way to class"
+   ],
+   "title_wrong": [
+    "Always Draw Your Maps to Scale",
+    "Street Numbers: The Key to Navigation",
+    "Lost on the Way to Class",
+    "How Car Dealers Use Giant Gorillas"
+   ],
+   "blank_more": [
+    [
+     5,
+     "particular landmarks",
+     [
+      "exact distances",
+      "numbered addresses",
+      "private memories",
+      "official rules"
+     ],
+     "각자 다른 지도지만 모두에게 소통되는 '특정 지형지물'을 본다."
+    ],
+    [
+     7,
+     "informal but understood cultural references",
+     [
+      "formal and precise street numbers",
+      "secret codes known only to the mapmaker",
+      "scientific measurements of distance",
+      "official symbols used in atlases"
+     ],
+     "파란 고릴라, 분홍 빅토리아풍 집처럼 '비공식적이지만 이해되는 문화적 참조'."
+    ]
    ]
   },
   {
@@ -544,6 +988,80 @@
      "the most recent image"
     ],
     "망치를 '먹었다'처럼 예상 밖 문장에서 큰 반응 → 가장 예상치 못한 사건."
+   ],
+   "tf": [
+    [
+     "사람들은 익숙한 것에 주의를 덜 기울이는 경향이 있다.",
+     true
+    ],
+    [
+     "가장 주의가 필요한 것은 대개 새롭고 예상치 못한 것이다.",
+     true
+    ],
+    [
+     "반복된 이미지를 보면 뇌 활동이 반복할수록 줄어든다.",
+     true
+    ],
+    [
+     "가장 큰 뇌 반응은 가장 예상치 못한 사건에서 나온다.",
+     true
+    ],
+    [
+     "'망치를 집어서 먹었다'는 문장은 훨씬 큰 반응을 일으킨다.",
+     true
+    ],
+    [
+     "익숙한 것에 주의를 덜 주는 행동은 생물학적으로 해롭다.",
+     false
+    ],
+    [
+     "뇌는 반복된 경험에 점점 더 강하게 반응한다.",
+     false
+    ],
+    [
+     "'망치와 못을 집어 들었다'는 문장이 가장 큰 반응을 일으킨다.",
+     false
+    ],
+    [
+     "뇌는 새로운 것이 제시되어도 다시 반응하지 않는다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "why repeated practice strengthens the brain's responses",
+    "the importance of paying attention to our possessions",
+    "how hammers and nails are used in brain experiments",
+    "why familiar people deserve more of our attention"
+   ],
+   "title_wrong": [
+    "Practice Makes the Brain Respond More",
+    "Treasure What You Already Own",
+    "Tools in the Science Lab",
+    "Old Friends Need More Attention"
+   ],
+   "blank_more": [
+    [
+     1,
+     "pay less attention to familiar things",
+     [
+      "pay more attention to familiar things",
+      "forget about new things quickly",
+      "avoid unexpected situations",
+      "remember every repeated image"
+     ],
+     "뇌는 반복에 적응하므로 '익숙한 것에는 주의를 덜 기울인다'."
+    ],
+    [
+     5,
+     "when something new was presented",
+     [
+      "when the images were repeated",
+      "when nothing changed at all",
+      "when the experiment ended",
+      "when the person fell asleep"
+     ],
+     "반복에 반응이 줄다가 '새로운 것이 제시될 때만' 다시 반응한다."
+    ]
    ]
   },
   {
@@ -627,6 +1145,80 @@
      "cause laziness"
     ],
     "후회한 집단이 더 많이 풀고 더 오래 매달렸다 → 후회는 끈기를 심화시킨다."
+   ],
+   "tf": [
+    [
+     "Keith Markman과 동료들은 참가자들에게 10개의 철자 바꾸기 문제를 주었다.",
+     true
+    ],
+    [
+     "연구자들은 참가자들에게 가능한 단어의 절반만 찾았다고 말했다.",
+     true
+    ],
+    [
+     "연구자들은 실제 성과를 더 잘했을 수도 있는 방식과 비교하게 했다.",
+     true
+    ],
+    [
+     "후회 집단은 '적어도' 비교 집단보다 기분이 더 나빠졌다.",
+     true
+    ],
+    [
+     "다음 라운드에서 후회 집단은 더 많은 퍼즐을 풀었다.",
+     true
+    ],
+    [
+     "연구자들은 참가자들에게 모든 단어를 찾았다고 칭찬했다.",
+     false
+    ],
+    [
+     "후회 집단은 다음 라운드에서 가장 먼저 과제를 포기했다.",
+     false
+    ],
+    [
+     "'적어도' 비교를 한 집단이 가장 오래 과제를 붙잡았다.",
+     false
+    ],
+    [
+     "후회는 끈기를 약화해 성과를 떨어뜨린다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "how praise improves performance on difficult puzzles",
+    "why regret should be avoided in problem solving",
+    "the effect of time limits on solving anagrams",
+    "how comparing ourselves with others lowers self-esteem"
+   ],
+   "title_wrong": [
+    "Praise: The Secret to Solving Puzzles",
+    "Forget Regret and Move On",
+    "Beat the Clock with Anagrams",
+    "Comparison Steals Your Confidence"
+   ],
+   "blank_more": [
+    [
+     3,
+     "poked people with a little regret",
+     [
+      "praised people for their effort",
+      "gave people a short break",
+      "showed people the correct answers",
+      "told people to stop solving"
+     ],
+     "'만약 ~했다면'을 떠올리게 함 → '약간의 후회감을 불러일으켰다'."
+    ],
+    [
+     7,
+     "stuck with the task longer",
+     [
+      "gave up the task earlier",
+      "complained about the task",
+      "forgot the task rules",
+      "changed to an easier task"
+     ],
+     "후회 집단이 더 많이 풀고 '더 오래 과제를 붙잡았다' → 끈기."
+    ]
    ]
   },
   {
@@ -698,6 +1290,80 @@
      "completely unfamiliar to you"
     ],
     "쉬운 것만 하는 것도, 초급자가 어려운 것에 뛰어드는 것도 좋지 않다 → 너무 쉽지도 어렵지도 않은 주제."
+   ],
+   "tf": [
+    [
+     "외국어 숙달을 위해 너무 쉽지도 어렵지도 않은 주제를 공부하는 것이 중요하다.",
+     true
+    ],
+    [
+     "이는 주로 혼자 공부하는 경우 특히 그렇다.",
+     true
+    ],
+    [
+     "어느 정도의 과잉 학습은 도움이 될 수 있다.",
+     true
+    ],
+    [
+     "쉬운 문구를 술술 말하면 기분이 좋아질 수 있다.",
+     true
+    ],
+    [
+     "초급자가 가정법 문법 같은 어려운 주제에 뛰어드는 것은 시간을 잘 쓰는 것이 아니다.",
+     true
+    ],
+    [
+     "그리스어를 이미 아는 사람은 기본 어휘에 모든 시간을 써야 한다.",
+     false
+    ],
+    [
+     "쉬운 내용만 연습하는 것이 학습 시간을 가장 잘 활용하는 방법이다.",
+     false
+    ],
+    [
+     "초급자는 가정법 같은 어려운 문법부터 시작해야 한다.",
+     false
+    ],
+    [
+     "과잉 학습은 언제나 학습에 해롭다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "the benefits of studying a foreign language with a tutor",
+    "why beginners should start with difficult grammar",
+    "how overlearning guarantees fluency in Greek",
+    "the best way to memorize basic vocabulary"
+   ],
+   "title_wrong": [
+    "Start with the Hardest Grammar First",
+    "Tutors Are Essential for Language Learning",
+    "Overlearning: The Fastest Path to Fluency",
+    "Memorize a Thousand Words a Day"
+   ],
+   "blank_more": [
+    [
+     2,
+     "studying a language largely on your own",
+     [
+      "learning a language in a large class",
+      "speaking with native speakers daily",
+      "living in a foreign country",
+      "studying several languages at once"
+     ],
+     "스스로 난이도를 골라야 하므로 '혼자 공부할 때' 특히 중요하다."
+    ],
+    [
+     4,
+     "rehearsing only easy material",
+     [
+      "challenging yourself with hard topics",
+      "reviewing your mistakes carefully",
+      "reading foreign newspapers",
+      "practicing with a partner"
+     ],
+     "간단한 문구를 술술 말하면 기분은 좋지만 '쉬운 내용만 연습하는 것'은 최선이 아니다."
+    ]
    ]
   },
   {
@@ -773,6 +1439,80 @@
      "return from expository to narrative text"
     ],
     "문해력 요구가 점점 커지는 과정 → 이야기형 글에서 설명형 글로 넘어가는 시기."
+   ],
+   "tf": [
+    [
+     "중학년은 학생들이 이야기형 글에서 설명형 글로 넘어가기 시작하는 시기이다.",
+     true
+    ],
+    [
+     "많은 학생에게 중학교 입학 후 정규 읽기 교육이 끝난다.",
+     true
+    ],
+    [
+     "중학년 교사의 약 50%만 문해력 교육 연수를 받는다.",
+     true
+    ],
+    [
+     "교육 과정 전반에 걸친 작문 같은 특정 연수를 받는 교사는 더 적다.",
+     true
+    ],
+    [
+     "모든 교사는 과목과 관계없이 언어 과목을 자기 과목에 통합하도록 요구받는다.",
+     true
+    ],
+    [
+     "중학교에 들어가면 정규 읽기 교육이 더 강화된다.",
+     false
+    ],
+    [
+     "거의 모든 중학년 교사가 문해력 교육 연수를 받는다.",
+     false
+    ],
+    [
+     "언어 과목 통합은 국어 교사에게만 요구된다.",
+     false
+    ],
+    [
+     "설명형 글로의 이행은 학생들의 문해력 부담을 줄여 준다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "why middle school students prefer narrative texts",
+    "the decreasing importance of literacy in integrated curricula",
+    "how to design writing programs for elementary schools",
+    "the reasons students stop reading for pleasure"
+   ],
+   "title_wrong": [
+    "Stories Beat Textbooks in Middle School",
+    "Literacy Matters Less in Integrated Classes",
+    "Writing Programs for Young Children",
+    "Why Teens Stop Reading for Fun"
+   ],
+   "blank_more": [
+    [
+     2,
+     "formal reading instruction ends",
+     [
+      "formal reading instruction becomes stricter",
+      "students choose more narrative books",
+      "teachers receive more training",
+      "reading tests are no longer given"
+     ],
+     "Unfortunately + 요구가 커지는데도 → '정규 읽기 교육이 끝난다'."
+    ],
+    [
+     5,
+     "less than ideally prepared",
+     [
+      "perfectly trained",
+      "highly motivated",
+      "fully supported",
+      "well paid"
+     ],
+     "연수 받은 교사가 적으므로(Consequently) '완벽하게 준비되지 못했다'."
+    ]
    ]
   },
   {
@@ -844,6 +1584,80 @@
      "avoided newspapers throughout their lives"
     ],
     "Anne Frank의 꿈, 신문·잡지에 쓰다가 소설로 간 작가들 → 언론인으로 글쓰기 경력 시작."
+   ],
+   "tf": [
+    [
+     "소설가를 꿈꾸는 많은 사람이 언론인으로 글쓰기를 시작했다.",
+     true
+    ],
+    [
+     "Anne Frank는 13살 때 언론인이나 작가가 되기를 꿈꿨다.",
+     true
+    ],
+    [
+     "Anne Frank는 일기에 훌륭한 글을 쓸 수 있을지에 대해 적었다.",
+     true
+    ],
+    [
+     "Jack London과 Tom Wolfe는 소설 이전에 신문이나 잡지에 글을 썼다.",
+     true
+    ],
+    [
+     "John Steinbeck은 『분노의 포도』를 쓰기 전에 이주민 캠프에 관한 기사를 썼다.",
+     true
+    ],
+    [
+     "Anne Frank는 작가가 되는 것에 관심이 없었다.",
+     false
+    ],
+    [
+     "Margaret Mitchell은 소설가가 된 뒤에야 신문에 글을 쓰기 시작했다.",
+     false
+    ],
+    [
+     "John Steinbeck은 기사를 쓰기 전에는 소설을 한 권도 출간하지 않았다.",
+     false
+    ],
+    [
+     "『분노의 포도』는 이주민과 관련이 없는 작품이다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "why journalists rarely succeed as novelists",
+    "the influence of war on Anne Frank's diary",
+    "how newspapers chose stories about migrant workers",
+    "the decline of magazines in the twentieth century"
+   ],
+   "title_wrong": [
+    "From Novelist to Reporter: A Common Path",
+    "War and the Diary of a Young Girl",
+    "Newspapers That Ignored Migrants",
+    "The End of the Magazine Era"
+   ],
+   "blank_more": [
+    [
+     3,
+     "will I ever become a journalist or a writer",
+     [
+      "will I ever leave this hiding place",
+      "will my family ever forgive me",
+      "will I ever travel around the world",
+      "will anyone ever read my letters"
+     ],
+     "앞 문장의 '이것(언론인으로 시작하는 꿈)' → 일기에 '언론인이나 작가가 될 수 있을까'."
+    ],
+    [
+     4,
+     "before turning to fiction",
+     [
+      "after retiring from writing",
+      "instead of writing novels",
+      "while working as teachers",
+      "without any writing experience"
+     ],
+     "신문·잡지에 쓰다가 '소설로 전향하기 전'."
+    ]
    ]
   },
   {
@@ -919,6 +1733,80 @@
      "forced us to stay in one place"
     ],
     "다른 집단과 정보 공유, 친구가 생존 자산 → 광범위한 사회적 네트워크 구축."
+   ],
+   "tf": [
+    [
+     "호모 사피엔스는 35만~15만 년 전 탐험 욕구와 길 찾기 정신을 발전시켰다.",
+     true
+    ],
+    [
+     "길 찾기 능력은 광범위한 사회적 네트워크 구축을 가능하게 했다.",
+     true
+    ],
+    [
+     "선사 시대 사람들은 소규모 가족 단위로 살았다.",
+     true
+    ],
+    [
+     "자원 위치와 포식자 움직임에 대한 정보 공유는 진화적 강점이 되었다.",
+     true
+    ],
+    [
+     "친구는 생존의 자산이었다.",
+     true
+    ],
+    [
+     "길 찾기 능력은 종으로서의 성공과 무관했다.",
+     false
+    ],
+    [
+     "선사 시대 사람들은 대규모 도시 단위로 살았다.",
+     false
+    ],
+    [
+     "다른 집단과 정보를 공유하는 것은 생존에 불리했다.",
+     false
+    ],
+    [
+     "탐험 욕구는 다른 인간종과 공통된 특징이었다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "why early humans avoided contact with other groups",
+    "how predators shaped the size of family units",
+    "the decline of hunting in prehistoric times",
+    "the invention of maps by early humans"
+   ],
+   "title_wrong": [
+    "Stay Close to Home to Survive",
+    "Predators Built Our Families",
+    "The End of the Hunter",
+    "Who Drew the First Map?"
+   ],
+   "blank_more": [
+    [
+     4,
+     "share information with other groups",
+     [
+      "hide food from other groups",
+      "fight against other groups",
+      "stay away from other groups",
+      "copy the tools of other groups"
+     ],
+     "자원·포식자 정보를 '다른 집단과 공유'할 수 있는 것이 강점이었다."
+    ],
+    [
+     5,
+     "a survival asset",
+     [
+      "a heavy burden",
+      "a constant danger",
+      "a rare luxury",
+      "an unwanted rival"
+     ],
+     "식량이 떨어지면 갈 곳, 사냥 도움을 청할 사람 → 친구는 '생존 자산'."
+    ]
    ]
   },
   {
@@ -998,6 +1886,80 @@
      "a set of rules imposed by outsiders"
     ],
     "적응한 이누이트는 살아남고 적응 못한 식민지는 사라짐 → 문화는 생존 요구에 대한 전략적 대응."
+   ],
+   "tf": [
+    [
+     "진화 심리학은 문화가 번식 성공과 생물학적 적합성의 직접적 결과라고 본다.",
+     true
+    ],
+    [
+     "사회 조직을 통해 환경에 적응하는 사람들은 자손을 남길 가능성이 크다.",
+     true
+    ],
+    [
+     "그린란드의 스칸디나비아 식민지는 결국 사라졌다.",
+     true
+    ],
+    [
+     "스칸디나비아 정착민들은 유럽식 목축과 원시 농업을 계속했다.",
+     true
+    ],
+    [
+     "이누이트족은 주로 사냥과 낚시로 식량을 얻었다.",
+     true
+    ],
+    [
+     "스칸디나비아 정착민들은 바다에 의존하는 생활에 잘 적응했다.",
+     false
+    ],
+    [
+     "이누이트족의 문화는 적응성이 부족해 생존에 실패했다.",
+     false
+    ],
+    [
+     "진화 심리학은 문화가 번식과 관계없다고 주장한다.",
+     false
+    ],
+    [
+     "이누이트족은 유럽식 목축 관행을 받아들였다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "why European farming spread across Greenland",
+    "how harsh climates destroy all human cultures",
+    "the history of fishing tools among the Inuit",
+    "the conflict between Scandinavians and the Inuit"
+   ],
+   "title_wrong": [
+    "European Farming Conquers the Arctic",
+    "No Culture Survives a Harsh Climate",
+    "Inuit Fishing Tools Through History",
+    "War on the Ice: Scandinavians vs. Inuit"
+   ],
+   "blank_more": [
+    [
+     5,
+     "did not adapt to the harsh climate",
+     [
+      "quickly adapted to the harsh climate",
+      "moved to a warmer region",
+      "learned fishing from the Inuit",
+      "built stronger houses"
+     ],
+     "결국 사라진 이유 → '혹독한 기후에 적응하지 못하고' 유럽식 관행을 계속했다."
+    ],
+    [
+     6,
+     "without interruption",
+     [
+      "with great difficulty",
+      "only for a short time",
+      "under European rule",
+      "after a long famine"
+     ],
+     "By contrast — 사라진 식민지와 대조적으로 이누이트는 '중단 없이' 적응했다."
+    ]
    ]
   },
   {
@@ -1073,6 +2035,80 @@
      "follow consumers’ diet advice"
     ],
     "비만 유발 제품과 감량 제품 둘 다로 수익 → 꿩 먹고 알 먹기(have their cake and eat it, too)."
+   ],
+   "tf": [
+    [
+     "식품 산업은 '몸에 좋은' 식품과 다이어트 식품을 원하는 소비자를 겨냥한 제품을 만든다.",
+     true
+    ],
+    [
+     "식품 회사는 비만을 유발하는 제품으로도 수익을 낸다.",
+     true
+    ],
+    [
+     "'더 건강한' 제품에서는 칼로리·설탕·지방·소금 일부를 제거한다.",
+     true
+    ],
+    [
+     "어떤 회사는 건강에 좋지 않은 제품에 영양소만 추가한다.",
+     true
+    ],
+    [
+     "시리얼 회사는 가당 정제 곡물 제품에 비타민이나 철분을 넣고 '건강에 좋은'이라고 표시한다.",
+     true
+    ],
+    [
+     "시리얼 회사는 건강한 식단을 위해 통곡물을 주로 사용한다.",
+     false
+    ],
+    [
+     "식품 회사는 체중 감량을 내세운 제품을 판매하지 않는다.",
+     false
+    ],
+    [
+     "'더 건강한' 제품에는 설탕과 소금이 더 많이 첨가된다.",
+     false
+    ],
+    [
+     "식품 회사는 소비자의 건강 우려에 전혀 관심을 두지 않는다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "government rules that ban unhealthy food advertising",
+    "why whole grains are more expensive than refined grains",
+    "how consumers learn to read nutrition labels",
+    "the history of breakfast cereal in America"
+   ],
+   "title_wrong": [
+    "New Laws Ban Junk Food Ads",
+    "The High Price of Whole Grains",
+    "Reading Labels Like an Expert",
+    "A Short History of Breakfast Cereal"
+   ],
+   "blank_more": [
+    [
+     4,
+     "simply add nutrients",
+     [
+      "completely remove sugar",
+      "rarely change recipes",
+      "openly admit risks",
+      "sharply cut prices"
+     ],
+     "'더 건강한' 제품의 또 다른 방식 → 건강에 나쁜 제품에 영양소를 '단순히 추가'한다."
+    ],
+    [
+     3,
+     "address consumers’ concerns about health",
+     [
+      "raise the price of their products",
+      "make their foods taste sweeter",
+      "hide the nutrition labels",
+      "reduce the cost of packaging"
+     ],
+     "칼로리·설탕 등을 빼는 목적 → '건강에 대한 소비자의 우려를 해소'하기 위해."
+    ]
    ]
   },
   {
@@ -1148,6 +2184,80 @@
      "spread their wings to scare predators"
     ],
     "살아 있는 나비는 늘 펴고 있지 않다(Yet) → 햇볕을 쬘 때만 납작하게 편다."
+   ],
+   "tf": [
+    [
+     "카메라가 등장하기 전 나비의 표준 이미지는 심하게 왜곡된 것이었다.",
+     true
+    ],
+    [
+     "표준 이미지는 박물관 핀에 꽂힌 죽은 나비의 모습이었다.",
+     true
+    ],
+    [
+     "표본의 날개는 몸과 90도로 납작하게 펼쳐져 있다.",
+     true
+    ],
+    [
+     "파스타 '파르팔레'는 나비를 뜻하는 말에서 유래했다.",
+     true
+    ],
+    [
+     "어떤 나비 종은 날개를 꼭 닫은 채 내려앉는다.",
+     true
+    ],
+    [
+     "살아 있는 나비는 항상 날개를 90도로 납작하게 편다.",
+     false
+    ],
+    [
+     "날개를 활짝 편 나비는 표본보다 날개가 더 위로 들려 있다.",
+     false
+    ],
+    [
+     "살아 있는 나비의 뒷날개는 표본보다 몸에서 더 멀리 떨어져 있다.",
+     false
+    ],
+    [
+     "박물관 표본은 나비의 자연스러운 자세를 정확히 보여 준다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "how cameras changed the way museums collect insects",
+    "the origin of the bow-tie as a fashion item",
+    "why butterflies need sunlight to survive",
+    "the proper way to pin butterfly specimens"
+   ],
+   "title_wrong": [
+    "Cameras Replace Museum Collections",
+    "The Surprising History of the Bow-Tie",
+    "Sunlight: Fuel for Butterflies",
+    "How to Pin a Perfect Specimen"
+   ],
+   "blank_more": [
+    [
+     1,
+     "grossly distorted",
+     [
+      "perfectly accurate",
+      "newly invented",
+      "widely ignored",
+      "highly colorful"
+     ],
+     "살아 있는 모습이 아닌 죽은 표본 → '심하게 왜곡된' 이미지."
+    ],
+    [
+     6,
+     "slope downwards",
+     [
+      "point upwards",
+      "stay perfectly flat",
+      "fold forwards",
+      "stretch sideways"
+     ],
+     "수평인 표본과 달리 항상 '아래쪽으로 기울어' 뒷날개가 몸에 가깝다."
+    ]
    ]
   },
   {
@@ -1231,6 +2341,80 @@
      "produce visual patterns"
     ],
     "언어·음악 모두 소리 체계, 인간만 독특 → 소리에서 의미를 찾아내는 능력."
+   ],
+   "tf": [
+    [
+     "음악과 언어는 둘 다 복잡하고 의미 있는 소리의 연속을 수반한다.",
+     true
+    ],
+    [
+     "현대 인지 과학에서 음악과 언어의 관계는 이제 겨우 탐구되기 시작했다.",
+     true
+    ],
+    [
+     "다양한 분야의 연구자들이 이 학제 간 연구에 점점 끌리고 있다.",
+     true
+    ],
+    [
+     "시지각이나 촉각은 다른 동물 연구로 많이 배울 수 있다.",
+     true
+    ],
+    [
+     "언어와 음악에 관해서 인간 종은 독특하다.",
+     true
+    ],
+    [
+     "음악과 언어의 관계는 이미 충분히 연구되었다.",
+     false
+    ],
+    [
+     "연구자들은 이 분야에 점점 관심을 잃고 있다.",
+     false
+    ],
+    [
+     "인간의 시지각 경험은 다른 동물과 완전히 다르다.",
+     false
+    ],
+    [
+     "다른 동물과 비교하면 언어와 음악에 대한 통찰을 쉽게 얻을 수 있다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "how animals communicate through musical sounds",
+    "why visual perception is unique to humans",
+    "the history of language teaching through songs",
+    "the decline of interest in music research"
+   ],
+   "title_wrong": [
+    "Birds Sing, Whales Talk",
+    "Only Humans Can See Colors",
+    "Learning Languages Through Songs",
+    "Why Scientists Gave Up on Music"
+   ],
+   "blank_more": [
+    [
+     3,
+     "poised to change rapidly",
+     [
+      "unlikely to change soon",
+      "already fully explained",
+      "ignored by most researchers",
+      "limited to one field"
+     ],
+     "이제 막 탐구 시작 + 연구자들이 몰려듦 → '빠르게 변할 준비가 된'."
+    ],
+    [
+     7,
+     "our species is unique",
+     [
+      "animals are our best teachers",
+      "our species is ordinary",
+      "music is less complex",
+      "language is easy to study"
+     ],
+     "however — 시각·촉각과 달리 언어·음악에서는 '인간 종이 독특'하다."
+    ]
    ]
   },
   {
@@ -1314,6 +2498,80 @@
      "they ignore abdominal fat"
     ],
     "While(비록 ~지만) 위험 검진에 쓰이지만 → 진단 도구는 아니다."
+   ],
+   "tf": [
+    [
+     "BMI는 다양한 질병 및 만성 질환과 높은 상관관계가 있다.",
+     true
+    ],
+    [
+     "BMI는 체내 지방이나 근육의 양을 반영하지 않는다.",
+     true
+    ],
+    [
+     "남성 40인치, 여성 35인치를 넘는 복부 지방은 비만 관련 질환 위험을 높인다.",
+     true
+    ],
+    [
+     "'모든 체격에서의 건강' 접근은 체격과 관계없이 건강 증진 행동에 초점을 둔다.",
+     true
+    ],
+    [
+     "반복적인 다이어트는 조기 사망과 심리적 고통의 위험을 높일 수 있다.",
+     true
+    ],
+    [
+     "BMI와 허리둘레는 질병을 진단하는 도구이다.",
+     false
+    ],
+    [
+     "BMI는 나이와 성별 차이를 정확하게 반영한다.",
+     false
+    ],
+    [
+     "'모든 체격에서의 건강' 접근은 체중 감량을 가장 중요하게 여긴다.",
+     false
+    ],
+    [
+     "영양과 건강은 개인의 의지만의 문제로 여겨진다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "the best diet plans for losing abdominal fat",
+    "why BMI is the only reliable measure of health",
+    "how cultural factors determine body size",
+    "the history of weight measurement in medicine"
+   ],
+   "title_wrong": [
+    "Lose Belly Fat in Two Weeks",
+    "BMI: The Perfect Health Test",
+    "Culture Decides Your Body Size",
+    "Weighing Patients Through History"
+   ],
+   "blank_more": [
+    [
+     7,
+     "weight-neutral",
+     [
+      "weight-focused",
+      "diet-based",
+      "muscle-building",
+      "fat-burning"
+     ],
+     "체격과 관계없이 건강 행동에 초점 → '체중 중립적인' 접근."
+    ],
+    [
+     8,
+     "understanding and empathy",
+     [
+      "strict rules and punishment",
+      "expensive medical tests",
+      "faster weight loss",
+      "individual willpower alone"
+     ],
+     "사회 경제적 문제 → '이해와 공감'이 필요하다."
+    ]
    ]
   },
   {
@@ -1393,6 +2651,80 @@
      "consumable"
     ],
     "복사·이전해도 같고 여러 사람이 동시에 가질 수 있다 → 비경합적(non-rivalrous)."
+   ],
+   "tf": [
+    [
+     "농장 자료가 농부에게 속한다는 내용은 흔히 볼 수 있다.",
+     true
+    ],
+    [
+     "그런 내용이 계약서에 명시되기도 한다.",
+     true
+    ],
+    [
+     "자료 소유권은 자료 모음의 저작권 외에는 법률에서 다뤄지지 않는다.",
+     true
+    ],
+    [
+     "자료는 복사되거나 다른 플랫폼으로 옮겨져도 동일하게 유지된다.",
+     true
+    ],
+    [
+     "미가공 자료에는 저작권이나 소유권이 법적으로 적용되지 않는다.",
+     true
+    ],
+    [
+     "농장 자료 소유권은 법률로 자세히 규정되어 있다.",
+     false
+    ],
+    [
+     "자료는 한 번에 한 사람만 소유할 수 있다.",
+     false
+    ],
+    [
+     "미가공 자료는 지적 재화로 보호받는다.",
+     false
+    ],
+    [
+     "구조화된 자료 모음과 미가공 자료 사이에는 차이가 없다.",
+     false
+    ]
+   ],
+   "topic_wrong": [
+    "how farmers can sell their data for profit",
+    "the benefits of digital technology in agriculture",
+    "why contracts always protect farmers' rights",
+    "the process of copying data to new platforms"
+   ],
+   "title_wrong": [
+    "Turn Your Farm Data into Cash",
+    "Smart Farms, Bigger Harvests",
+    "Contracts Always Protect Farmers",
+    "Moving Data Made Simple"
+   ],
+   "blank_more": [
+    [
+     4,
+     "the peculiar nature of data",
+     [
+      "the high price of data",
+      "the small size of farms",
+      "the strength of contracts",
+      "the speed of technology"
+     ],
+     "자료는 다른 재화와 비교되는 '독특한 특성'(비경합성)을 지닌다."
+    ],
+    [
+     7,
+     "similar to facts",
+     [
+      "protected as inventions",
+      "owned by the government",
+      "stored in contracts",
+      "sold like crops"
+     ],
+     "사실에는 저작권·소유권이 없다 → 미가공 자료는 '사실과 유사'하다."
+    ]
    ]
   }
  ]
