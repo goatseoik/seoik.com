@@ -1344,6 +1344,23 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
   @keyframes aiDot{ 0%,60%,100%{ transform:translateY(0); opacity:.35; } 30%{ transform:translateY(-4px); opacity:1; } }
   .ai-dim{ position:fixed; inset:0; z-index:1400; background:rgba(6,10,24,.45); display:flex; align-items:flex-end; justify-content:center; }
   .ai-dim[hidden]{ display:none; }
+  .ai-box{ position:relative; }
+  .ai-hbtn{ width:32px; height:32px; border:1px solid var(--border); border-radius:9px; background:var(--card); color:var(--ink); font-size:16px; line-height:1; cursor:pointer; flex-shrink:0; }
+  .ai-hist{ position:absolute; inset:0; z-index:2; background:var(--card); display:flex; flex-direction:column; }
+  .ai-hist[hidden]{ display:none; }
+  .ai-hist-top{ display:flex; align-items:center; gap:8px; padding:14px 16px; border-bottom:1px solid var(--border); }
+  .ai-hist-top b{ flex:1; font-size:16px; }
+  .ai-hist-top #aiHistNew{ border:0; border-radius:99px; background:var(--blue); color:#fff; font:700 13px var(--sans); padding:7px 12px; cursor:pointer; }
+  .ai-hist-list{ flex:1; overflow:auto; padding:6px 10px 16px; }
+  .ai-hist-g h4{ margin:14px 6px 6px; font-size:12.5px; color:var(--ink-soft); font-weight:800; }
+  .ai-hist-g h4 span{ font-weight:600; color:var(--ink-faint); }
+  .ai-hist-it{ display:flex; align-items:stretch; border-radius:12px; }
+  .ai-hist-it.on, .ai-hist-it:hover{ background:var(--bg); }
+  .ai-hist-open{ flex:1; min-width:0; text-align:left; border:0; background:none; color:var(--ink); padding:10px 10px; cursor:pointer; display:flex; flex-direction:column; gap:2px; }
+  .ai-hist-open span{ font-size:14.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ai-hist-open small{ font-size:11.5px; color:var(--ink-faint); }
+  .ai-hist-del{ border:0; background:none; color:var(--ink-faint); font-size:18px; padding:0 12px; cursor:pointer; }
+  .ai-hist-empty{ text-align:center; color:var(--ink-soft); font-size:14px; line-height:1.7; margin-top:40px; }
   .ai-box{ width:100%; max-width:560px; height:min(82vh,720px); background:var(--card); color:var(--ink); border-radius:20px 20px 0 0; display:flex; flex-direction:column; overflow:hidden; }
   @media (min-width:600px){ .ai-dim{ align-items:center; } .ai-box{ border-radius:20px; } }
   .ai-head{ display:flex; align-items:center; gap:8px; padding:14px 16px; border-bottom:1px solid var(--border); }
@@ -6726,19 +6743,54 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
   /* ---------- 화면 ---------- */
   const fab = document.createElement("button"); fab.type = "button"; fab.className = "ai-fab"; fab.innerHTML = "✨ AI에게 질문";
   const dim = document.createElement("div"); dim.className = "ai-dim"; dim.hidden = true;
-  dim.innerHTML = '<div class="ai-box" role="dialog" aria-label="AI 학습 도우미"><div class="ai-head"><b>✨ 학습 도우미</b><select id="aiSubj"><option value="">전 과목</option></select><button type="button" class="ai-x" id="aiX" aria-label="닫기">×</button></div>'+
+  dim.innerHTML = '<div class="ai-box" role="dialog" aria-label="AI 학습 도우미"><div class="ai-head"><button type="button" class="ai-hbtn" id="aiHistBtn" aria-label="질문 기록">☰</button><b>✨ 학습 도우미</b><button type="button" class="ai-hbtn ai-new" id="aiNew" aria-label="새 질문">＋</button><select id="aiSubj"><option value="">전 과목</option></select><button type="button" class="ai-x" id="aiX" aria-label="닫기">×</button></div>'+
     '<div class="ai-log" id="aiLog"></div><div class="ai-sugg" id="aiSugg"></div>'+
-    '<div class="ai-in"><textarea id="aiQ" placeholder="궁금한 개념을 물어보세요 (예: 중화점이 뭐야?)"></textarea><button type="button" id="aiGo">질문</button></div></div>';
+    '<div class="ai-in"><textarea id="aiQ" placeholder="궁금한 개념을 물어보세요 (예: 중화점이 뭐야?)"></textarea><button type="button" id="aiGo">질문</button></div>'+
+    '<div class="ai-hist" id="aiHist" hidden><div class="ai-hist-top"><b>질문 기록</b><button type="button" id="aiHistNew">＋ 새 질문</button><button type="button" class="ai-x" id="aiHistX" aria-label="기록 닫기">×</button></div><div class="ai-hist-list" id="aiHistList"></div></div></div>';
   document.body.appendChild(fab); document.body.appendChild(dim);
   const log = dim.querySelector("#aiLog"), inp = dim.querySelector("#aiQ"), sel = dim.querySelector("#aiSubj");
   const hist = [];
+  /* ---------- 질문 기록: 과목별로 대화를 이 기기에 저장 (Claude 앱의 '최근 항목'처럼) ---------- */
+  const CHAT_KEY = "seoik.aiChats.v1";
+  let chats = []; try{ chats = JSON.parse(localStorage.getItem(CHAT_KEY)) || []; }catch(e){ chats = []; }
+  let cur = null;
+  function saveChats(){ try{ localStorage.setItem(CHAT_KEY, JSON.stringify(chats.slice(0, 80))); }catch(e){} }
+  function bindBot(el){ el.querySelectorAll("[data-n]").forEach(b=> b.onclick = ()=>{ const [sid,si] = b.dataset.n.split("|"); close(); window.__seoikOpenNotes(sid, +si); }); }
+  function greet(){
+    add("ai-bot", "안녕! 서익닷컴 <b>개념노트와 문제 해설</b>에서 찾아서 답해 줄게.\n개념, 사건, 공식, 헷갈리는 문제 다 물어봐." + (AI_URL ? "\n<small style=\"color:var(--ink-soft)\">AI가 사이트 자료를 근거로 설명해 줘요. AI 답변은 틀릴 수 있으니 근거 자료도 같이 확인해!</small>" : ""));
+    const sg = dim.querySelector("#aiSugg"); sg.innerHTML = ["중화점이 뭐야?","사사오입 개헌","롤스 차등의 원칙","복사 평형","시민불복종 조건","역함수 구하는 법"].map(t=>'<button type="button">'+t+'</button>').join("");
+    sg.querySelectorAll("button").forEach(b=> b.onclick = ()=>{ inp.value = b.textContent; ask(); });
+  }
+  function newChat(){ cur = null; hist.length = 0; log.innerHTML = ""; greet(); hideHist(); setTimeout(()=>inp.focus(), 60); }
+  function loadChat(id){
+    const c = chats.find(x=>x.id===id); if(!c) return;
+    cur = c; hist.length = 0; (c.hist||[]).forEach(h=>hist.push(h));
+    log.innerHTML = ""; dim.querySelector("#aiSugg").innerHTML = "";
+    c.msgs.forEach(m=>{ const d = add(m.c, m.h); if(m.c==="ai-bot") bindBot(d); });
+    sel.value = c.subj === "전 과목" ? "" : c.subj; if(sel.value !== (c.subj === "전 과목" ? "" : c.subj)) sel.value = "";
+    hideHist(); log.scrollTop = log.scrollHeight;
+  }
+  const histBox = dim.querySelector("#aiHist");
+  function hideHist(){ histBox.hidden = true; }
+  function when(t){ const d = new Date(t), n = new Date(); return d.toDateString()===n.toDateString() ? d.toTimeString().slice(0,5) : (d.getMonth()+1)+"/"+d.getDate(); }
+  function showHist(){
+    const list = dim.querySelector("#aiHistList");
+    if(!chats.length){ list.innerHTML = '<p class="ai-hist-empty">아직 질문 기록이 없어요.<br>질문하면 과목별로 여기 남아요.</p>'; }
+    else{
+      const order = [], groups = {};
+      chats.slice().sort((a,b)=>b.t-a.t).forEach(c=>{ if(!groups[c.subj]){ groups[c.subj] = []; order.push(c.subj); } groups[c.subj].push(c); });
+      list.innerHTML = order.map(sj=>'<div class="ai-hist-g"><h4>'+esc(sj)+' <span>'+groups[sj].length+'</span></h4>'+
+        groups[sj].map(c=>'<div class="ai-hist-it'+(cur&&cur.id===c.id?' on':'')+'"><button type="button" class="ai-hist-open" data-id="'+c.id+'"><span>'+esc(c.title)+'</span><small>'+when(c.t)+' · 질문 '+c.msgs.filter(m=>m.c==="ai-me").length+'개</small></button><button type="button" class="ai-hist-del" data-del="'+c.id+'" aria-label="삭제">×</button></div>').join("")+'</div>').join("");
+      list.querySelectorAll("[data-id]").forEach(b=> b.onclick = ()=> loadChat(b.dataset.id));
+      list.querySelectorAll("[data-del]").forEach(b=> b.onclick = ()=>{ if(!confirm("이 질문 기록을 지울까요?")) return; chats = chats.filter(c=>c.id!==b.dataset.del); if(cur && cur.id===b.dataset.del) { cur = null; hist.length = 0; log.innerHTML = ""; greet(); } saveChats(); showHist(); });
+    }
+    histBox.hidden = false;
+  }
   function add(cls, html){ const d = document.createElement("div"); d.className = "ai-msg "+cls; d.innerHTML = html; log.appendChild(d); log.scrollTop = log.scrollHeight; return d; }
   function open(prefill){
     const D = window.__seoikData && window.__seoikData();
     if(D && sel.options.length<2){ const seen = new Set(); D.subjects.forEach(s=>{ if(seen.has(s.name)) return; seen.add(s.name); const o = document.createElement("option"); o.value = s.name; o.textContent = s.name; sel.appendChild(o); }); }
-    if(!log.children.length) add("ai-bot", "안녕! 서익닷컴 <b>개념노트와 문제 해설</b>에서 찾아서 답해 줄게.\n개념, 사건, 공식, 헷갈리는 문제 다 물어봐." + (AI_URL ? "\n<small style=\"color:var(--ink-soft)\">AI가 사이트 자료를 근거로 설명해 줘요. AI 답변은 틀릴 수 있으니 근거 자료도 같이 확인해!</small>" : ""));
-    const sg = dim.querySelector("#aiSugg"); sg.innerHTML = ["중화점이 뭐야?","사사오입 개헌","롤스 차등의 원칙","복사 평형","시민불복종 조건","역함수 구하는 법"].map(t=>'<button type="button">'+t+'</button>').join("");
-    sg.querySelectorAll("button").forEach(b=> b.onclick = ()=>{ inp.value = b.textContent; ask(); });
+    if(!log.children.length) greet();
     if(prefill) inp.value = prefill;
     dim.hidden = false; document.body.style.overflow = "hidden"; setTimeout(()=>inp.focus(), 60);
   }
@@ -6747,6 +6799,8 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
     const q = inp.value.trim(); if(!q) return; inp.value = "";
     dim.querySelector("#aiSugg").innerHTML = "";
     add("ai-me", esc(q));
+    if(!cur){ cur = {id:String(Date.now()), subj:sel.value || "전 과목", title:q.slice(0, 40), msgs:[], hist:[], t:Date.now()}; chats.unshift(cur); }
+    cur.msgs.push({c:"ai-me", h:esc(q)});
     const hits = search(q, sel.value);
     const bot = add("ai-bot", "찾는 중…");
     let answer = "", aiErr = "";
@@ -6768,17 +6822,23 @@ window.__seoikBack = function(){ if(!dim.hidden){ if(!busy) closeSheet(); return
     }
     if(aiErr) html = '<div style="font-size:12px;color:var(--red);margin-bottom:6px">AI 연결 오류: '+esc(aiErr)+'</div>' + html;
     bot.innerHTML = html;
-    bot.querySelectorAll("[data-n]").forEach(b=> b.onclick = ()=>{ const [sid,si] = b.dataset.n.split("|"); close(); window.__seoikOpenNotes(sid, +si); });
+    bindBot(bot);
+    if(cur){ cur.msgs.push({c:"ai-bot", h:html}); cur.msgs = cur.msgs.slice(-60); cur.hist = hist.slice(-6); cur.t = Date.now();
+      chats = [cur].concat(chats.filter(c=>c!==cur)); saveChats(); }
     log.scrollTop = log.scrollHeight;
   }
   fab.onclick = ()=> open();
   dim.querySelector("#aiX").onclick = close;
+  dim.querySelector("#aiHistBtn").onclick = ()=> histBox.hidden ? showHist() : hideHist();
+  dim.querySelector("#aiHistX").onclick = hideHist;
+  dim.querySelector("#aiNew").onclick = newChat;
+  dim.querySelector("#aiHistNew").onclick = newChat;
   dim.addEventListener("click", e=>{ if(e.target===dim) close(); });
   dim.querySelector("#aiGo").onclick = ask;
   inp.addEventListener("keydown", e=>{ if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); ask(); } });
   window.__seoikAsk = open;
   const oldBack = window.__seoikBack;
-  window.__seoikBack = function(){ if(!dim.hidden){ close(); return true; } return oldBack ? oldBack.apply(this, arguments) : false; };
+  window.__seoikBack = function(){ if(!dim.hidden){ if(!histBox.hidden){ hideHist(); return true; } close(); return true; } return oldBack ? oldBack.apply(this, arguments) : false; };
 })();
 </script>
 </body>
