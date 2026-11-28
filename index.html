@@ -1591,8 +1591,26 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
  .sq-source{display:inline-block;color:#66748a;font:500 11px var(--sans);margin-right:6px;vertical-align:middle}
 
   /* ---------- 약점 분석 / 시험지 점수 / 벼락치기 / 오류 신고 ---------- */
-  .my-tools{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:14px 16px 0; }
+  .my-tools{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 16px 0; }
   .my-tools button{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:13px 6px; border-radius:12px; border:1px solid var(--border); background:var(--card); color:var(--ink); font:700 13px var(--sans); cursor:pointer; box-shadow:var(--shadow); }
+  .st-wrap{ padding:12px 16px 40px; }
+  .st-sum{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:12px; }
+  .st-sum div{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:10px; text-align:center; }
+  .st-sum b{ display:block; font-size:18px; } .st-sum small{ font-size:11.5px; color:var(--ink-soft); }
+  .st-note{ font-size:12.5px; color:var(--ink-soft); line-height:1.6; margin:6px 2px 12px; }
+  .st-acts{ display:flex; gap:6px; margin-bottom:10px; } .st-acts button{ border:1px solid var(--border); background:var(--card); color:var(--ink); border-radius:99px; padding:7px 12px; font:600 13px var(--sans); cursor:pointer; }
+  .st-acts button.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+  .st-user{ background:var(--card); border:1px solid var(--border); border-radius:14px; margin-bottom:8px; overflow:hidden; }
+  .st-user > summary{ list-style:none; display:grid; grid-template-columns:1fr auto; gap:2px 10px; padding:12px 14px; cursor:pointer; }
+  .st-user > summary::-webkit-details-marker{ display:none; }
+  .st-user .st-id{ font-weight:800; font-size:15px; } .st-user .st-main{ font-weight:800; font-size:15px; text-align:right; }
+  .st-user .st-sub{ font-size:12px; color:var(--ink-soft); } .st-user .st-last{ font-size:12px; color:var(--ink-faint); text-align:right; }
+  .st-det{ padding:4px 14px 14px; border-top:1px solid var(--line-soft); }
+  .st-det h5{ margin:10px 0 6px; font-size:12.5px; color:var(--ink-soft); }
+  .st-bar{ display:grid; grid-template-columns:62px 1fr 64px; align-items:center; gap:8px; font-size:12.5px; margin:3px 0; }
+  .st-bar i{ display:block; height:9px; border-radius:5px; background:var(--blue); min-width:2px; }
+  .st-bar span:last-child{ text-align:right; color:var(--ink-soft); font-variant-numeric:tabular-nums; }
+  .st-rank{ font-size:12px; color:var(--ink-faint); margin-right:6px; }
   .my-tools button b{ font-size:19px; line-height:1; }
   .my-tools button:active{ background:var(--bg); }
   .wk-head p b{ color:var(--ink); }
@@ -1936,7 +1954,7 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
       <div class="left"><button class="icon-btn hamburger" data-open-drawer aria-label="전체 메뉴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><span class="title">마이</span></div>
       <div class="right"><button class="icon-btn" data-go-home aria-label="홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg></button></div>
     </div>
-    <div class="my-tools"><button type="button" data-go-tab="weak"><b>📊</b><span>약점 분석</span></button><button type="button" data-go-tab="cram"><b>⚡</b><span>벼락치기</span></button><button type="button" data-go-tab="reports"><b>🚩</b><span id="myRepLabel">내 오류 신고</span></button></div>
+    <div class="my-tools"><button type="button" data-go-tab="weak"><b>📊</b><span>약점 분석</span></button><button type="button" data-go-tab="cram"><b>⚡</b><span>벼락치기</span></button><button type="button" data-go-tab="reports"><b>🚩</b><span id="myRepLabel">내 오류 신고</span></button><button type="button" data-go-tab="studytime"><b>⏱</b><span id="myStLabel">내 학습 시간</span></button></div>
     <div class="my-stat-row" id="myStatRow"></div>
     <div class="section-label">단원별 진행률</div>
     <div id="myUnitList"></div>
@@ -1959,6 +1977,14 @@ body.in-memo .bottomnav, body.in-memo .term-bar, body.in-memo #zbFloat, body.in-
       <div class="right"><button class="icon-btn" data-go-home aria-label="홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg></button></div>
     </div>
     <div id="cramBody"></div>
+  </div>
+
+  <!-- ============ 학습 시간 ============ -->
+  <div data-view="studytime">
+    <div class="topbar">
+      <div class="left"><button class="icon-btn" data-go-home aria-label="홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><span class="title" id="stTitle">학습 시간</span></div>
+    </div>
+    <div id="stBody"></div>
   </div>
 
   <!-- ============ 오류 신고함 ============ -->
@@ -2732,6 +2758,7 @@ function goTab(name){
   else if(name==="weak") renderWeak();
   else if(name==="cram") renderCram();
   else if(name==="reports") renderReports();
+  else if(name==="studytime") renderStudyTime();
   showView(name);
 }
 document.querySelectorAll(".bottomnav button").forEach(b=>{
@@ -5742,6 +5769,111 @@ async function fetchMemPosts(){
       return p; }).sort((a,b)=>b.ts-a.ts);
   }catch(e){ MEM_POSTS = []; }
 }
+
+/* ================= 학습 시간: 공부한 시간을 재서 아이디별로 모으고, 관리자(ik1212)는 모든 아이디를 본다 =================
+   - 화면이 켜져 있고 최근 90초 안에 만지거나(퀴즈·노트·시험지·오답·모의고사 화면) 한 시간만 센다 → 켜 두고 딴짓한 시간은 안 들어감
+   - 이 기기에 계정별로 날짜·과목별 초를 쌓고, 로그인돼 있으면 3분마다 Firestore shared_notes/st_<uid> 에 올린다
+     (볼 수 있는 사람: 본인 + 관리자). 기기마다 따로 적고(dev) 관리자 화면에서 합친다 */
+const ST_KEY = "seoik_studytime_v1", ST_DEV_KEY = "seoik_dev_id", ST_CAT = "학습시간";
+const ST_VIEWS = new Set(["quiz","mathquiz","notes","study","mock","wrong","weak","cram","drill","pememo"]);
+let stLastInput = Date.now(), stDirty = false, stList = null, stRange = "today";
+["pointerdown","keydown","touchstart","wheel","scroll"].forEach(ev=> window.addEventListener(ev, ()=>{ stLastInput = Date.now(); }, { passive:true, capture:true }));
+function stDev(){ try{ let d = localStorage.getItem(ST_DEV_KEY); if(!d){ d = "d" + Date.now().toString(36) + Math.random().toString(36).slice(2,6); localStorage.setItem(ST_DEV_KEY, d); } return d; }catch(e){ return "d0"; } }
+function stAcc(){ const A = window.__seoikAcc; return A && A.acc && A.acc(); }
+function stLoad(){ try{ return JSON.parse(localStorage.getItem(ST_KEY) || "{}") || {}; }catch(e){ return {}; } }
+function stDay(t){ const d = new Date(t || Date.now()); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
+function stCurView(){ const v = document.querySelector("[data-view].show"); return v ? v.getAttribute("data-view") : ""; }
+function stCurSubj(view){
+  let s = null;
+  if((view === "quiz" || view === "mathquiz") && quizSubject) s = quizSubject;
+  else if(view === "notes") s = subjById(notesSubjectId);
+  else if(view === "study") s = subjById(studySubjectId);
+  return s ? s.name : ({mock:"실전 모의고사", wrong:"오답노트", weak:"약점 분석", cram:"벼락치기", drill:"문제 풀기", pememo:"체육 메모"}[view] || "기타");
+}
+function stTick(sec){
+  if(document.visibilityState !== "visible") return;
+  const view = stCurView(); if(!ST_VIEWS.has(view)) return;
+  if(Date.now() - stLastInput > 90000) return;
+  const a = stAcc(), who = a ? a.id : "_guest", all = stLoad();
+  const me = all[who] || (all[who] = { d:{}, all:0 });
+  const day = stDay(), b = me.d[day] || (me.d[day] = { t:0, s:{} }), sj = stCurSubj(view);
+  b.t += sec; b.s[sj] = (b.s[sj] || 0) + sec; me.all = (me.all || 0) + sec; me.last = Date.now();
+  const keep = Object.keys(me.d).sort().slice(-45); Object.keys(me.d).forEach(k=>{ if(!keep.includes(k)) delete me.d[k]; });
+  try{ localStorage.setItem(ST_KEY, JSON.stringify(all)); }catch(e){}
+  if(a) stDirty = true;
+}
+setInterval(()=> stTick(10), 10000);
+async function stPush(keepalive){
+  const A = window.__seoikAcc, a = stAcc(); if(!a || !stDirty) return;
+  const me = stLoad()[a.id]; if(!me) return;
+  stDirty = false;
+  try{
+    const tok = await A.idToken(), url = fsBase() + "/shared_notes/st_" + a.uid, H = { Authorization:"Bearer " + tok };
+    let dev = {};
+    if(!keepalive){ try{ const r = await fetch(url, { headers:H }); if(r.ok){ const j = await r.json(); dev = (JSON.parse((j.fields.content||{}).stringValue || "{}").dev) || {}; } }catch(e){} }
+    dev[stDev()] = me;
+    const content = JSON.stringify({ dev });
+    const fields = { cat:fsStr(ST_CAT), title:fsStr(a.id + " 학습 시간"), content:fsStr(content), ts:{ integerValue:String(Date.now()) },
+      uid:fsStr(a.uid), author:fsStr(a.id), pages:{ integerValue:"0" }, members:{ arrayValue:{ values: [...new Set([a.id, REPORT_ADMIN])].map(x=> ({ stringValue: x + MAILDOM })) } } };
+    const put = ()=> fetch(url, { method:"PATCH", keepalive: !!keepalive, headers:Object.assign({ "Content-Type":"application/json" }, H), body: JSON.stringify({ fields }) });
+    let r = await put();
+    if(!r.ok && r.status === 403 && !keepalive){ await fetch(url, { method:"DELETE", headers:H }); r = await put(); }   /* 수정 권한이 없으면 지우고 새로 올림 */
+    if(!r.ok) stDirty = true;
+  }catch(e){ stDirty = true; }
+}
+setInterval(()=> stPush(false), 180000);
+document.addEventListener("visibilitychange", ()=>{ if(document.visibilityState === "hidden") stPush(true); });
+setTimeout(()=>{ if(stAcc()){ stDirty = true; stPush(false); } }, 8000);
+
+function stFmt(sec){ sec = Math.round(sec || 0); const h = Math.floor(sec/3600), m = Math.floor(sec%3600/60); return h ? h + "시간 " + m + "분" : m ? m + "분" : (sec ? "1분 미만" : "0분"); }
+function stAgo(t){ if(!t) return "기록 없음"; const m = Math.floor((Date.now() - t)/60000); return m < 1 ? "방금" : m < 60 ? m + "분 전" : m < 1440 ? Math.floor(m/60) + "시간 전" : Math.floor(m/1440) + "일 전"; }
+/* 여러 기기의 기록을 날짜·과목별로 합친다 */
+function stMerge(devs){
+  const out = { d:{}, all:0, last:0 };
+  devs.forEach(me=>{ if(!me) return; out.all += me.all || 0; out.last = Math.max(out.last, me.last || 0);
+    Object.entries(me.d || {}).forEach(([day, b])=>{ const o = out.d[day] || (out.d[day] = { t:0, s:{} }); o.t += b.t || 0; Object.entries(b.s || {}).forEach(([k, v])=>{ o.s[k] = (o.s[k] || 0) + v; }); }); });
+  return out;
+}
+function stRangeDays(range){ const n = range === "today" ? 1 : range === "week" ? 7 : 30, out = []; for(let i = 0; i < n; i++) out.push(stDay(Date.now() - i*86400000)); return out; }
+function stSum(m, range){ const s = { t:0, subj:{} }; stRangeDays(range).forEach(d=>{ const b = m.d[d]; if(!b) return; s.t += b.t; Object.entries(b.s).forEach(([k, v])=>{ s.subj[k] = (s.subj[k] || 0) + v; }); }); return s; }
+function stDetailHTML(m, range){
+  const s = stSum(m, range), subj = Object.entries(s.subj).sort((a,b)=>b[1]-a[1]), mx = subj.length ? subj[0][1] : 1;
+  let h = '<h5>과목별 (' + ({today:"오늘", week:"최근 7일", month:"최근 30일"}[range]) + ')</h5>' + (subj.length ? subj.map(([k, v])=> '<div class="st-bar"><span>' + escapeHtml(k) + '</span><i style="width:' + Math.max(2, v/mx*100) + '%"></i><span>' + stFmt(v) + '</span></div>').join("") : '<div class="st-note">이 기간에는 기록이 없어요.</div>');
+  const days = stRangeDays("week").slice().reverse(), dm = Math.max(1, ...days.map(d=> (m.d[d] || {}).t || 0));
+  h += '<h5>최근 7일</h5>' + days.map(d=>{ const t = (m.d[d] || {}).t || 0, dt = new Date(d + "T00:00"); return '<div class="st-bar"><span>' + (dt.getMonth()+1) + '/' + dt.getDate() + ' ' + "일월화수목금토"[dt.getDay()] + '</span><i style="width:' + (t ? Math.max(2, t/dm*100) : 0) + '%"></i><span>' + stFmt(t) + '</span></div>'; }).join("");
+  return h;
+}
+async function renderStudyTime(){
+  const body = document.getElementById("stBody"), a = stAcc(), isAdmin = !!(a && a.id === REPORT_ADMIN);
+  document.getElementById("stTitle").textContent = isAdmin ? "아이디별 학습 시간" : "내 학습 시간";
+  stTick(0);
+  const rangeBtns = '<div class="st-acts">' + [["today","오늘"],["week","최근 7일"],["month","최근 30일"]].map(([k, t])=> '<button type="button" data-st-r="' + k + '"' + (stRange === k ? ' class="on"' : '') + '>' + t + '</button>').join("") + (isAdmin ? '<button type="button" id="stReload">새로고침</button>' : '') + '</div>';
+  const bind = ()=>{ body.querySelectorAll("[data-st-r]").forEach(b=> b.onclick = ()=>{ stRange = b.dataset.stR; renderStudyTime(); });
+    const rl = document.getElementById("stReload"); if(rl) rl.onclick = ()=>{ stList = null; stPush(false).then(renderStudyTime); }; };
+  if(!isAdmin){
+    const mine = stLoad()[a ? a.id : "_guest"] || { d:{}, all:0 };
+    const m = stMerge([mine]);
+    body.innerHTML = '<div class="st-wrap"><div class="st-sum"><div><b>' + stFmt(stSum(m, "today").t) + '</b><small>오늘</small></div><div><b>' + stFmt(stSum(m, "week").t) + '</b><small>최근 7일</small></div><div><b>' + stFmt(m.all) + '</b><small>전체</small></div></div>' +
+      rangeBtns + '<div class="st-user"><div class="st-det">' + stDetailHTML(m, stRange) + '</div></div>' +
+      '<p class="st-note">문제·개념노트·시험지 화면을 켜 두고 실제로 만지고 있을 때만 세요 (90초 넘게 가만히 있으면 멈춤). ' + (a ? '로그인돼 있어서 기록이 관리자에게도 보여요.' : '이 기기에서 잰 시간이에요. 로그인하면 아이디로 모여요.') + '</p></div>';
+    bind(); return;
+  }
+  if(!stList){ body.innerHTML = '<div class="st-wrap"><p class="st-note">불러오는 중…</p></div>';
+    await stPush(false);
+    try{ await fetchMemPosts(); }catch(e){}
+    stList = MEM_POSTS.filter(p=> p.cat === ST_CAT).map(p=>{ let c = {}; try{ c = JSON.parse(p.content || "{}") || {}; }catch(e){} return { id:p.author || "?", m: stMerge(Object.values(c.dev || {})) }; });
+    if(activeTab !== "studytime") return; }
+  const rows = stList.map(u=> Object.assign(u, { r: stSum(u.m, stRange) })).sort((x, y)=> y.r.t - x.r.t || y.m.last - x.m.last);
+  const tot = rows.reduce((t, u)=> t + u.r.t, 0), active = rows.filter(u=> u.r.t > 0).length;
+  body.innerHTML = '<div class="st-wrap"><div class="st-sum"><div><b>' + rows.length + '명</b><small>기록 있는 아이디</small></div><div><b>' + active + '명</b><small>' + ({today:"오늘", week:"7일", month:"30일"}[stRange]) + ' 공부함</small></div><div><b>' + stFmt(active ? tot/active : 0) + '</b><small>1인 평균</small></div></div>' + rangeBtns +
+    (rows.length ? rows.map((u, i)=>{ const top = Object.entries(u.r.subj).sort((a,b)=>b[1]-a[1]).slice(0, 2).map(([k, v])=> k + " " + stFmt(v)).join(" · ");
+      return '<details class="st-user"><summary><span class="st-id"><span class="st-rank">' + (i+1) + '</span>' + escapeHtml(u.id) + '</span><span class="st-main">' + stFmt(u.r.t) + '</span><span class="st-sub">' + escapeHtml(top || "이 기간 기록 없음") + '</span><span class="st-last">전체 ' + stFmt(u.m.all) + ' · ' + stAgo(u.m.last) + '</span></summary><div class="st-det">' + stDetailHTML(u.m, stRange) + '</div></details>'; }).join("")
+    : '<div class="empty-note">아직 올라온 학습 시간이 없어요. 친구들이 로그인한 상태로 공부하면 여기 쌓여요.</div>') +
+    '<p class="st-note">이번 업데이트 이후, 로그인한 상태로 공부한 시간부터 쌓여요. 앱을 켜 두고 실제로 만질 때만 세고(90초 넘게 가만히 있으면 멈춤), 3분마다·앱을 닫을 때 올라와요.</p></div>';
+  bind();
+}
+function refreshStLabel(){ const el = document.getElementById("myStLabel"); if(!el) return; const a = stAcc(); el.textContent = a && a.id === REPORT_ADMIN ? "아이디별 시간" : "내 학습 시간"; }
+setTimeout(refreshStLabel, 500); setInterval(refreshStLabel, 5000);
 let pdfjsP = null;
 function loadPdfJs(){
   if(window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
